@@ -1,0 +1,34 @@
+<div class="container">
+  <div class="row" id="loginContainer">
+    <div class="col-8">
+      <h1>{{'login.header-title' | translate}}</h1>
+    </div>
+    <div class="col-4">
+      <h2>{{'login.form-title' | translate}}</h2>
+      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+        {{errorMessage}}
+      </div>
+      <form *ngIf="!nextStep" (ngSubmit)="onPhoneFormSubmit()">
+        <div class="form-group" id="phoneForm">
+          <label for="phone">{{'login.form-phone-label' | translate}}</label>
+          <input type="text" disabled class="form-control" id="prefix" [value]="phonePrefix"/>
+          <input type="phone" class="form-control" id="phone"
+                 [(ngModel)]="phone" name="phone"
+                 placeholder="{{'login.form-phone-placeholder' | translate}}">
+        </div>
+        <button type="submit" class="btn btn-primary">{{'login.form-button' | translate}}</button>
+      </form>
+      <form *ngIf="nextStep" (ngSubmit)="onCodeFormSubmit()">
+        <div class="form-group" id="codeForm">
+          <label for="code">{{'login.form-code-label' | translate}}</label>
+          <input type="number" class="form-control" id="code"
+                 [(ngModel)]="code" name="code"
+                 placeholder="{{'login.form-code-placeholder' | translate}}">
+        </div>
+        <button type="submit" class="btn btn-primary">{{'login.form-button' | translate}}</button>
+        <button type="button" (click)="onBackButtonClick()"
+                class="btn btn-secondary">{{'login.form-back-button' | translate}}</button>
+      </form>
+    </div>
+  </div>
+</div>

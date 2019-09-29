@@ -1,0 +1,12 @@
+{
+  "login": {
+    "header-title": "TADEUS",
+    "form-title": "Sign-In",
+    "form-button": "Send",
+    "form-back-button": "Back",
+    "form-phone-placeholder": "Enter phone number",
+    "form-phone-label": "Phone number",
+    "form-code-placeholder": "Enter SMS code",
+    "form-code-label": "Verification code"
+  }
+}
