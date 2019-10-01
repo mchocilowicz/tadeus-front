@@ -10,7 +10,17 @@ export class NavComponent implements OnInit {
   opened: boolean | null = false;
   selected = '';
 
+  links = [
+    'login',
+    'user',
+    'city',
+    'ngo-type',
+    'trading-point-type',
+    'trading-point'
+  ]
+
   constructor(private readonly service: TranslateService) {
+
   }
 
   ngOnInit() {

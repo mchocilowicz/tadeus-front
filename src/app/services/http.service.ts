@@ -10,15 +10,33 @@ export class HttpService<T> {
     constructor(private readonly httpClient: HttpClient, private readonly translateService: TranslateService) {
     }
 
-    get(path: string): Observable<ApiResponse<T>> {
-        return this.httpClient.get<ApiResponse<T>>(environment.url + path, {headers: this.prepareOptions()});
+    get(path: string, params: any = null): Observable<ApiResponse<T>> {
+        return this.httpClient.get<ApiResponse<T>>(environment.url + path, {
+            headers: this.prepareHeaders(),
+            params: params
+        });
     }
 
     post(path: string, body: any): Observable<ApiResponse<T>> {
-        return this.httpClient.post<ApiResponse<T>>(environment.url + path, body, {headers: this.prepareOptions()});
+        return this.httpClient.post<ApiResponse<T>>(environment.url + path, body, {headers: this.prepareHeaders()});
     }
 
-    private prepareOptions(): HttpHeaders {
+    file(path: string, file: any) {
+        const formData = new FormData();
+        formData.append('file', file);
+        return this.httpClient.post<ApiResponse<T>>(environment.url + path, formData, {headers: this.fileHeaders()})
+    }
+
+    put(path: string, body: object) {
+        return this.httpClient.put<ApiResponse<T>>(environment.url + path, body, {headers: this.prepareHeaders()});
+    }
+
+    private prepareHeaders(): HttpHeaders {
         return new HttpHeaders().set('Accept-Language', this.translateService.currentLang);
+    }
+
+    private fileHeaders(): HttpHeaders {
+        return new HttpHeaders()
+            .set('Accept', 'application/json');
     }
 }

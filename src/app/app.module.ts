@@ -15,12 +15,14 @@ import { AuthGuard } from './guards/auth.guard';
 import {
     MatButtonModule,
     MatCheckboxModule,
+    MatDialogModule,
     MatExpansionModule,
     MatInputModule,
     MatMenuModule,
     MatPaginatorModule,
     MatSelectModule,
     MatSidenavModule,
+    MatSortModule,
     MatTableModule
 } from '@angular/material';
 import { CityComponent } from './pages/city/city.component';
@@ -29,13 +31,19 @@ import { LoginService } from "./services/login.service";
 import { CityService } from "./services/city.service";
 import { UserService } from "./services/user.service";
 import { HttpService } from "./services/http.service";
-
+import { TradingPointFileDialogComponent } from './pages/trading-point/trading-point-file-dialog/trading-point-file-dialog.component';
+import { TradingPointComponent } from "./pages/trading-point/trading-point.component";
+import { TradingPointService } from "./pages/trading-point/trading-point-service.service";
+import { TradingPointViewComponent } from './pages/trading-point/trading-point-view/trading-point-view.component';
+import { NgoTypeComponent } from './pages/ngo-type/ngo-type.component';
+import { TradingPointTypeComponent } from './pages/trading-point-type/trading-point-type.component';
+import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
 }
 
-const appRoutes: Routes = [
+export const appRoutes: Routes = [
     {
         path: 'login',
         component: LoginComponent
@@ -48,6 +56,26 @@ const appRoutes: Routes = [
     {
         path: 'city',
         component: CityComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'ngo-type',
+        component: NgoTypeComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'trading-point-type',
+        component: TradingPointTypeComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'trading-point',
+        component: TradingPointComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'trading-point/:ID',
+        component: TradingPointViewComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -64,7 +92,13 @@ const appRoutes: Routes = [
         LoginComponent,
         UserComponent,
         CityComponent,
-        NavComponent
+        NavComponent,
+        TradingPointComponent,
+        TradingPointFileDialogComponent,
+        TradingPointViewComponent,
+        NgoTypeComponent,
+        TradingPointTypeComponent,
+        SimpleDialogComponent
     ],
     imports: [
         BrowserModule,
@@ -88,6 +122,8 @@ const appRoutes: Routes = [
         MatButtonModule,
         MatMenuModule,
         MatExpansionModule,
+        MatDialogModule,
+        MatSortModule,
         // StoreModule.forRoot(reducers, {
         //   metaReducers,
         //   runtimeChecks: {
@@ -96,8 +132,9 @@ const appRoutes: Routes = [
         //   }
         // })
     ],
-    providers: [HttpService, LoginService, UserService, CityService],
-    bootstrap: [AppComponent],
+    providers: [HttpService, LoginService, UserService, CityService, TradingPointService],
+    entryComponents: [TradingPointFileDialogComponent, TradingPointComponent, SimpleDialogComponent],
+    bootstrap: [AppComponent]
 })
 export class AppModule {
 }

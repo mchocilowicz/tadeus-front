@@ -1,0 +1,9 @@
+<h1 mat-dialog-title>File Upload</h1>
+<div mat-dialog-content>
+    <p>What's your favorite animal?</p>
+    <input (change)="onChange($event)" type="file">
+</div>
+<div mat-dialog-actions>
+    <button (click)="onNoClick()" mat-button>No Thanks</button>
+    <button (click)="onOkClick()" mat-button>Ok</button>
+</div>

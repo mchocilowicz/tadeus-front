@@ -1,0 +1,115 @@
+<app-nav>
+    Trading-point {{ this.id }}
+    <form class="example-form">
+        <mat-form-field class="example-full-width">
+            <input [(ngModel)]="tradingPoint.name" matInput name="name" placeholder="Name">
+        </mat-form-field>
+
+        <table cellspacing="0" class="example-full-width">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.address" matInput name="address" placeholder="Address">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.postCode" matInput name="postCode"
+                               placeholder="Post-Code">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <table cellspacing="0" class="example-full-width">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.longitude" matInput name="longitude"
+                               placeholder="Longitude">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.latitude" matInput name="latitude"
+                               placeholder="Latitude">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table cellspacing="0" class="example-full-width">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-select [(value)]="tradingPoint.type" name="type" placeholder="Type">
+                            <mat-option *ngFor="let type of types"
+                                        [value]="type.name">{{type.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <mat-select [(value)]="tradingPoint.city" name="city" placeholder="City">
+                            <mat-option *ngFor="let city of cities"
+                                        [value]="city.name">{{city.name}}</mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+
+        <table cellspacing="0" class="example-full-width">
+            <tr>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.fee" matInput name="fee"
+                               placeholder="Manipulation Fee">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.vat" matInput name="vat" placeholder="Vat">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.donationPercentage" matInput name="percentage"
+                               placeholder="Donation Percentage">
+                    </mat-form-field>
+                </td>
+                <td>
+                    <mat-form-field class="example-full-width">
+                        <input [(ngModel)]="tradingPoint.xp" matInput name="xp" placeholder="XP">
+                    </mat-form-field>
+                </td>
+            </tr>
+        </table>
+        <button (click)="onEdit()">Save changes</button>
+    </form>
+
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Terminals
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <mat-form-field>
+                <input [value]="phonePrefix" disabled matInput>
+                <input [(ngModel)]="phone" matInput placeholder="Phone" type="phone">
+            </mat-form-field>
+            <button (click)="saveTerminal()">Add Terminal</button>
+            <table [dataSource]="terminals" mat-table matSort>
+                <mat-text-column name="ID"></mat-text-column>
+                <mat-text-column name="phone"></mat-text-column>
+                <mat-text-column name="step"></mat-text-column>
+
+                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+            </table>
+
+        </mat-expansion-panel>
+    </mat-accordion>
+
+
+</app-nav>
