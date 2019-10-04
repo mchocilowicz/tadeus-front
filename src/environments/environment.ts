@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-    // url: 'https://tadeus.herokuapp.com/api/dashboard/'
     url: 'http://localhost:4000/api/dashboard/'
 };
 

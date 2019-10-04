@@ -38,6 +38,9 @@ import { TradingPointViewComponent } from './pages/trading-point/trading-point-v
 import { NgoTypeComponent } from './pages/ngo-type/ngo-type.component';
 import { TradingPointTypeComponent } from './pages/trading-point-type/trading-point-type.component';
 import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.component';
+import { NgoComponent } from "./pages/ngo/ngo.component";
+import { StatsComponent } from "./pages/stats/stats.component";
+import { ConfigurationComponent } from "./pages/configuration/configuration.component";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -79,6 +82,21 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'ngo',
+        component: NgoComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'configuration',
+        component: ConfigurationComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'stats',
+        component: StatsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
         path: '',
         redirectTo: '/user',
         pathMatch: 'full'
@@ -98,7 +116,10 @@ export const appRoutes: Routes = [
         TradingPointViewComponent,
         NgoTypeComponent,
         TradingPointTypeComponent,
-        SimpleDialogComponent
+        SimpleDialogComponent,
+        NgoComponent,
+        StatsComponent,
+        ConfigurationComponent
     ],
     imports: [
         BrowserModule,
