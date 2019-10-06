@@ -2,11 +2,11 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
 import { MatPaginator } from "@angular/material/paginator";
 import { TradingPointService } from "./trading-point-service.service";
-import { TradingPointFileDialogComponent } from "./trading-point-file-dialog/trading-point-file-dialog.component";
 import { MatDialog } from "@angular/material";
 import { ITradingPoint } from "../../models/trading-point.interface";
 import { CityService } from "../../services/city.service";
 import { Router } from "@angular/router";
+import { FileUploadDialogComponent } from "../../components/file-upload-dialog/file-upload-dialog.component";
 
 @Component({
     selector: 'app-trading-point',
@@ -32,8 +32,11 @@ export class TradingPointComponent implements OnInit {
     }
 
     openDialog(): void {
-        this.dialog.open(TradingPointFileDialogComponent, {
+        this.dialog.open(FileUploadDialogComponent, {
             width: '250px',
+            data: {
+                path: 'trading-point'
+            }
         });
     }
 

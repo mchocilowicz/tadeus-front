@@ -31,7 +31,6 @@ import { LoginService } from "./services/login.service";
 import { CityService } from "./services/city.service";
 import { UserService } from "./services/user.service";
 import { HttpService } from "./services/http.service";
-import { TradingPointFileDialogComponent } from './pages/trading-point/trading-point-file-dialog/trading-point-file-dialog.component';
 import { TradingPointComponent } from "./pages/trading-point/trading-point.component";
 import { TradingPointService } from "./pages/trading-point/trading-point-service.service";
 import { TradingPointViewComponent } from './pages/trading-point/trading-point-view/trading-point-view.component';
@@ -41,6 +40,9 @@ import { SimpleDialogComponent } from './components/simple-dialog/simple-dialog.
 import { NgoComponent } from "./pages/ngo/ngo.component";
 import { StatsComponent } from "./pages/stats/stats.component";
 import { ConfigurationComponent } from "./pages/configuration/configuration.component";
+import { FileUploadDialogComponent } from './components/file-upload-dialog/file-upload-dialog.component';
+import { NgoViewComponent } from './pages/ngo/ngo-view/ngo-view.component';
+import { NgoService } from "./pages/ngo/ngo.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -112,14 +114,15 @@ export const appRoutes: Routes = [
         CityComponent,
         NavComponent,
         TradingPointComponent,
-        TradingPointFileDialogComponent,
         TradingPointViewComponent,
         NgoTypeComponent,
         TradingPointTypeComponent,
         SimpleDialogComponent,
         NgoComponent,
         StatsComponent,
-        ConfigurationComponent
+        ConfigurationComponent,
+        FileUploadDialogComponent,
+        NgoViewComponent
     ],
     imports: [
         BrowserModule,
@@ -153,8 +156,18 @@ export const appRoutes: Routes = [
         //   }
         // })
     ],
-    providers: [HttpService, LoginService, UserService, CityService, TradingPointService],
-    entryComponents: [TradingPointFileDialogComponent, TradingPointComponent, SimpleDialogComponent],
+    providers: [
+        HttpService,
+        LoginService,
+        UserService,
+        CityService,
+        TradingPointService,
+        NgoService
+    ],
+    entryComponents: [
+        FileUploadDialogComponent,
+        SimpleDialogComponent
+    ],
     bootstrap: [AppComponent]
 })
 export class AppModule {

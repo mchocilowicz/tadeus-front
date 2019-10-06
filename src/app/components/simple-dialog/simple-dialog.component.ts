@@ -13,7 +13,8 @@ export class SimpleDialogComponent {
 
     constructor(
         public dialogRef: MatDialogRef<SimpleDialogComponent>,
-        @Inject(MAT_DIALOG_DATA) public data: any, private service: HttpService<any>) {
+        @Inject(MAT_DIALOG_DATA) public data: any,
+        private service: HttpService<any>) {
         this.value = data.name;
     }
 
