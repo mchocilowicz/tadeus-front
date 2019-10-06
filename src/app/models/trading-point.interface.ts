@@ -1,12 +1,15 @@
+import { IType } from "./type.interface";
+import { ICity } from "./city.interface";
+
 export interface ITradingPoint {
     id: string,
     ID: string,
-    type: TradingPointType,
+    type: IType,
     name: string,
     donation: number,
     vat: number,
     fee: number,
-    city: City,
+    city: ICity,
     xp: number,
     updatedDate: Date,
 }
@@ -28,8 +31,8 @@ export class TradingPointView {
 
 export class TradingPointSave {
     ID: string = '';
-    city: City;
-    type: TradingPointType;
+    city: ICity;
+    type: IType;
     name: string = '';
     address: string = '';
     donationPercentage: number = null;
@@ -39,15 +42,4 @@ export class TradingPointSave {
     fee: number = 0.66;
     postCode: string = '';
     xp: number = 0;
-}
-
-export interface City {
-    id: string,
-    name: string
-}
-
-export interface TradingPointType {
-    code: number,
-    id: string,
-    name: string
 }

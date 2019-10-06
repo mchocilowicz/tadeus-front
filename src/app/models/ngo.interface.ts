@@ -1,4 +1,5 @@
-import { City, TradingPointType } from "./trading-point.interface";
+import { IType } from "./type.interface";
+import { ICity } from "./city.interface";
 
 export interface INgo {
     ID: string;
@@ -7,6 +8,37 @@ export interface INgo {
     name: string;
     verified: boolean;
     verifiedAt: Date;
-    type: TradingPointType,
-    city: City
+    type: IType,
+    city: ICity
+}
+
+export interface INgoView {
+    city: ICity;
+    type: IType;
+    bankNumber: string;
+    phone: string;
+    email: string;
+    verified: boolean;
+    verifiedAt: Date;
+    longitude: string;
+    latitude: string;
+    name: string;
+    address: string;
+    postCode: string;
+    ID: string;
+}
+
+export class NgoSave {
+    city: string = '';
+    type: string = '';
+    bankNumber: string = '';
+    phone: string = '';
+    email: string = '';
+    verified: boolean = false;
+    verifiedAt: Date = null;
+    longitude: number = null;
+    latitude: number = null;
+    name: string = '';
+    address: string = '';
+    postCode: string = '';
 }

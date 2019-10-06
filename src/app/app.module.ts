@@ -89,6 +89,11 @@ export const appRoutes: Routes = [
         canActivate: [AuthGuard]
     },
     {
+        path: 'ngo/:ID',
+        component: NgoViewComponent,
+        canActivate: [AuthGuard]
+    },
+    {
         path: 'configuration',
         component: ConfigurationComponent,
         canActivate: [AuthGuard]
