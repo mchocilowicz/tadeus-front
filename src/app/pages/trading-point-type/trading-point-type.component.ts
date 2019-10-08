@@ -1,10 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
-import { City } from "../../models/trading-point.interface";
 import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { SimpleDialogComponent } from "../../components/simple-dialog/simple-dialog.component";
 import { TradingPointService } from "../trading-point/trading-point-service.service";
+import { ICity } from "../../models/city.interface";
 
 @Component({
     selector: 'app-trading-point-type',
@@ -14,7 +14,7 @@ import { TradingPointService } from "../trading-point/trading-point-service.serv
 export class TradingPointTypeComponent implements OnInit {
 
     displayedColumns: string[] = ['name', 'code'];
-    dataSource = new MatTableDataSource<City>([]);
+    dataSource = new MatTableDataSource<ICity>([]);
 
     @ViewChild(MatPaginator, {static: true})
     paginator!: MatPaginator;

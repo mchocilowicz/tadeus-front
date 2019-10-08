@@ -1,1 +1,68 @@
-<p>configuration works!</p>
+<app-nav>
+    <mat-form-field>
+        <input matInput placeholder="Min Personal Pool" [value]="config.minPersonalPool">
+    </mat-form-field>
+    <mat-form-field>
+        <input matInput placeholder="Min Ngo Transfer" [value]="config.minNgoTransfer">
+    </mat-form-field>
+    <p>Editing Dates for Client will change data for Partners and Ngo</p>
+    <div class="config-container">
+        Client
+        <mat-form-field>
+            <input matInput (dateChange)="onClientDate($event.target.value)" [matDatepicker]="clientCurrent"
+                   placeholder="ngo" [value]="config.currentClientPaymentDate">
+            <mat-datepicker-toggle matSuffix [for]="clientCurrent"></mat-datepicker-toggle>
+            <mat-datepicker #clientCurrent></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="interval" [value]="config.clientCycleDays">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput disabled placeholder="ngo" [matDatepicker]="clientNext"
+                   [value]="config.nextClientPaymentDate">
+            <mat-datepicker-toggle matSuffix [for]="clientNext"></mat-datepicker-toggle>
+            <mat-datepicker #clientNext></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <p>Editing Dates for Partner will change data for Ngo</p>
+    <div class="config-container">
+        Partner
+        <mat-form-field>
+            <input matInput (dateChange)="onPartnerDate($event.target.value)" [matDatepicker]="partnerCurrent"
+                   placeholder="Value binding"
+                   [value]="config.currentPartnerPaymentDate">
+            <mat-datepicker-toggle matSuffix [for]="partnerCurrent"></mat-datepicker-toggle>
+            <mat-datepicker #partnerCurrent></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="interval" [value]="config.partnerCycleDays">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput disabled placeholder="Value binding" [matDatepicker]="partnerNext"
+                   [value]="config.nextPartnerPaymentDate">
+            <mat-datepicker-toggle matSuffix [for]="partnerNext"></mat-datepicker-toggle>
+            <mat-datepicker #partnerNext></mat-datepicker>
+        </mat-form-field>
+    </div>
+    <div class="config-container">
+        Ngo
+        <mat-form-field>
+            <input matInput (dateChange)="onNgoDate($event.target.value)" [matDatepicker]="ngoCurrent"
+                   placeholder="Value binding"
+                   [value]="config.currentNgoPaymentDate">
+            <mat-datepicker-toggle matSuffix [for]="ngoCurrent"></mat-datepicker-toggle>
+            <mat-datepicker #ngoCurrent></mat-datepicker>
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput placeholder="interval" [value]="config.ngoCycleDays">
+        </mat-form-field>
+        <mat-form-field>
+            <input matInput disabled [matDatepicker]="ngoNext" placeholder="Value binding"
+                   [value]="config.nextNgoPaymentDate">
+            <mat-datepicker-toggle matSuffix [for]="ngoNext"></mat-datepicker-toggle>
+            <mat-datepicker #ngoNext></mat-datepicker>
+        </mat-form-field>
+    </div>
+
+    <button>Update</button>
+</app-nav>

@@ -23,7 +23,9 @@ import {
     MatSelectModule,
     MatSidenavModule,
     MatSortModule,
-    MatTableModule
+    MatTableModule,
+    MatDatepickerModule,
+    MatNativeDateModule
 } from '@angular/material';
 import { CityComponent } from './pages/city/city.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -43,6 +45,7 @@ import { ConfigurationComponent } from "./pages/configuration/configuration.comp
 import { FileUploadDialogComponent } from './components/file-upload-dialog/file-upload-dialog.component';
 import { NgoViewComponent } from './pages/ngo/ngo-view/ngo-view.component';
 import { NgoService } from "./pages/ngo/ngo.service";
+import { ConfigurationService } from "./pages/configuration/configuration.service";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -153,6 +156,8 @@ export const appRoutes: Routes = [
         MatExpansionModule,
         MatDialogModule,
         MatSortModule,
+        MatDatepickerModule,
+        MatNativeDateModule
         // StoreModule.forRoot(reducers, {
         //   metaReducers,
         //   runtimeChecks: {
@@ -167,7 +172,8 @@ export const appRoutes: Routes = [
         UserService,
         CityService,
         TradingPointService,
-        NgoService
+        NgoService,
+        ConfigurationService
     ],
     entryComponents: [
         FileUploadDialogComponent,

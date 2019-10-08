@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatPaginator, MatTableDataSource } from '@angular/material';
 import { CityService } from "../../services/city.service";
-import { City } from "../../models/trading-point.interface";
 import { MatDialog } from "@angular/material/dialog";
 import { SimpleDialogComponent } from "../../components/simple-dialog/simple-dialog.component";
+import { ICity } from "../../models/city.interface";
 
 
 @Component({
@@ -13,7 +13,7 @@ import { SimpleDialogComponent } from "../../components/simple-dialog/simple-dia
 })
 export class CityComponent implements OnInit {
     displayedColumns: string[] = ['name'];
-    dataSource = new MatTableDataSource<City>([]);
+    dataSource = new MatTableDataSource<ICity>([]);
 
     @ViewChild(MatPaginator, {static: true})
     paginator!: MatPaginator;
