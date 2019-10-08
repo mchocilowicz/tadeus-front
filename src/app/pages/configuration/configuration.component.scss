@@ -1,3 +1,12 @@
 .config-container {
   display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+}
+
+.config-form {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: column;
 }
