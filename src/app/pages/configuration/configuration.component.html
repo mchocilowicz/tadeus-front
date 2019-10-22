@@ -17,7 +17,8 @@
                 <mat-datepicker #clientCurrent></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-                <input [value]="config.clientCycleDays" matInput placeholder="interval">
+                <input (change)="onClientIntervalChange($event.target.value)" [value]="config.clientCycleDays"
+                       matInput min="1" placeholder="interval" type="number">
             </mat-form-field>
             <mat-form-field>
                 <input [matDatepicker]="clientNext" [value]="config.nextClientPaymentDate" disabled matInput
@@ -38,7 +39,8 @@
                 <mat-datepicker #partnerCurrent></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-                <input [value]="config.partnerCycleDays" matInput placeholder="interval">
+                <input (change)="onPartnerIntervalChange($event.target.value)" [value]="config.partnerCycleDays"
+                       matInput min="1" placeholder="interval" type="number">
             </mat-form-field>
             <mat-form-field>
                 <input [matDatepicker]="partnerNext" [value]="config.nextPartnerPaymentDate" disabled matInput
@@ -58,7 +60,8 @@
                 <mat-datepicker #ngoCurrent></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-                <input [value]="config.ngoCycleDays" matInput placeholder="interval">
+                <input (change)="onNgoIntervalChange($event.target.value)" [value]="config.ngoCycleDays" matInput
+                       min="1" placeholder="interval" type="number">
             </mat-form-field>
             <mat-form-field>
                 <input [matDatepicker]="ngoNext" [value]="config.nextNgoPaymentDate" disabled matInput

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { ConfigurationService } from "./configuration.service";
 import * as moment from 'moment'
+import { ConfigurationSave } from "./configuration-save.model";
+import { Configuration } from "./configuration.model";
 
 @Component({
     selector: 'app-configuration',
@@ -35,8 +37,11 @@ export class ConfigurationComponent implements OnInit {
         this.onPartnerDate(this.config.nextClientPaymentDate)
     }
 
-    onClientInterval() {
-
+    onClientIntervalChange(interval: number) {
+        if (interval > 0) {
+            this.config.nextClientPaymentDate = moment(this.config.currentClientPaymentDate).add(interval, 'days').toDate();
+            this.onPartnerDate(this.config.nextClientPaymentDate)
+        }
     }
 
     onPartnerDate(date) {
@@ -45,8 +50,11 @@ export class ConfigurationComponent implements OnInit {
         this.onNgoDate(this.config.nextPartnerPaymentDate)
     }
 
-    onPartnerInterval() {
-
+    onPartnerIntervalChange(interval: number) {
+        if (interval > 0) {
+            this.config.nextPartnerPaymentDate = moment(this.config.currentPartnerPaymentDate).add(interval, 'days').toDate();
+            this.onNgoDate(this.config.nextPartnerPaymentDate)
+        }
     }
 
     onNgoDate(date) {
@@ -54,19 +62,25 @@ export class ConfigurationComponent implements OnInit {
         this.config.nextNgoPaymentDate = moment(this.config.currentNgoPaymentDate).add(this.config.ngoCycleDays, 'days').toDate();
     }
 
-    onNgoInterval() {
-
+    onNgoIntervalChange(interval: number) {
+        if (interval > 0) {
+            this.config.nextNgoPaymentDate = moment(this.config.currentNgoPaymentDate).add(interval, 'days').toDate();
+        }
     }
 
     onUpdate() {
         this.service.update(this.prepareRequestBody(), this.config.id).subscribe(r => {
-
+            if (r.data) {
+                this.config = r.data
+            }
         })
     }
 
     onSave() {
         this.service.save(this.prepareRequestBody()).subscribe(r => {
-
+            if (r.data) {
+                this.config = r.data
+            }
         })
     }
 
@@ -77,33 +91,4 @@ export class ConfigurationComponent implements OnInit {
         });
         return body;
     }
-}
-
-export class ConfigurationSave {
-    minNgoTransfer: number = 0;
-    minPersonalPool: number = 0;
-    currentClientPaymentDate: Date = null;
-    clientCycleDays: number = 1;
-    nextClientPaymentDate: Date = null;
-    currentPartnerPaymentDate: Date = null;
-    partnerCycleDays: number = 1;
-    nextPartnerPaymentDate: Date = null;
-    currentNgoPaymentDate: Date = null;
-    ngoCycleDays: number = 1;
-    nextNgoPaymentDate: Date = null;
-}
-
-export class Configuration {
-    id: string;
-    minNgoTransfer: number = 0;
-    minPersonalPool: number = 0;
-    currentClientPaymentDate: Date = null;
-    clientCycleDays: number = 1;
-    nextClientPaymentDate: Date = null;
-    currentPartnerPaymentDate: Date = null;
-    partnerCycleDays: number = 1;
-    nextPartnerPaymentDate: Date = null;
-    currentNgoPaymentDate: Date = null;
-    ngoCycleDays: number = 1;
-    nextNgoPaymentDate: Date = null;
 }

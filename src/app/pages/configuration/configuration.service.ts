@@ -1,13 +1,14 @@
 import { Injectable } from '@angular/core';
 import { HttpService } from "../../services/http.service";
-import { ConfigurationSave } from "./configuration.component";
+import { Configuration } from "./configuration.model";
+import { ConfigurationSave } from "./configuration-save.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ConfigurationService {
 
-    constructor(private httpService: HttpService<any>) {
+    constructor(private httpService: HttpService<Configuration>) {
     }
 
     getConfig() {
