@@ -1,18 +1,12 @@
-<mat-sidenav-container hasBackdrop class="example-container">
-    <mat-sidenav #sidenav [(opened)]="opened" mode="over">
+<mat-sidenav-container class="example-container">
+    <mat-sidenav mode="side" opened>
         <div class="nav-menu">
             <a *ngFor="let link of links" [routerLink]="'/' +link" routerLinkActive="active">{{ link }}</a>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
         <nav class="nav-container">
-            <p (click)="sidenav.toggle()">TADEUS</p>
-            <mat-form-field>
-                <mat-select (change)="onLanguageChange()" [(value)]="selected">
-                    <mat-option value="pl">PL</mat-option>
-                    <mat-option value="en">ENG</mat-option>
-                </mat-select>
-            </mat-form-field>
+            <p>TADEUS</p>
         </nav>
         <ng-content></ng-content>
     </mat-sidenav-content>

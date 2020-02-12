@@ -1,6 +1,8 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
+import { Component, OnInit } from '@angular/core';
+import { MatTableDataSource } from '@angular/material';
 import { UserService } from "../../services/user.service";
+import { UserListItem } from "../../models/user-list-item.interface";
+import { OpinionService } from "../../services/opinion.service";
 
 
 @Component({
@@ -9,17 +11,23 @@ import { UserService } from "../../services/user.service";
     styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-    displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-    dataSource = new MatTableDataSource<any>();
+    displayedColumns: string[] = ['id', 'phone', 'email', 'xp', 'status', 'updatedAt'];
+    userDataSource = new MatTableDataSource<UserListItem>();
+    opinionDataSource = new MatTableDataSource<any>();
 
-    @ViewChild(MatPaginator, {static: true})
-    paginator!: MatPaginator;
-
-    constructor(private userService: UserService) {
+    constructor(private userService: UserService, private opinionService: OpinionService) {
     }
 
     ngOnInit() {
-        this.dataSource.paginator = this.paginator;
-        this.userService.getUsers().subscribe(r => console.log(r));
+        this.userService.getUsers().subscribe(r => {
+            if (r.data) {
+                this.userDataSource = r.data;
+            }
+        });
+        this.opinionService.getUsersOpinion().subscribe(r => {
+            if (r.data) {
+                this.opinionDataSource = r.data;
+            }
+        })
     }
 }

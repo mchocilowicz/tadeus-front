@@ -1,6 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
 import { MatDialog } from "@angular/material/dialog";
 import { CityService } from "../../services/city.service";
 import { Router } from "@angular/router";
@@ -31,9 +30,6 @@ export class NgoComponent implements OnInit {
     type: string;
     name: string;
 
-    @ViewChild(MatPaginator, {static: true})
-    paginator!: MatPaginator;
-
     constructor(private dialog: MatDialog,
                 private router: Router,
                 private ngoService: NgoService,
@@ -63,7 +59,6 @@ export class NgoComponent implements OnInit {
         this.cityService.getCities().subscribe(r => {
             this.cities = r.data;
         });
-        this.dataSource.paginator = this.paginator;
     }
 
     onRowClick(row: any) {
