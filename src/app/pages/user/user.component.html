@@ -1,74 +1,132 @@
 <app-nav>
-  <mat-accordion>
-    <mat-expansion-panel>
-      <mat-expansion-panel-header>
-        <mat-panel-title>
-          Filters
-        </mat-panel-title>
-      </mat-expansion-panel-header>
+    <mat-accordion>
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Filtry
+                </mat-panel-title>
+            </mat-expansion-panel-header>
 
-      <div class="filter-container">
-        <mat-form-field>
-          <input matInput placeholder="Input">
-        </mat-form-field>
+            <div class="filter-container">
+                <form [formGroup]="filterForm">
+                    <mat-form-field>
+                        <input formControlName="phone" matInput placeholder="Telefon" type="number">
+                    </mat-form-field>
 
-        <mat-form-field>
-          <textarea matInput placeholder="Textarea"></textarea>
-        </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="xpMin" matInput placeholder="XP od" type="number">
+                    </mat-form-field>
 
-        <mat-form-field>
-          <mat-select placeholder="Select">
-            <mat-option value="option">Option</mat-option>
-          </mat-select>
-        </mat-form-field>
-        <button>Filter</button>
-      </div>
-    </mat-expansion-panel>
-  </mat-accordion>
+                    <mat-form-field>
+                        <input formControlName="xpMax" matInput placeholder="Xp do" type="number">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="updatedFrom" matInput placeholder="Data aktywności od " type="date">
+                    </mat-form-field>
+                    <mat-form-field>
+                        <input formControlName="updatedTo" matInput placeholder="Data aktywności do" type="date">
+                    </mat-form-field>
+
+                    <mat-form-field>
+                        <mat-select formControlName="status" placeholder="Status">
+                            <div *ngIf="statuses && statuses.length > 0">
+                                <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
+                            </div>
+                            <div *ngIf="statuses.length === 0">
+                                <mat-option value=""></mat-option>
+                            </div>
+                        </mat-select>
+                    </mat-form-field>
+                    <button (click)="onFilterFormSubmit()">Szukaj</button>
+                </form>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+
+    <div>
+        <p>Użytkownicy</p>
+    </div>
+
+    <div class="mat-elevation-z8">
+        <table [dataSource]="userDataSource" mat-table>
+
+            <!-- Position Column -->
+            <ng-container matColumnDef="id">
+                <th *matHeaderCellDef mat-header-cell> ID</th>
+                <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
+            </ng-container>
+
+            <!-- Name Column -->
+            <ng-container matColumnDef="phone">
+                <th *matHeaderCellDef mat-header-cell> Numer Telefonu</th>
+                <td *matCellDef="let element" mat-cell> {{element.prefix + " " + element.phone}} </td>
+            </ng-container>
+
+            <!-- Weight Column -->
+            <ng-container matColumnDef="email">
+                <th *matHeaderCellDef mat-header-cell> Email</th>
+                <td *matCellDef="let element" mat-cell> {{element.email}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="xp">
+                <th *matHeaderCellDef mat-header-cell> Xp</th>
+                <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="status">
+                <th *matHeaderCellDef mat-header-cell> Status</th>
+                <td *matCellDef="let element" mat-cell> {{element.status}} </td>
+            </ng-container>
+
+            <!-- Symbol Column -->
+            <ng-container matColumnDef="updatedAt">
+                <th *matHeaderCellDef mat-header-cell> Ostatnia Aktywność</th>
+                <td *matCellDef="let element" mat-cell> {{element.updateAt |  date:'MM/dd/yyyy'}} </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="userDisplayColumns" mat-header-row></tr>
+            <tr (click)="onRowClick(row)" *matRowDef="let row; columns: userDisplayColumns;" mat-row></tr>
+        </table>
+    </div>
+
+    <div>
+        <p>Opinie</p>
+    </div>
 
 
-  <div class="mat-elevation-z8">
-    <table [dataSource]="userDataSource" mat-table>
+    <div class="mat-elevation-z8">
+        <table [dataSource]="opinionDataSource" mat-table>
 
-      <!-- Position Column -->
-      <ng-container matColumnDef="id">
-        <th *matHeaderCellDef mat-header-cell> ID</th>
-        <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
-      </ng-container>
+            <ng-container matColumnDef="name">
+                <th *matHeaderCellDef mat-header-cell>Username</th>
+                <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+            </ng-container>
 
-      <!-- Name Column -->
-      <ng-container matColumnDef="phone">
-        <th *matHeaderCellDef mat-header-cell> Numer Telefonu</th>
-        <td *matCellDef="let element" mat-cell> {{element.prefix + " " + element.phone}} </td>
-      </ng-container>
+            <ng-container matColumnDef="phone">
+                <th *matHeaderCellDef mat-header-cell> Numer Telefonu</th>
+                <td *matCellDef="let element" mat-cell> {{element.prefix + " " + element.phone}} </td>
+            </ng-container>
 
-      <!-- Weight Column -->
-      <ng-container matColumnDef="email">
-        <th *matHeaderCellDef mat-header-cell> Email</th>
-        <td *matCellDef="let element" mat-cell> {{element.email}} </td>
-      </ng-container>
+            <ng-container matColumnDef="email">
+                <th *matHeaderCellDef mat-header-cell> Email</th>
+                <td *matCellDef="let element" mat-cell> {{element.email}} </td>
+            </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="xp">
-        <th *matHeaderCellDef mat-header-cell> Xp</th>
-        <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
-      </ng-container>
+            <ng-container matColumnDef="value">
+                <th *matHeaderCellDef mat-header-cell>Opinia</th>
+                <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+            </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="status">
-        <th *matHeaderCellDef mat-header-cell> Status</th>
-        <td *matCellDef="let element" mat-cell> {{element.status}} </td>
-      </ng-container>
+            <ng-container matColumnDef="createdAt">
+                <th *matHeaderCellDef mat-header-cell> Data</th>
+                <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
+            </ng-container>
 
-      <!-- Symbol Column -->
-      <ng-container matColumnDef="updatedAt">
-        <th *matHeaderCellDef mat-header-cell> Ostatnia Aktywność</th>
-        <td *matCellDef="let element" mat-cell> {{element.updateAt |  date:'MM/dd/yyyy'}} </td>
-      </ng-container>
-
-      <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
-      <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
-    </table>
-  </div>
+            <tr *matHeaderRowDef="opinionDisplayedColumns" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: opinionDisplayedColumns;" mat-row></tr>
+        </table>
+    </div>
 
 </app-nav>

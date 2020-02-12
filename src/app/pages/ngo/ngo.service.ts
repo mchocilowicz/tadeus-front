@@ -9,7 +9,7 @@ export class NgoService {
     }
 
     uploadFile(file: File) {
-        return this.service.file('ngo/upload', file)
+        return this.service.file('ngo/import', file)
     }
 
     getNgoList() {

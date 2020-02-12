@@ -1,0 +1,70 @@
+<app-nav>
+    <div *ngIf="userInformation">
+        Użytkownik użytkownika :
+        <div>
+            Imię: {{userInformation.name}}
+        </div>
+        <div>
+            Numer telefonu: +{{userInformation.prefix}}{{userInformation.phone}}
+        </div>
+        <div>
+            Pula osobista: {{userInformation.personalPool}}
+        </div>
+        <div>
+            Xp: {{userInformation.xp}}
+        </div>
+        <div>
+            <div>Pula dotacji: {{userInformation.donationPool}}</div>
+            <div>Aktualny cel: {{userInformation.currentNgo}}</div>
+            <div>Ostatni cel: {{userInformation.lastNgo}}</div>
+            <div>Zebrane środki od początku: {{userInformation.collectedMoney}}</div>
+            <div>Ostatnia aktywnośćL {{userInformation.updateAt |  date:'MM/dd/yyyy'}}</div>
+        </div>
+    </div>
+    <div *ngIf="userInformation">
+        <form>
+            <div>
+                Edycja
+                <mat-form-field>
+                    <input formControlName="phone" matInput placeholder="Nowy numer telefon" type="number">
+                </mat-form-field>
+                <div>
+                    <p>Aktualny Status: {{userInformation.status}}</p>
+                    <p>Nowy Status: {{newStatus}}</p>
+                    <button>Zawieś użytkownika</button>
+                    <button>Zablokuj użytkownika</button>
+                </div>
+                <div>
+                    <button>Zapisz zmiany</button>
+                </div>
+        </form>
+        <button>Usuń użytkownika</button>
+        <div>
+            <form>
+                <p>Przesłanie środków pul do innego użytkownika</p>
+                <mat-form-field>
+                    <input formControlName="phone" matInput placeholder="ID użytkownika docelowego" type="number">
+                </mat-form-field>
+                <button>Wyślij</button>
+            </form>
+        </div>
+    </div>
+    <div *ngIf="userInformation">
+        Transakcje użytkownika
+
+        <table>
+            <th>
+                <tr>Typ</tr>
+                <tr>Data</tr>
+                <tr>Cena</tr>
+                <tr>Xp</tr>
+            </th>
+            <tr *ngFor="let t of userInformation.transactions">
+                <td>{{t.type}}</td>
+                <td>{{t.createdAt}}</td>
+                <td>{{t.price}}</td>
+                <td>{{t.xp}}</td>
+            </tr>
+        </table>
+    </div>
+</app-nav>

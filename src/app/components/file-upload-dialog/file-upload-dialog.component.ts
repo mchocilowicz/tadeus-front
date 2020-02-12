@@ -26,7 +26,7 @@ export class FileUploadDialogComponent {
     }
 
     onOkClick() {
-        this.service.file(this.data.path + '/' + 'upload', this.file).subscribe(r => {
+        this.service.file(this.data.path + '/' + 'import', this.file).subscribe(r => {
             if (!r.error) {
                 this.dialogRef.close()
             }

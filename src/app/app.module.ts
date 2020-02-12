@@ -8,24 +8,24 @@ import { LoginComponent } from './pages/login/login.component';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { UserComponent } from './pages/user/user.component';
 import { RouterModule, Routes } from '@angular/router';
 import { AuthGuard } from './guards/auth.guard';
 import {
     MatButtonModule,
     MatCheckboxModule,
+    MatDatepickerModule,
     MatDialogModule,
     MatExpansionModule,
     MatInputModule,
     MatMenuModule,
+    MatNativeDateModule,
     MatPaginatorModule,
     MatSelectModule,
     MatSidenavModule,
     MatSortModule,
-    MatTableModule,
-    MatDatepickerModule,
-    MatNativeDateModule
+    MatTableModule
 } from '@angular/material';
 import { CityComponent } from './pages/city/city.component';
 import { NavComponent } from './components/nav/nav.component';
@@ -46,6 +46,9 @@ import { FileUploadDialogComponent } from './components/file-upload-dialog/file-
 import { NgoViewComponent } from './pages/ngo/ngo-view/ngo-view.component';
 import { NgoService } from "./pages/ngo/ngo.service";
 import { ConfigurationService } from "./pages/configuration/configuration.service";
+import { OpinionService } from "./services/opinion.service";
+import { StatusService } from "./services/status.service";
+import { UserViewComponent } from './pages/user/user-view/user-view.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -59,6 +62,11 @@ export const appRoutes: Routes = [
     {
         path: 'user',
         component: UserComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'user/:ID',
+        component: UserViewComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -130,7 +138,8 @@ export const appRoutes: Routes = [
         StatsComponent,
         ConfigurationComponent,
         FileUploadDialogComponent,
-        NgoViewComponent
+        NgoViewComponent,
+        UserViewComponent
     ],
     imports: [
         BrowserModule,
@@ -144,6 +153,7 @@ export const appRoutes: Routes = [
         }),
         HttpClientModule,
         FormsModule,
+        ReactiveFormsModule,
         RouterModule.forRoot(appRoutes, {enableTracing: true}),
         MatSidenavModule,
         MatCheckboxModule,
@@ -173,7 +183,9 @@ export const appRoutes: Routes = [
         CityService,
         TradingPointService,
         NgoService,
-        ConfigurationService
+        ConfigurationService,
+        OpinionService,
+        StatusService
     ],
     entryComponents: [
         FileUploadDialogComponent,

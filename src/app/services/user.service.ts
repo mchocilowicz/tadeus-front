@@ -8,7 +8,12 @@ export class UserService {
     constructor(private readonly httpService: HttpService<any>) {
     }
 
-    getUsers() {
-        return this.httpService.get('user');
+    getUsers(filters: any) {
+        const params = Object.keys(filters).filter(it => filters[it]).map(it => `${ it }=${ filters[it] }`).join("&");
+        return this.httpService.get('user?' + params);
+    }
+
+    getUserInformationBy(ID: string) {
+        return this.httpService.get('user/' + ID);
     }
 }
