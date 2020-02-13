@@ -16,4 +16,12 @@ export class UserService {
     getUserInformationBy(ID: string) {
         return this.httpService.get('user/' + ID);
     }
+
+    updateUserInformation(ID: string, body: any) {
+        return this.httpService.put('user/' + ID, body)
+    }
+
+    transferPoolToAnotherUser(ID: string, body: any) {
+        return this.httpService.put('user/' + ID + "/transfer", body)
+    }
 }

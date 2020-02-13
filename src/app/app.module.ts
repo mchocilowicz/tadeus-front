@@ -49,6 +49,7 @@ import { ConfigurationService } from "./pages/configuration/configuration.servic
 import { OpinionService } from "./services/opinion.service";
 import { StatusService } from "./services/status.service";
 import { UserViewComponent } from './pages/user/user-view/user-view.component';
+import { MatRadioModule } from "@angular/material/radio";
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -167,7 +168,8 @@ export const appRoutes: Routes = [
         MatDialogModule,
         MatSortModule,
         MatDatepickerModule,
-        MatNativeDateModule
+        MatNativeDateModule,
+        MatRadioModule,
         // StoreModule.forRoot(reducers, {
         //   metaReducers,
         //   runtimeChecks: {

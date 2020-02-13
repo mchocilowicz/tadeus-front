@@ -1,6 +1,7 @@
 export interface UserView {
     id: string;
     ID: string;
+    name: string;
     prefix: number | null;
     phone: number | null;
     donationPool: number;
@@ -10,11 +11,11 @@ export interface UserView {
     xp: number;
     currentNgo: string;
     lastNgo: string;
-    transactions: UserTransactionResponse[];
+    transactions: UserTransaction[];
     status: string;
 }
 
-export interface UserTransactionResponse {
+export interface UserTransaction {
     type: string;
     createdAt: Date;
     price: number;

@@ -2,7 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { UserService } from "../../../services/user.service";
 import { ActivatedRoute, Router } from "@angular/router";
 import { FormBuilder, FormGroup } from "@angular/forms";
-import { UserView } from "../../../models/user-view.interface";
+import { UserTransaction, UserView } from "../../../models/user-view.interface";
+import { MatTableDataSource } from "@angular/material/table";
 
 @Component({
     selector: 'app-user-view',
@@ -13,7 +14,10 @@ export class UserViewComponent implements OnInit {
 
     userInformation: UserView;
     newStatus: string;
-    form: FormGroup;
+    editForm: FormGroup;
+    transferForm: FormGroup;
+    transactionDisplayFields: string[] = ['type', 'price', 'date', 'xp'];
+    transactionDataSource = new MatTableDataSource<UserTransaction>();
 
     constructor(private route: ActivatedRoute,
                 private router: Router,
@@ -24,23 +28,51 @@ export class UserViewComponent implements OnInit {
     ngOnInit() {
         const id = this.route.snapshot.paramMap.get("ID");
         if (id) {
-            this.userService.getUserInformationBy(id).subscribe(r => {
-                if (r.data) {
-                    this.userInformation = r.data;
-                    this.newStatus = r.data.status;
-                }
-            })
+            this.loadInitialData(id);
         } else {
             this.router.navigateByUrl("user")
         }
     }
 
-    onSuspendClick() {
-        this.newStatus = "SUSPENDED";
+    onStatusChange($event: any) {
+        this.editForm.patchValue({
+            status: $event.value
+        })
     }
 
-    onBlockClick() {
-        this.newStatus = "BLOCKED"
+    onEditSubmit() {
+        this.userService.updateUserInformation(this.userInformation.ID, this.editForm.value).subscribe(r => {
+            if (!r.data) {
+                this.router.navigateByUrl("user")
+            }
+        })
+    }
+
+    onTransferSubmit() {
+        this.userService.transferPoolToAnotherUser(this.userInformation.ID, this.transferForm.value).subscribe(r => {
+            if (!r.error) {
+                this.router.navigateByUrl("user")
+            }
+        })
+    }
+
+    private loadInitialData(id: string) {
+        this.userService.getUserInformationBy(id).subscribe(r => {
+            if (r.data) {
+                this.userInformation = r.data;
+                this.transactionDataSource = r.data.transactions;
+                this.newStatus = r.data.status;
+
+                this.editForm = this.fb.group({
+                    status: [this.userInformation.status],
+                    prefix: [48],
+                    phone: [null]
+                });
+                this.transferForm = this.fb.group({
+                    targetID: [null],
+                });
+            }
+        })
     }
 
 }
