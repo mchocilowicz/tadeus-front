@@ -5,14 +5,11 @@
     </div>
     <div class="col-4">
       <h2>{{'login.form-title' | translate}}</h2>
-      <div *ngIf="errorMessage" class="alert alert-danger" role="alert">
-        {{errorMessage}}
-      </div>
       <form *ngIf="!nextStep" (ngSubmit)="onPhoneFormSubmit()">
         <div class="form-group" id="phoneForm">
           <label for="phone">{{'login.form-phone-label' | translate}}</label>
-          <input type="text" disabled class="form-control" id="prefix" [value]="phonePrefix"/>
-          <input type="phone" class="form-control" id="phone"
+          +{{phonePrefix}}
+          <input class="form-control" id="phone" type="number"
                  [(ngModel)]="phone" name="phone"
                  placeholder="{{'login.form-phone-placeholder' | translate}}">
         </div>

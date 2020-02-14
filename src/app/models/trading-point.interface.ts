@@ -1,17 +1,17 @@
-import { IType } from "./type.interface";
-import { ICity } from "./city.interface";
+import {IType} from "./type.interface";
+import {ICity} from "./city.interface";
 
 export interface ITradingPoint {
-    id: string,
     ID: string,
-    type: IType,
+    type: string,
     name: string,
-    donation: number,
-    vat: number,
-    fee: number,
-    city: ICity,
-    xp: number,
-    updatedDate: Date,
+    city: string,
+    email: string
+}
+
+export interface TradingPointType {
+    id: string;
+    name: string;
 }
 
 export class TradingPointView {

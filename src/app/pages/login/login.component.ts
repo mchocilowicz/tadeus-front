@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { LoginService } from "../../services/login.service";
+import {Component, OnInit} from '@angular/core';
+import {Router} from '@angular/router';
+import {LoginService} from "../../services/login.service";
 
 @Component({
     selector: 'app-login',
@@ -9,11 +9,10 @@ import { LoginService } from "../../services/login.service";
 })
 export class LoginComponent implements OnInit {
 
-    phone: string | null = '';
+    phone: number | null = null;
     code: number | null = null;
     nextStep: boolean | null = false;
-    errorMessage: string | null = '';
-    phonePrefix: string | null = '+48';
+    phonePrefix: number | null = 48;
 
     constructor(private readonly loginService: LoginService, private readonly router: Router) {
     }
@@ -28,10 +27,7 @@ export class LoginComponent implements OnInit {
     onPhoneFormSubmit(): void {
         if (this.phone && this.phonePrefix) {
             this.loginService.sendPhone(this.phone, this.phonePrefix).subscribe(r => {
-                if (r.error) {
-                    this.errorMessage = r.message;
-                } else {
-                    this.errorMessage = '';
+                if (!r.error) {
                     this.nextStep = true;
                 }
             });
@@ -41,11 +37,8 @@ export class LoginComponent implements OnInit {
     onCodeFormSubmit(): void {
         if (this.phone && this.phonePrefix && this.code) {
             this.loginService.sendCode(this.phone, this.phonePrefix, this.code).subscribe(r => {
-                if (r.error) {
-                    this.errorMessage = r.message;
-                } else {
-                    this.errorMessage = '';
-                    this.phone = '';
+                if (!r.error) {
+                    this.phone = null;
                     this.code = null;
                     this.nextStep = false;
                     localStorage.setItem('tds', r.data);

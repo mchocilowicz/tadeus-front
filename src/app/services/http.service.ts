@@ -1,9 +1,9 @@
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {Observable} from 'rxjs';
 import ApiResponse from '../models/api-response.interface';
-import { environment } from '../../environments/environment';
-import { TranslateService } from '@ngx-translate/core';
-import { Injectable } from "@angular/core";
+import {environment} from '../../environments/environment';
+import {TranslateService} from '@ngx-translate/core';
+import {Injectable} from "@angular/core";
 
 @Injectable()
 export class HttpService<T> {
@@ -29,6 +29,10 @@ export class HttpService<T> {
 
     put(path: string, body: object) {
         return this.httpClient.put<ApiResponse<T>>(environment.url + path, body, {headers: this.prepareHeaders()});
+    }
+
+    delete(path: string) {
+        return this.httpClient.delete<ApiResponse<T>>(environment.url + path, {headers: this.prepareHeaders()});
     }
 
     private prepareHeaders(): HttpHeaders {

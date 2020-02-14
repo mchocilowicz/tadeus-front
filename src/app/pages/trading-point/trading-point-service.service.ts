@@ -1,7 +1,7 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from "../../services/http.service";
-import { HttpParams } from "@angular/common/http";
-import { TradingPointSave } from "../../models/trading-point.interface";
+import {Injectable} from '@angular/core';
+import {HttpService} from "../../services/http.service";
+import {HttpParams} from "@angular/common/http";
+import {TradingPointSave} from "../../models/trading-point.interface";
 
 @Injectable({
     providedIn: 'root'
@@ -9,10 +9,6 @@ import { TradingPointSave } from "../../models/trading-point.interface";
 export class TradingPointService {
 
     constructor(private readonly service: HttpService<any>) {
-    }
-
-    uploadFile(file: File) {
-        return this.service.file('trading-point/upload', file)
     }
 
     getTradingPoints() {

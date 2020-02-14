@@ -1,85 +1,87 @@
 <app-nav>
-    <div *ngIf="userInformation">
-        Użytkownik użytkownika :
-        <div>
-            Imię: {{userInformation.name}}
-        </div>
-        <div>
-            Numer telefonu: +{{userInformation.prefix}}{{userInformation.phone}}
-        </div>
-        <div>
-            Pula osobista: {{userInformation.personalPool}}
-        </div>
-        <div>
-            Xp: {{userInformation.xp}}
-        </div>
-        <div>
-            <div>Pula dotacji: {{userInformation.donationPool}}</div>
-            <div>Aktualny cel: {{userInformation.currentNgo}}</div>
-            <div>Ostatni cel: {{userInformation.lastNgo}}</div>
-            <div>Zebrane środki od początku: {{userInformation.collectedMoney}}</div>
-            <div>Ostatnia aktywnośćL {{userInformation.updateAt |  date:'MM/dd/yyyy'}}</div>
-        </div>
-    </div>
-    <div *ngIf="userInformation">
-        <form [formGroup]="editForm">
+    <div *ngIf="userInformation" class="userContainer">
+        <div class="userInformation">
+            Dane użytkownika :
             <div>
-                Edycja
-                <mat-form-field>
-                    <input formControlName="phone" matInput placeholder="Nowy numer telefon" type="number">
-                </mat-form-field>
-                <div>
-                    <mat-radio-group
-                            (change)="onStatusChange($event)"
-                            [value]="userInformation.status"
-                            aria-labelledby="example-radio-group-label"
-                            class="example-radio-group">
-                        <mat-radio-button class="example-radio-button" value="ACTIVE">Aktywny</mat-radio-button>
-                        <mat-radio-button class="example-radio-button" value="BLOCKED">Zablokuj</mat-radio-button>
-                        <mat-radio-button class="example-radio-button" value="SUSPENDED">Zawieś</mat-radio-button>
-                    </mat-radio-group>
-                </div>
-                <div>
-                    <button (click)="onEditSubmit()">Zapisz zmiany</button>
-                </div>
+                Imię: {{userInformation.name}}
             </div>
-        </form>
-        <button>Usuń użytkownika</button>
-        <div>
-            <form [formGroup]="transferForm">
-                <p>Przesłanie środków pul do innego użytkownika</p>
-                <mat-form-field>
-                    <input formControlName="targetID" matInput placeholder="ID użytkownika docelowego" type="text">
-                </mat-form-field>
-                <button (click)="onTransferSubmit()">Wyślij</button>
-            </form>
+            <div>
+                Numer telefonu: +{{userInformation.prefix}}{{userInformation.phone}}
+            </div>
+            <div>
+                Pula osobista: {{userInformation.personalPool}}
+            </div>
+            <div>
+                Xp: {{userInformation.xp}}
+            </div>
+            <div>
+                <div>Pula dotacji: {{userInformation.donationPool}}</div>
+                <div>Aktualny cel: {{userInformation.currentNgo}}</div>
+                <div>Ostatni cel: {{userInformation.lastNgo}}</div>
+                <div>Zebrane środki od początku: {{userInformation.collectedMoney}}</div>
+                <div>Ostatnia aktywnośćL {{userInformation.updateAt |  date:'MM/dd/yyyy'}}</div>
+            </div>
         </div>
-    </div>
-    <div *ngIf="userInformation">
-        Transakcje użytkownika
-        <table [dataSource]="transactionDataSource" mat-table>
-            <ng-container matColumnDef="type">
-                <th *matHeaderCellDef mat-header-cell>Typ</th>
-                <td *matCellDef="let element" mat-cell> {{element.type}} </td>
-            </ng-container>
+        <div>
+            <p>Edycja</p>
+            <form [formGroup]="editForm">
+                <div>
+                    <mat-form-field>
+                        <input formControlName="phone" matInput placeholder="Nowy numer telefon" type="number">
+                    </mat-form-field>
+                    <div>
+                        <mat-radio-group
+                                (change)="onStatusChange($event)"
+                                [value]="userInformation.status"
+                                aria-labelledby="example-radio-group-label"
+                                class="example-radio-group">
+                            <mat-radio-button class="example-radio-button" value="ACTIVE">Aktywny</mat-radio-button>
+                            <mat-radio-button class="example-radio-button" value="BLOCKED">Zablokuj</mat-radio-button>
+                            <mat-radio-button class="example-radio-button" value="SUSPENDED">Zawieś</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                    <div>
+                        <button (click)="onEditSubmit()">Zapisz zmiany</button>
+                        <button (click)="onDeleteClick()">Usuń użytkownika</button>
+                    </div>
+                </div>
+            </form>
+            <div>
+                <p>Przesłanie środków pul do innego użytkownika</p>
+                <form [formGroup]="transferForm">
+                    <mat-form-field>
+                        <input formControlName="targetID" matInput placeholder="ID użytkownika docelowego" type="text">
+                    </mat-form-field>
+                    <button (click)="onTransferSubmit()">Wyślij</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            Transakcje użytkownika
+            <table [dataSource]="transactionDataSource" mat-table>
+                <ng-container matColumnDef="type">
+                    <th *matHeaderCellDef mat-header-cell>Typ</th>
+                    <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="price">
-                <th *matHeaderCellDef mat-header-cell> Cena</th>
-                <td *matCellDef="let element" mat-cell> {{element.price}} </td>
-            </ng-container>
+                <ng-container matColumnDef="price">
+                    <th *matHeaderCellDef mat-header-cell> Cena</th>
+                    <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="date">
-                <th *matHeaderCellDef mat-header-cell> Data</th>
-                <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
-            </ng-container>
+                <ng-container matColumnDef="date">
+                    <th *matHeaderCellDef mat-header-cell> Data</th>
+                    <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
+                </ng-container>
 
-            <ng-container matColumnDef="xp">
-                <th *matHeaderCellDef mat-header-cell>Xp</th>
-                <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
-            </ng-container>
+                <ng-container matColumnDef="xp">
+                    <th *matHeaderCellDef mat-header-cell>Xp</th>
+                    <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
+                </ng-container>
 
-            <tr *matHeaderRowDef="transactionDisplayFields" mat-header-row></tr>
-            <tr *matRowDef="let row; columns: transactionDisplayFields;" mat-row></tr>
-        </table>
+                <tr *matHeaderRowDef="transactionDisplayFields" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: transactionDisplayFields;" mat-row></tr>
+            </table>
+        </div>
     </div>
 </app-nav>

@@ -1,5 +1,5 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from "./http.service";
+import {Injectable} from '@angular/core';
+import {HttpService} from "./http.service";
 
 
 @Injectable()
@@ -9,7 +9,7 @@ export class UserService {
     }
 
     getUsers(filters: any) {
-        const params = Object.keys(filters).filter(it => filters[it]).map(it => `${ it }=${ filters[it] }`).join("&");
+        const params = Object.keys(filters).filter(it => filters[it]).map(it => `${it}=${filters[it]}`).join("&");
         return this.httpService.get('user?' + params);
     }
 
@@ -23,5 +23,9 @@ export class UserService {
 
     transferPoolToAnotherUser(ID: string, body: any) {
         return this.httpService.put('user/' + ID + "/transfer", body)
+    }
+
+    deleteUser(ID: string) {
+        return this.httpService.delete(`user/${ID}`)
     }
 }

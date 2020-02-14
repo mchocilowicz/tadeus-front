@@ -3,62 +3,57 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Filters
+                    Filtry
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
             <div class="filter-container">
                 <mat-form-field>
-                    <input [(ngModel)]="name" matInput placeholder="Input">
+                    <input [(ngModel)]="name" matInput placeholder="Nazwa Partnera">
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select [(ngModel)]="type" placeholder="Type">
+                    <mat-select [(ngModel)]="type" placeholder="Typ">
                         <mat-option value=""></mat-option>
-                        <mat-option *ngFor="let type of types" [value]="type.name">{{type.name}}</mat-option>
+                        <mat-option *ngFor="let type of types" [value]="type.id">{{type.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select [(ngModel)]="city" placeholder="City">
+                    <mat-select [(ngModel)]="city" placeholder="Miasto">
                         <mat-option value=""></mat-option>
-                        <mat-option *ngFor="let city of cities" [value]="city.name">{{city.name}}</mat-option>
+                        <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button (click)="onFilterClick()">Filter</button>
+                <button (click)="onFilterClick()">Szukaj</button>
             </div>
         </mat-expansion-panel>
     </mat-accordion>
 
-    <button (click)="openDialog()">Import</button>
     <div class="mat-elevation-z8">
         <table [dataSource]="dataSource" mat-table matSort>
             <mat-text-column name="ID"></mat-text-column>
             <mat-text-column name="name"></mat-text-column>
-            <ng-container matColumnDef="type">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header> Type</th>
-                <td *matCellDef="let element" mat-cell> {{element.type.name}} </td>
+            <mat-text-column name="email"></mat-text-column>
+
+            <ng-container matColumnDef="phone">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Numer telefonu</th>
+                <td *matCellDef="let element" mat-cell> +{{element.prefix}}{{element.phone}} </td>
             </ng-container>
 
-            <!-- Weight Column -->
-            <mat-text-column name="donation"></mat-text-column>
-
-            <mat-text-column name="vat"></mat-text-column>
-            <mat-text-column name="fee"></mat-text-column>
+            <ng-container matColumnDef="type">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> Typ</th>
+                <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+            </ng-container>
 
             <ng-container matColumnDef="city">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header> city</th>
-                <td *matCellDef="let element" mat-cell> {{element.city.name}} </td>
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>Miasto</th>
+                <td *matCellDef="let element" mat-cell> {{element.city}} </td>
             </ng-container>
-
-            <mat-text-column name="xp"></mat-text-column>
-
-            <mat-text-column name="updatedDate"></mat-text-column>
 
             <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
             <tr (click)="onRowClick(row)" *matRowDef="let row; columns: displayedColumns;" class="trading-point-row"
                 mat-row></tr>
         </table>
-
-        <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
     </div>
+    <button (click)="openDialog()">Import</button>
 
 </app-nav>

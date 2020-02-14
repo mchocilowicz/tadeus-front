@@ -1,12 +1,12 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { TradingPointService } from "./trading-point-service.service";
-import { MatDialog } from "@angular/material";
-import { ITradingPoint } from "../../models/trading-point.interface";
-import { CityService } from "../../services/city.service";
-import { Router } from "@angular/router";
-import { FileUploadDialogComponent } from "../../components/file-upload-dialog/file-upload-dialog.component";
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {TradingPointService} from "./trading-point-service.service";
+import {MatDialog} from "@angular/material";
+import {ITradingPoint, TradingPointType} from "../../models/trading-point.interface";
+import {CityService} from "../../services/city.service";
+import {Router} from "@angular/router";
+import {FileUploadDialogComponent} from "../../components/file-upload-dialog/file-upload-dialog.component";
+import {ICity} from "../../models/city.interface";
 
 @Component({
     selector: 'app-trading-point',
@@ -14,16 +14,13 @@ import { FileUploadDialogComponent } from "../../components/file-upload-dialog/f
     styleUrls: ['./trading-point.component.scss']
 })
 export class TradingPointComponent implements OnInit {
-    displayedColumns: string[] = ['ID', 'name', 'type', 'donation', 'vat', 'fee', 'city', 'xp', 'updatedDate'];
+    displayedColumns: string[] = ['ID', 'name', 'email', 'phone', 'type', 'city'];
     dataSource = new MatTableDataSource<ITradingPoint>([]);
-    types: [];
-    cities: [];
+    types: TradingPointType[];
+    cities: ICity[];
     city: string;
     type: string;
     name: string;
-
-    @ViewChild(MatPaginator, {static: true})
-    paginator!: MatPaginator;
 
     constructor(private service: TradingPointService,
                 private readonly dialog: MatDialog,
@@ -42,9 +39,7 @@ export class TradingPointComponent implements OnInit {
 
     ngOnInit() {
         this.service.getTradingPoints().subscribe(r => {
-            if (r.error) {
-
-            } else {
+            if (r.data) {
                 this.dataSource = r.data;
             }
         });
@@ -53,8 +48,7 @@ export class TradingPointComponent implements OnInit {
         });
         this.cityService.getCities().subscribe(r => {
             this.cities = r.data;
-        })
-        this.dataSource.paginator = this.paginator;
+        });
     }
 
     onRowClick(row: any) {
@@ -67,9 +61,9 @@ export class TradingPointComponent implements OnInit {
             city: this.city,
             type: this.type
         };
+
         this.service.getTradingPointsWithQuery(params).subscribe(r => {
             this.dataSource = r.data;
         })
     }
-
 }

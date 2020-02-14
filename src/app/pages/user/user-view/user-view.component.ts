@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
-import { UserService } from "../../../services/user.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { FormBuilder, FormGroup } from "@angular/forms";
-import { UserTransaction, UserView } from "../../../models/user-view.interface";
-import { MatTableDataSource } from "@angular/material/table";
+import {Component, OnInit} from '@angular/core';
+import {UserService} from "../../../services/user.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {FormBuilder, FormGroup} from "@angular/forms";
+import {UserTransaction, UserView} from "../../../models/user-view.interface";
+import {MatTableDataSource} from "@angular/material/table";
+import ApiResponse from "../../../models/api-response.interface";
 
 @Component({
     selector: 'app-user-view',
@@ -42,19 +43,28 @@ export class UserViewComponent implements OnInit {
 
     onEditSubmit() {
         this.userService.updateUserInformation(this.userInformation.ID, this.editForm.value).subscribe(r => {
-            if (!r.data) {
-                this.router.navigateByUrl("user")
-            }
+            this.navigateToUserList(r)
         })
     }
 
     onTransferSubmit() {
         this.userService.transferPoolToAnotherUser(this.userInformation.ID, this.transferForm.value).subscribe(r => {
-            if (!r.error) {
-                this.router.navigateByUrl("user")
-            }
+            this.navigateToUserList(r)
         })
     }
+
+    onDeleteClick() {
+        this.userService.deleteUser(this.userInformation.ID).subscribe(r => {
+            this.navigateToUserList(r)
+        })
+    }
+
+    private navigateToUserList(r: ApiResponse<any>) {
+        if (!r.error) {
+            this.router.navigateByUrl("user")
+        }
+    }
+
 
     private loadInitialData(id: string) {
         this.userService.getUserInformationBy(id).subscribe(r => {

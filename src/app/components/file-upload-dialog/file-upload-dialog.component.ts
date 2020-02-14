@@ -1,6 +1,7 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { HttpService } from "../../services/http.service";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {HttpService} from "../../services/http.service";
+import {Router} from "@angular/router";
 
 @Component({
     selector: 'app-file-upload-dialog',
@@ -14,7 +15,8 @@ export class FileUploadDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<FileUploadDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private service: HttpService<any>) {
+        private service: HttpService<any>,
+        private router: Router) {
     }
 
     onNoClick(): void {
@@ -28,7 +30,8 @@ export class FileUploadDialogComponent {
     onOkClick() {
         this.service.file(this.data.path + '/' + 'import', this.file).subscribe(r => {
             if (!r.error) {
-                this.dialogRef.close()
+                this.dialogRef.close();
+                this.router.navigateByUrl(this.data.path);
             }
         })
     }
