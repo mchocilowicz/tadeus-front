@@ -30,15 +30,24 @@ export class TradingPointService {
         return this.service.get('trading-point-type')
     }
 
-    saveTerminal(id: string, phone: string) {
-        return this.service.post(`trading-point/${id}/terminal`, {phone: phone})
+    saveTerminal(ID: string, body: any) {
+        return this.service.post(`trading-point/${ID}/terminal`, body)
     }
 
-    getTradingPoint(id: string) {
-        return this.service.get('trading-point/' + id)
+    getTradingPoint(ID: string) {
+        return this.service.get('trading-point/' + ID)
     }
 
-    updateTradingPoint(id: string, body: TradingPointSave) {
-        return this.service.put(`trading-point/${id}`, body)
+    updateTradingPoint(ID: string, body: TradingPointSave) {
+        return this.service.put(`trading-point/${ID}`, body)
     }
+
+    createTradingPoint(body: any) {
+        return this.service.post(`trading-point`, body)
+    }
+
+    updateImage(ID: string, formData: FormData) {
+        return this.service.image(`trading-point/${ID}/image`, formData)
+    }
+
 }

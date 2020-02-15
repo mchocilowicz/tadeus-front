@@ -1,5 +1,5 @@
-import { Injectable } from "@angular/core";
-import { HttpService } from "./http.service";
+import {Injectable} from "@angular/core";
+import {HttpService} from "./http.service";
 
 @Injectable()
 export class OpinionService {
@@ -9,5 +9,9 @@ export class OpinionService {
 
     getUsersOpinion() {
         return this.httpService.get('user/opinion');
+    }
+
+    getTradingPointsOpinion() {
+        return this.httpService.get('trading-point/opinion');
     }
 }

@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import {Component} from '@angular/core';
 
 @Component({
     selector: 'app-nav',
@@ -7,15 +7,11 @@ import { Component } from '@angular/core';
 })
 export class NavComponent {
     links = [
-        'login',
-        'user',
-        'city',
         'stats',
-        'configuration',
+        'user',
+        'trading-point',
         'ngo',
-        'ngo-type',
-        'trading-point-type',
-        'trading-point'
+        'configuration',
     ];
 
 }

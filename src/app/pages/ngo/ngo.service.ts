@@ -1,6 +1,6 @@
-import { Injectable } from "@angular/core";
-import { HttpParams } from "@angular/common/http";
-import { HttpService } from "../../services/http.service";
+import {Injectable} from "@angular/core";
+import {HttpParams} from "@angular/common/http";
+import {HttpService} from "../../services/http.service";
 
 @Injectable()
 export class NgoService {
@@ -8,8 +8,8 @@ export class NgoService {
     constructor(private service: HttpService<any>) {
     }
 
-    uploadFile(file: File) {
-        return this.service.file('ngo/import', file)
+    getNgoBy(ID: string) {
+        return this.service.get('ngo/' + ID)
     }
 
     getNgoList() {

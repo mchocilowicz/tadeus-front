@@ -27,6 +27,10 @@ export class HttpService<T> {
         return this.httpClient.post<ApiResponse<T>>(environment.url + path, formData, {headers: this.fileHeaders()})
     }
 
+    image(path: string, formData: FormData) {
+        return this.httpClient.post<ApiResponse<T>>(environment.url + path, formData, {headers: this.fileHeaders()})
+    }
+
     put(path: string, body: object) {
         return this.httpClient.put<ApiResponse<T>>(environment.url + path, body, {headers: this.prepareHeaders()});
     }
@@ -41,6 +45,6 @@ export class HttpService<T> {
 
     private fileHeaders(): HttpHeaders {
         return new HttpHeaders()
-            .set('Accept', 'application/json');
+            .set('Accept', 'multipart/form-data');
     }
 }

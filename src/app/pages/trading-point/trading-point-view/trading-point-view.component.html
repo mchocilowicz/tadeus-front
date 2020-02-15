@@ -1,115 +1,181 @@
 <app-nav>
-    Trading-point {{ this.id }}
-    <form class="example-form">
-        <mat-form-field class="example-full-width">
-            <input [(ngModel)]="tradingPoint.name" matInput name="name" placeholder="Name">
-        </mat-form-field>
-
-        <table cellspacing="0" class="example-full-width">
-            <tr>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.address" matInput name="address" placeholder="Address">
-                    </mat-form-field>
-                </td>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.postCode" matInput name="postCode"
-                               placeholder="Post-Code">
-                    </mat-form-field>
-                </td>
-            </tr>
-        </table>
-        <table cellspacing="0" class="example-full-width">
-            <tr>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.longitude" matInput name="longitude"
-                               placeholder="Longitude">
-                    </mat-form-field>
-                </td>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.latitude" matInput name="latitude"
-                               placeholder="Latitude">
-                    </mat-form-field>
-                </td>
-            </tr>
-        </table>
-
-        <table cellspacing="0" class="example-full-width">
-            <tr>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <mat-select [(value)]="tradingPoint.type" name="type" placeholder="Type">
-                            <mat-option *ngFor="let type of types"
-                                        [value]="type.name">{{type.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </td>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <mat-select [(value)]="tradingPoint.city" name="city" placeholder="City">
-                            <mat-option *ngFor="let city of cities"
-                                        [value]="city.name">{{city.name}}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </td>
-            </tr>
-        </table>
-
-        <table cellspacing="0" class="example-full-width">
-            <tr>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.fee" matInput name="fee"
-                               placeholder="Manipulation Fee">
-                    </mat-form-field>
-                </td>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.vat" matInput name="vat" placeholder="Vat">
-                    </mat-form-field>
-                </td>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.donationPercentage" matInput name="percentage"
-                               placeholder="Donation Percentage">
-                    </mat-form-field>
-                </td>
-                <td>
-                    <mat-form-field class="example-full-width">
-                        <input [(ngModel)]="tradingPoint.xp" matInput name="xp" placeholder="XP">
-                    </mat-form-field>
-                </td>
-            </tr>
-        </table>
-        <button (click)="onEdit()">Save changes</button>
-    </form>
-
-    <mat-accordion>
+    <div *ngIf="tradingPointForm">
+        Punkt Handlowy
+        <form [formGroup]="tradingPointForm" class="example-form">
+            <div cellspacing="0" class="example-full-width">
+                <div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="name" matInput placeholder="Nazwa" type="text">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="phone" matInput placeholder="Telefon" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="email" matInput placeholder="Email" type="text">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-select formControlName="type" placeholder="Typ">
+                                <mat-option *ngFor="let type of types"
+                                            [value]="type.id">{{type.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="fee" matInput placeholder="Oplata manipulacyjna"
+                                   type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="vat" matInput placeholder="VAT" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="donationPercentage" matInput placeholder="Domyślna wartość dotacji"
+                                   type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="xp" matInput placeholder="XP" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-radio-group
+                                aria-labelledby="example-radio-group-label"
+                                class="example-radio-group"
+                                formControlName="active">
+                            <mat-radio-button [value]="true" class="example-radio-button">Aktywny</mat-radio-button>
+                            <mat-radio-button [value]="false" class="example-radio-button">Nieaktywny</mat-radio-button>
+                        </mat-radio-group>
+                    </div>
+                </div>
+                <div formGroupName="address">
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="street" matInput placeholder="Ulica" type="text">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="number" matInput placeholder="Numer ulicy" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="postCode" matInput placeholder="Kod pocztowy" type="text">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="longitude" matInput placeholder="Longitude" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="latitude" matInput placeholder="Latitude" type="number">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <mat-select formControlName="city" placeholder="Miasto">
+                                <mat-option *ngFor="let city of cities"
+                                            [value]="city.id">{{city.name}}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </div>
+            <button (click)="onEdit()">Zapisz</button>
+        </form>
+    </div>
+    <mat-accordion *ngIf="terminalForm">
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Terminals
+                    Terminale
                 </mat-panel-title>
             </mat-expansion-panel-header>
-            <mat-form-field>
-                <input [value]="phonePrefix" disabled matInput>
-                <input [(ngModel)]="phone" matInput placeholder="Phone" type="phone">
-            </mat-form-field>
-            <button (click)="saveTerminal()">Add Terminal</button>
+
+            <form [formGroup]="terminalForm">
+                <mat-form-field>
+                    <input formControlName="phone" matInput placeholder="Numer telefonu" type="number">
+                </mat-form-field>
+                <mat-form-field>
+                    <input formControlName="name" matInput placeholder="Imie" type="text">
+                </mat-form-field>
+                <button (click)="saveTerminal()">Dodaj terminal</button>
+            </form>
+
             <table [dataSource]="terminals" mat-table matSort>
                 <mat-text-column name="ID"></mat-text-column>
+                <mat-text-column name="name"></mat-text-column>
                 <mat-text-column name="phone"></mat-text-column>
                 <mat-text-column name="step"></mat-text-column>
 
                 <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
             </table>
+        </mat-expansion-panel>
+    </mat-accordion>
+    <mat-accordion *ngIf="transactions">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Transakcje
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+
+            <table [dataSource]="transactions" mat-table>
+                <ng-container matColumnDef="type">
+                    <th *matHeaderCellDef mat-header-cell>Typ</th>
+                    <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="price">
+                    <th *matHeaderCellDef mat-header-cell>Cena</th>
+                    <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="date">
+                    <th *matHeaderCellDef mat-header-cell> Data</th>
+                    <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="xp">
+                    <th *matHeaderCellDef mat-header-cell>Xp</th>
+                    <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="transactionDisplayFields" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: transactionDisplayFields;" mat-row></tr>
+            </table>
 
         </mat-expansion-panel>
     </mat-accordion>
-
-
+    <mat-accordion *ngIf="image">
+        <mat-expansion-panel>
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    Obrazki
+                </mat-panel-title>
+            </mat-expansion-panel-header>
+            <div>
+                <img [src]="image" style="width: 150px; height: 150px"/>
+                <form>
+                    <input (change)="onImageChange($event)" placeholder="Nowy obrazek" type="file">
+                    <button (click)="updateImage()" [disabled]="newImage === null">Zmien obrazek</button>
+                </form>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
 </app-nav>

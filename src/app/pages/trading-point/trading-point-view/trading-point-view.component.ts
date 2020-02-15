@@ -1,8 +1,11 @@
-import { Component, OnInit } from '@angular/core';
-import { TradingPointService } from "../trading-point-service.service";
-import { ActivatedRoute, Router } from "@angular/router";
-import { TradingPointSave, TradingPointView } from "../../../models/trading-point.interface";
-import { CityService } from "../../../services/city.service";
+import {Component, OnInit} from '@angular/core';
+import {TradingPointService} from "../trading-point-service.service";
+import {ActivatedRoute, Router} from "@angular/router";
+import {IType} from "../../../models/trading-point.interface";
+import {CityService} from "../../../services/city.service";
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
+import {ICity} from "../../../models/city.interface";
+import {environment} from "../../../../environments/environment";
 
 @Component({
     selector: 'app-trading-point-view',
@@ -10,64 +13,124 @@ import { CityService } from "../../../services/city.service";
     styleUrls: ['./trading-point-view.component.scss']
 })
 export class TradingPointViewComponent implements OnInit {
-    phone = '';
-    phonePrefix = '+48';
-    id = null;
-    terminals = [];
-    tradingPoint: TradingPointView = new TradingPointView();
-    displayedColumns: string[] = ['ID', 'phone', 'step'];
-    cities = [];
-    types = [];
+    terminals = null;
+    transactions = null;
+    transactionDisplayFields: string[] = ['type', 'price', 'date', 'xp'];
+    displayedColumns: string[] = ['ID', 'name', 'phone', 'step'];
+    cities: ICity[] = [];
+    types: IType[] = [];
+    ID: string;
+    terminalForm: FormGroup;
+    tradingPointForm: FormGroup;
+    newImage: File = null;
+    image: string;
 
     constructor(private service: TradingPointService,
                 private activatedRoute: ActivatedRoute,
+                private fb: FormBuilder,
                 private router: Router,
                 private cityService: CityService) {
     }
 
     ngOnInit() {
-        this.id = this.activatedRoute.snapshot.paramMap.get('ID');
-        this.service.getTradingPoint(this.id).subscribe(r => {
-            this.terminals = r.data.terminals;
-            this.tradingPoint = r.data;
-        });
+        const id = this.activatedRoute.snapshot.paramMap.get('ID');
+        this.ID = id;
+        if (id === 'new') {
+            this.tradingPointForm = this.fb.group({
+                type: new FormControl(null, Validators.required),
+                phone: new FormControl(null, Validators.required),
+                name: new FormControl(null, Validators.required),
+                address: this.fb.group({
+                    street: new FormControl(null, Validators.required),
+                    number: new FormControl(null, Validators.required),
+                    postCode: new FormControl(null, Validators.required),
+                    longitude: new FormControl(null, Validators.required),
+                    latitude: new FormControl(null, Validators.required),
+                    city: new FormControl(null, Validators.required)
+                }),
+                donationPercentage: new FormControl(0, Validators.required),
+                email: new FormControl(null, Validators.required),
+                price: new FormControl(0, Validators.required),
+                active: new FormControl(false, Validators.required),
+                vat: new FormControl(23, Validators.required),
+                fee: new FormControl(0.66, Validators.required),
+                xp: new FormControl(0, Validators.required),
+            })
+        } else {
+            this.service.getTradingPoint(id).subscribe(r => {
+                if (r.data) {
+                    this.image = environment.url + 'img/' + r.data.image;
+                    this.terminals = r.data.terminals;
+                    this.transactions = r.data.transactions;
+                    this.tradingPointForm = this.fb.group({
+                        type: new FormControl(r.data.type, Validators.required),
+                        phone: new FormControl(r.data.phone, Validators.required),
+                        name: new FormControl(r.data.name, Validators.required),
+                        donationPercentage: new FormControl(r.data.donationPercentage, Validators.required),
+                        email: new FormControl(r.data.email, [Validators.required, Validators.email]),
+                        price: new FormControl(r.data.price, Validators.required),
+                        active: new FormControl(r.data.active, Validators.required),
+                        vat: new FormControl(r.data.vat, Validators.required),
+                        fee: new FormControl(r.data.fee, Validators.required),
+                        xp: new FormControl(r.data.xp, Validators.required),
+                        address: this.fb.group({
+                            street: new FormControl(r.data.address.street, Validators.required),
+                            number: new FormControl(r.data.address.number, Validators.required),
+                            postCode: new FormControl(r.data.address.postCode, Validators.required),
+                            longitude: new FormControl(r.data.address.longitude, Validators.required),
+                            latitude: new FormControl(r.data.address.latitude, Validators.required),
+                            city: new FormControl(r.data.address.city, Validators.required)
+                        })
+                    });
+                    this.terminalForm = this.fb.group({
+                        phone: new FormControl(null, [Validators.required]),
+                        prefix: [48],
+                        name: new FormControl(null, [Validators.required])
+                    })
+                } else {
+                    this.router.navigateByUrl('trading-point')
+                }
+            });
+        }
         this.service.getTypes().subscribe(r => this.types = r.data);
         this.cityService.getCities().subscribe(r => this.cities = r.data);
     }
 
 
     onEdit() {
-        const dto = new TradingPointSave();
-        dto.address = this.tradingPoint.address;
-        dto.ID = this.tradingPoint.ID;
-        dto.postCode = this.tradingPoint.postCode;
-        dto.name = this.tradingPoint.name;
-        dto.city = this.cities.find(c => c.name === this.tradingPoint.city);
-        dto.type = this.types.find(c => c.name === this.tradingPoint.type);
-        dto.longitude = this.tradingPoint.longitude;
-        dto.latitude = this.tradingPoint.latitude;
-        dto.xp = this.tradingPoint.xp;
-        dto.vat = this.tradingPoint.vat;
-        dto.donationPercentage = this.tradingPoint.donationPercentage;
-        dto.fee = this.tradingPoint.fee;
-
-        this.service.updateTradingPoint(this.id, dto).subscribe(r => {
-            if (!r.error) {
-                this.router.navigateByUrl('/trading-point')
+        if (this.tradingPointForm.valid) {
+            if (this.ID === 'new') {
+                this.service.createTradingPoint(this.tradingPointForm.value).subscribe(() => this.router.navigateByUrl('trading-point'))
+            } else {
+                this.service.updateTradingPoint(this.ID, this.tradingPointForm.value).subscribe(() => this.router.navigateByUrl('trading-point'))
             }
-        })
-    }
-
-    saveTerminal() {
-        if (this.phone) {
-            this.service.saveTerminal(this.id, this.phonePrefix + this.phone).subscribe(r => {
-                    if (!r.error) {
-                        this.terminals = [...this.terminals, r.data];
-                        this.phone = null;
-                    }
-                }
-            )
         }
     }
 
+    saveTerminal() {
+        if (this.terminalForm.valid) {
+            this.service.saveTerminal(this.ID, this.terminalForm.value).subscribe(r => {
+                if (r.data) {
+                    this.terminals = [...this.terminals, r.data];
+                    this.terminalForm.reset();
+                }
+            })
+        }
+    }
+
+    onImageChange($event) {
+        this.newImage = $event.target.files[0]
+    }
+
+    updateImage() {
+        if (this.canUploadImage()) {
+            const form = new FormData();
+            form.append('image', this.newImage);
+            this.service.updateImage(this.ID, form).subscribe(r => this.router.navigateByUrl('trading-point'))
+        }
+    }
+
+    canUploadImage() {
+        return this.ID && this.ID.length > 0 && this.ID !== 'new' && this.newImage !== null;
+    }
 }

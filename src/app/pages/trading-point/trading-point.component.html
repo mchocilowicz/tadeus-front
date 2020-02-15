@@ -55,5 +55,45 @@
         </table>
     </div>
     <button (click)="openDialog()">Import</button>
+    <button (click)="createClick()">Stwórz</button>
+    <a [href]="excelUrl">Pobierz Excel</a>
+
+    <div>
+        <p>Opinie</p>
+    </div>
+
+    <div class="mat-elevation-z8">
+        <table [dataSource]="opinionDataSource" mat-table>
+
+            <ng-container matColumnDef="name">
+                <th *matHeaderCellDef mat-header-cell>Username</th>
+                <td *matCellDef="let element" mat-cell> {{element.name}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="phone">
+                <th *matHeaderCellDef mat-header-cell> Numer Telefonu</th>
+                <td *matCellDef="let element" mat-cell> {{element.prefix + " " + element.phone}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="email">
+                <th *matHeaderCellDef mat-header-cell> Email</th>
+                <td *matCellDef="let element" mat-cell> {{element.email}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="value">
+                <th *matHeaderCellDef mat-header-cell>Opinia</th>
+                <td *matCellDef="let element" mat-cell> {{element.value}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="createdAt">
+                <th *matHeaderCellDef mat-header-cell> Data</th>
+                <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="opinionDisplayedColumns" mat-header-row></tr>
+            <tr *matRowDef="let row; columns: opinionDisplayedColumns;" mat-row></tr>
+        </table>
+    </div>
+
 
 </app-nav>

@@ -1,5 +1,5 @@
-import { IType } from "./type.interface";
-import { ICity } from "./city.interface";
+import {IType} from "./type.interface";
+import {ICity} from "./city.interface";
 
 export interface INgo {
     ID: string;
@@ -8,8 +8,8 @@ export interface INgo {
     name: string;
     verified: boolean;
     verifiedAt: Date;
-    type: IType,
-    city: ICity
+    type: string,
+    city: string
 }
 
 export interface INgoView {

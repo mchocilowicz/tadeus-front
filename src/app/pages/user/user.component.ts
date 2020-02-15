@@ -17,8 +17,8 @@ import {Router} from "@angular/router";
 export class UserComponent implements OnInit {
     userDisplayColumns: string[] = ['id', 'phone', 'email', 'xp', 'status', 'updatedAt'];
     opinionDisplayedColumns: string[] = ['name', 'phone', 'email', 'value', 'createdAt'];
-    userDataSource = new MatTableDataSource<UserListItem>();
     opinionDataSource = new MatTableDataSource<Opinion>();
+    userDataSource = new MatTableDataSource<UserListItem>();
     statuses: string[];
     filterForm: FormGroup;
 
