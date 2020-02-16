@@ -11,6 +11,11 @@
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
+                            <input formControlName="longName" matInput placeholder="Długa nazwa" type="text">
+                        </mat-form-field>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
                             <input formControlName="phone" matInput placeholder="Telefon" type="number">
                         </mat-form-field>
                     </div>
@@ -29,24 +34,25 @@
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="fee" matInput placeholder="Oplata manipulacyjna"
-                                   type="number">
+                            <input formControlName="createdAt" matInput placeholder="Data dodania"
+                                   type="date">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="vat" matInput placeholder="VAT" type="number">
+                            <input formControlName="bankNumber" matInput placeholder="Numer konta" type="number">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="donationPercentage" matInput placeholder="Domyślna wartość dotacji"
-                                   type="number">
+                            <input formControlName="description" matInput placeholder="Opis"
+                                   type="text">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="xp" matInput placeholder="XP" type="number">
+                            <input formControlName="collectedDonation" matInput
+                                   placeholder="Zebrane pieniądze" type="number">
                         </mat-form-field>
                     </div>
                     <div>
@@ -59,6 +65,12 @@
                             <mat-radio-button [value]="false" class="example-radio-button">Nie zweryfikowany
                             </mat-radio-button>
                         </mat-radio-group>
+                    </div>
+                    <div>
+                        <mat-form-field class="example-full-width">
+                            <input formControlName="verifiedAt" matInput
+                                   placeholder="Zweryfikowano dnia" type="date">
+                        </mat-form-field>
                     </div>
                 </div>
                 <div formGroupName="address">
@@ -109,9 +121,9 @@
             </mat-expansion-panel-header>
 
             <table [dataSource]="transactions" mat-table>
-                <ng-container matColumnDef="type">
-                    <th *matHeaderCellDef mat-header-cell>Typ</th>
-                    <td *matCellDef="let element" mat-cell> {{element.type}} </td>
+                <ng-container matColumnDef="ID">
+                    <th *matHeaderCellDef mat-header-cell>ID</th>
+                    <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="price">
@@ -124,18 +136,13 @@
                     <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
                 </ng-container>
 
-                <ng-container matColumnDef="xp">
-                    <th *matHeaderCellDef mat-header-cell>Xp</th>
-                    <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
-                </ng-container>
-
                 <tr *matHeaderRowDef="transactionDisplayFields" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: transactionDisplayFields;" mat-row></tr>
             </table>
 
         </mat-expansion-panel>
     </mat-accordion>
-    <mat-accordion *ngIf="icon && thumbnail">
+    <mat-accordion *ngIf="image && thumbnail">
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
@@ -144,14 +151,15 @@
             </mat-expansion-panel-header>
             <div>
                 <div>
+                    Obrazek
+                    <img [src]="image" style="width: 150px; height: 150px"/>
                     Ikona
-                    <img [src]="icon" style="width: 50px; height: 50px"/>
-                    Tło
-                    <img [src]="thumbnail" style="width: 150px; height: 150px"/>
+                    <img [src]="thumbnail" style="width: 50px; height: 50px"/>
                     <form>
-                        <input (change)="onIconChange($event)" type="file">
+                        <input (change)="onImageChange($event)" type="file">
                         <input (change)="onThumbnailChange($event)" type="file">
-                        <button (click)="updateImage()" [disabled]="newIcon === null">Zmien</button>
+                        <button (click)="updateImage()" [disabled]="newImage === null || newThumbnail === null">Zmien
+                        </button>
                     </form>
                 </div>
             </div>
