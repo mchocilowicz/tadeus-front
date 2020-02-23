@@ -1,9 +1,9 @@
-<h1 mat-dialog-title>Excel file Upload</h1>
+<h1 mat-dialog-title>{{'file-upload.title' | translate}}</h1>
 <div mat-dialog-content>
-    <p>File</p>
+    <p>{{'file-upload.file' | translate}}</p>
     <input (change)="onChange($event)" type="file">
 </div>
 <div mat-dialog-actions>
-    <button (click)="onNoClick()" mat-button>No Thanks</button>
-    <button (click)="onOkClick()" mat-button>Ok</button>
+    <button (click)="onNoClick()" mat-button>{{'file-upload.cancel' | translate}}</button>
+    <button (click)="onOkClick()" mat-button>{{'file-upload.ok' | translate}}</button>
 </div>

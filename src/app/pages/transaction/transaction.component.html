@@ -1,0 +1,43 @@
+<app-nav>
+    <div>
+        <p>{{'nav.transaction' | translate}}</p>
+    </div>
+
+    <div class="mat-elevation-z8">
+        <table [dataSource]="dataSource" mat-table>
+            <ng-container matColumnDef="ngoID">
+                <th *matHeaderCellDef mat-header-cell>{{'transaction.ngoID' | translate}}</th>
+                <td *matCellDef="let element" mat-cell> {{element.ngoID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="userID">
+                <th *matHeaderCellDef mat-header-cell>{{'transaction.userID' | translate}}</th>
+                <td *matCellDef="let element" mat-cell> {{element.userID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="transactionID">
+                <th *matHeaderCellDef mat-header-cell>{{'transaction.transactionID' | translate}}</th>
+                <td *matCellDef="let element" mat-cell> {{element.transactionID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="terminalID">
+                <th *matHeaderCellDef mat-header-cell>{{'transaction.terminalID' | translate}}</th>
+                <td *matCellDef="let element" mat-cell> {{element.terminalID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="tradingPointID">
+                <th *matHeaderCellDef mat-header-cell>{{'transaction.tradingPointID' | translate}}</th>
+                <td *matCellDef="let element" mat-cell> {{element.tradingPointID}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="createdAt">
+                <th *matHeaderCellDef mat-header-cell>{{'transaction.createdAt'|translate}}</th>
+                <td *matCellDef="let element" mat-cell> {{element.createdAt |  date:'MM/dd/yyyy'}} </td>
+            </ng-container>
+
+            <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+            <tr (click)="onRowClick(row)" *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+        </table>
+    </div>
+
+</app-nav>

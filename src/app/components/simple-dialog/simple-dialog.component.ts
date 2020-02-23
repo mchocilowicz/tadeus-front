@@ -1,6 +1,6 @@
-import { Component, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
-import { HttpService } from "../../services/http.service";
+import {Component, Inject} from '@angular/core';
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import {HttpService} from "../../services/http.service";
 
 @Component({
     selector: 'app-simple-dialog',
@@ -14,7 +14,7 @@ export class SimpleDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<SimpleDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private service: HttpService<any>) {
+        private service: HttpService) {
         this.value = data.name;
     }
 
@@ -26,17 +26,13 @@ export class SimpleDialogComponent {
         const data = this.data;
         if (data.isEdit) {
             this.service.put(data.path, {name: data.name}).subscribe(r => {
-                if (r.error) {
-
-                } else {
+                if (!r.error) {
                     this.dialogRef.close();
                 }
             })
         } else {
             this.service.post(data.path, {name: data.name}).subscribe(r => {
-                if (r.error) {
-
-                } else {
+                if (!r.error) {
                     this.dialogRef.close();
                 }
             })

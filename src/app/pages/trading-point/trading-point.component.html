@@ -3,49 +3,59 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Filtry
+                    {{'filters.title' | translate}}
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
             <div class="filter-container">
                 <mat-form-field>
-                    <input [(ngModel)]="name" matInput placeholder="Nazwa Partnera">
+                    <input [(ngModel)]="name" matInput placeholder="{{'filters.partner' | translate}}">
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select [(ngModel)]="type" placeholder="Typ">
+                    <mat-select [(ngModel)]="type" placeholder="{{'filters.type' | translate}}">
                         <mat-option value=""></mat-option>
                         <mat-option *ngFor="let type of types" [value]="type.id">{{type.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
                 <mat-form-field>
-                    <mat-select [(ngModel)]="city" placeholder="Miasto">
+                    <mat-select [(ngModel)]="city" placeholder="{{'filters.city' | translate}}">
                         <mat-option value=""></mat-option>
                         <mat-option *ngFor="let city of cities" [value]="city.id">{{city.name}}</mat-option>
                     </mat-select>
                 </mat-form-field>
-                <button (click)="onFilterClick()">Szukaj</button>
+                <button (click)="onFilterClick()">"{{'filters.button' | translate}}"</button>
             </div>
         </mat-expansion-panel>
     </mat-accordion>
 
     <div class="mat-elevation-z8">
         <table [dataSource]="dataSource" mat-table matSort>
-            <mat-text-column name="ID"></mat-text-column>
-            <mat-text-column name="name"></mat-text-column>
-            <mat-text-column name="email"></mat-text-column>
+            <ng-container matColumnDef="ID">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> {{'trading-point.id' | translate}}</th>
+                <td *matCellDef="let element" mat-cell>{{element.ID}}</td>
+            </ng-container>
+
+            <ng-container matColumnDef="name">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> {{'trading-point.name' | translate}}</th>
+                <td *matCellDef="let element" mat-cell>{{element.name}}</td>
+            </ng-container>
+            <ng-container matColumnDef="email">
+                <th *matHeaderCellDef mat-header-cell mat-sort-header>  {{'trading-point.email' | translate}}</th>
+                <td *matCellDef="let element" mat-cell>{{element.email}}</td>
+            </ng-container>
 
             <ng-container matColumnDef="phone">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header> Numer telefonu</th>
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> {{'trading-point.phone' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> +{{element.prefix}}{{element.phone}} </td>
             </ng-container>
 
             <ng-container matColumnDef="type">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header> Typ</th>
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> {{'trading-point.type' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.type}} </td>
             </ng-container>
 
             <ng-container matColumnDef="city">
-                <th *matHeaderCellDef mat-header-cell mat-sort-header>Miasto</th>
+                <th *matHeaderCellDef mat-header-cell mat-sort-header> {{'trading-point.city' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.city}} </td>
             </ng-container>
 
@@ -54,39 +64,39 @@
                 mat-row></tr>
         </table>
     </div>
-    <button (click)="openDialog()">Import</button>
-    <button (click)="createClick()">Stwórz</button>
-    <a [href]="excelUrl">Pobierz Excel</a>
+    <button (click)="openDialog()"> {{'trading-point.import' | translate}}</button>
+    <button (click)="createClick()"> {{'trading-point.create' | translate}}</button>
+    <a [href]="excelUrl"> {{'trading-point.export' | translate}}</a>
 
     <div>
-        <p>Opinie</p>
+        <p> {{'opinion.title' | translate}}</p>
     </div>
 
     <div class="mat-elevation-z8">
         <table [dataSource]="opinionDataSource" mat-table>
 
             <ng-container matColumnDef="name">
-                <th *matHeaderCellDef mat-header-cell>Username</th>
+                <th *matHeaderCellDef mat-header-cell> {{'opinion.username' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="phone">
-                <th *matHeaderCellDef mat-header-cell> Numer Telefonu</th>
+                <th *matHeaderCellDef mat-header-cell> {{'opinion.phone' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.prefix + " " + element.phone}} </td>
             </ng-container>
 
             <ng-container matColumnDef="email">
-                <th *matHeaderCellDef mat-header-cell> Email</th>
+                <th *matHeaderCellDef mat-header-cell>  {{'opinion.email' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.email}} </td>
             </ng-container>
 
             <ng-container matColumnDef="value">
-                <th *matHeaderCellDef mat-header-cell>Opinia</th>
+                <th *matHeaderCellDef mat-header-cell> {{'opinion.value' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.value}} </td>
             </ng-container>
 
             <ng-container matColumnDef="createdAt">
-                <th *matHeaderCellDef mat-header-cell> Data</th>
+                <th *matHeaderCellDef mat-header-cell> {{'opinion.createdAt' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
             </ng-container>
 

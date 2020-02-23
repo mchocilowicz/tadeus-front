@@ -1,14 +1,28 @@
 export class Configuration {
-    id: string;
     minNgoTransfer: number = 0;
     minPersonalPool: number = 0;
-    currentClientPaymentDate: Date = null;
-    clientCycleDays: number = 1;
-    nextClientPaymentDate: Date = null;
-    currentPartnerPaymentDate: Date = null;
-    partnerCycleDays: number = 1;
-    nextPartnerPaymentDate: Date = null;
-    currentNgoPaymentDate: Date = null;
-    ngoCycleDays: number = 1;
-    nextNgoPaymentDate: Date = null;
+    userExpiration: number = 365;
+
+    userCloseInterval: number = 30;
+    partnerEmailInterval: number = 14;
+    partnerCloseInterval: number = 21;
+    ngoGenerateInterval: number = 14;
+    ngoCloseInterval: number = 21;
+
+    userFrom: Date = null;
+    partnerFrom: Date = null;
+    partnerSendMessagesAt: Date = null;
+    partnerNotEditableAt: Date = null;
+    ngoFrom: Date = null;
+}
+
+export class ConfigurationSave {
+    minNgoTransfer: number = null;
+    minPersonalPool: number = null;
+    userExpiration: number = null;
+    userCloseInterval: number = null;
+    partnerEmailInterval: number = null;
+    partnerCloseInterval: number = null;
+    ngoGenerateInterval: number = null;
+    ngoCloseInterval: number = null;
 }

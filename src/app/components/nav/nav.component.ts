@@ -6,12 +6,4 @@ import {Component} from '@angular/core';
     styleUrls: ['./nav.component.scss']
 })
 export class NavComponent {
-    links = [
-        'stats',
-        'user',
-        'trading-point',
-        'ngo',
-        'configuration',
-    ];
-
 }

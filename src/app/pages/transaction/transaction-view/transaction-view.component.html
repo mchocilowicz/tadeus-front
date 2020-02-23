@@ -1,0 +1,122 @@
+<app-nav>
+    <div *ngIf="transactionForm">
+        <form [formGroup]="transactionForm" class="example-form">
+            <div cellspacing="0" class="example-full-width">
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="ngoID" matInput placeholder="{{'transaction-form.ngoID' | translate}}"
+                               type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="ngoID" matInput placeholder="{{'transaction-form.ngoID' | translate}}"
+                               type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="userID" matInput placeholder="{{'transaction-form.userID' | translate}}"
+                               type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="transactionID" matInput
+                               placeholder="{{'transaction-form.transactionID' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="terminalID" matInput
+                               placeholder="{{'transaction-form.terminalID' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="tradingPointID" matInput
+                               placeholder="{{'transaction-form.tradingPointID' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="userXp" matInput placeholder="{{'transaction-form.userXp' | translate}}"
+                               type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="tradingPointXp" matInput
+                               placeholder="{{'transaction-form.tradingPointXp' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="isPaid" matInput placeholder="{{'transaction-form.isPaid' | translate}}"
+                               type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="ngoDonation" matInput
+                               placeholder="{{'transaction-form.ngoDonation' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="price" matInput placeholder="{{'transaction-form.price' | translate}}"
+                               type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="donationPercentage" matInput
+                               placeholder="{{'transaction-form.donationPercentage' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="provisionPercentage" matInput
+                               placeholder="{{'transaction-form.provisionPercentage' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="paymentValue" matInput
+                               placeholder="{{'transaction-form.paymentValue' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="vat" matInput placeholder="{{'transaction-form.vat' | translate}}"
+                               type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="provision" matInput
+                               placeholder="{{'transaction-form.provision' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="donationPool" matInput
+                               placeholder="{{'transaction-form.donationPool' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="personalPool" matInput
+                               placeholder="{{'transaction-form.personalPool' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+                <div>
+                    <mat-form-field class="example-full-width">
+                        <input formControlName="createdAt" matInput
+                               placeholder="{{'transaction-form.createdAt' | translate}}" type="text">
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+</app-nav>

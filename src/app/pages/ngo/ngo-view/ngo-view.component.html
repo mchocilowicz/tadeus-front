@@ -1,32 +1,35 @@
 <app-nav>
     <div *ngIf="ngoForm">
-        Punkt Handlowy
         <form [formGroup]="ngoForm" class="example-form">
             <div cellspacing="0" class="example-full-width">
                 <div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="name" matInput placeholder="Nazwa" type="text">
+                            <input formControlName="name" matInput placeholder="{{'ngo-view.name' | translate}}"
+                                   type="text">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="longName" matInput placeholder="Długa nazwa" type="text">
+                            <input formControlName="longName" matInput placeholder="{{'ngo-view.longName' | translate}}"
+                                   type="text">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="phone" matInput placeholder="Telefon" type="number">
+                            <input formControlName="phone" matInput placeholder="{{'ngo-view.phone' | translate}}"
+                                   type="number">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="email" matInput placeholder="Email" type="text">
+                            <input formControlName="email" matInput placeholder="{{'ngo-view.email' | translate}}"
+                                   type="text">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <mat-select formControlName="type" placeholder="Typ">
+                            <mat-select formControlName="type" placeholder="{{'ngo-view.type' | translate}}">
                                 <mat-option *ngFor="let type of types"
                                             [value]="type.id">{{type.name}}</mat-option>
                             </mat-select>
@@ -34,25 +37,28 @@
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="createdAt" matInput placeholder="Data dodania"
+                            <input formControlName="createdAt" matInput
+                                   placeholder="{{'ngo-view.createdAt' | translate}}"
                                    type="date">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="bankNumber" matInput placeholder="Numer konta" type="number">
+                            <input formControlName="bankNumber" matInput
+                                   placeholder="{{'ngo-view.bankNumber' | translate}}" type="number">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="description" matInput placeholder="Opis"
+                            <input formControlName="description" matInput
+                                   placeholder="{{'ngo-view.description' | translate}}"
                                    type="text">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
                             <input formControlName="collectedDonation" matInput
-                                   placeholder="Zebrane pieniądze" type="number">
+                                   placeholder="{{'ngo-view.collectedDonation' | translate}}" type="number">
                         </mat-form-field>
                     </div>
                     <div>
@@ -60,48 +66,55 @@
                                 aria-labelledby="example-radio-group-label"
                                 class="example-radio-group"
                                 formControlName="verified">
-                            <mat-radio-button [value]="true" class="example-radio-button">Zweryfikowany
+                            <mat-radio-button [value]="true"
+                                              class="example-radio-button">{{'ngo-view.active' | translate}}}
                             </mat-radio-button>
-                            <mat-radio-button [value]="false" class="example-radio-button">Nie zweryfikowany
+                            <mat-radio-button [value]="false"
+                                              class="example-radio-button">{{'ngo-view.inactive' | translate}}
                             </mat-radio-button>
                         </mat-radio-group>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
                             <input formControlName="verifiedAt" matInput
-                                   placeholder="Zweryfikowano dnia" type="date">
+                                   placeholder="{{'ngo-view.verifiedAt' | translate}}" type="date">
                         </mat-form-field>
                     </div>
                 </div>
                 <div formGroupName="address">
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="street" matInput placeholder="Ulica" type="text">
+                            <input formControlName="street" matInput placeholder="{{'ngo-view.street' | translate}}"
+                                   type="text">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="number" matInput placeholder="Numer ulicy" type="number">
+                            <input formControlName="number" matInput placeholder="{{'ngo-view.number' | translate}}"
+                                   type="number">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="postCode" matInput placeholder="Kod pocztowy" type="text">
+                            <input formControlName="postCode" matInput placeholder="{{'ngo-view.postCode' | translate}}"
+                                   type="text">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="longitude" matInput placeholder="Longitude" type="number">
+                            <input formControlName="longitude" matInput
+                                   placeholder="{{'ngo-view.longitude' | translate}}" type="number">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <input formControlName="latitude" matInput placeholder="Latitude" type="number">
+                            <input formControlName="latitude" matInput placeholder="{{'ngo-view.latitude' | translate}}"
+                                   type="number">
                         </mat-form-field>
                     </div>
                     <div>
                         <mat-form-field class="example-full-width">
-                            <mat-select formControlName="city" placeholder="Miasto">
+                            <mat-select formControlName="city" placeholder="{{'ngo-view.city' | translate}}">
                                 <mat-option *ngFor="let city of cities"
                                             [value]="city.id">{{city.name}}</mat-option>
                             </mat-select>
@@ -109,30 +122,30 @@
                     </div>
                 </div>
             </div>
-            <button (click)="onEdit()">Zapisz</button>
+            <button (click)="onEdit()">{{'ngo-view.button' | translate}}</button>
         </form>
     </div>
     <mat-accordion *ngIf="transactions">
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Transakcje
+                    {{'ngo-view.transaction.title' | translate}}
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
             <table [dataSource]="transactions" mat-table>
                 <ng-container matColumnDef="ID">
-                    <th *matHeaderCellDef mat-header-cell>ID</th>
+                    <th *matHeaderCellDef mat-header-cell>{{'ngo-view.transaction.id' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="price">
-                    <th *matHeaderCellDef mat-header-cell>Cena</th>
+                    <th *matHeaderCellDef mat-header-cell>{{'ngo-view.transaction.price' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.price}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="date">
-                    <th *matHeaderCellDef mat-header-cell> Data</th>
+                    <th *matHeaderCellDef mat-header-cell> {{'ngo-view.transaction.createdAt' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
                 </ng-container>
 
@@ -146,19 +159,20 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Obrazki
+                    {{'ngo-view.images.title' | translate}}
                 </mat-panel-title>
             </mat-expansion-panel-header>
             <div>
                 <div>
-                    Obrazek
+                    {{'ngo-view.images.image' | translate}}
                     <img [src]="image" style="width: 150px; height: 150px"/>
-                    Ikona
+                    {{'ngo-view.images.icon' | translate}}
                     <img [src]="thumbnail" style="width: 50px; height: 50px"/>
                     <form>
                         <input (change)="onImageChange($event)" type="file">
                         <input (change)="onThumbnailChange($event)" type="file">
-                        <button (click)="updateImage()" [disabled]="newImage === null || newThumbnail === null">Zmien
+                        <button (click)="updateImage()"
+                                [disabled]="newImage === null || newThumbnail === null">{{'ngo-view.images.button' | translate}}
                         </button>
                     </form>
                 </div>

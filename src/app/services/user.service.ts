@@ -1,20 +1,21 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from "./http.service";
+import {UserListItem} from "../models/user-list-item.interface";
 
 
 @Injectable()
 export class UserService {
 
-    constructor(private readonly httpService: HttpService<any>) {
+    constructor(private readonly httpService: HttpService) {
     }
 
     getUsers(filters: any) {
         const params = Object.keys(filters).filter(it => filters[it]).map(it => `${it}=${filters[it]}`).join("&");
-        return this.httpService.get('user?' + params);
+        return this.httpService.get<UserListItem[]>('user?' + params);
     }
 
     getUserInformationBy(ID: string) {
-        return this.httpService.get('user/' + ID);
+        return this.httpService.get<any>('user/' + ID);
     }
 
     updateUserInformation(ID: string, body: any) {

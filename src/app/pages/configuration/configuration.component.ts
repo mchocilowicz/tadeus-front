@@ -1,8 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { ConfigurationService } from "./configuration.service";
+import {Component, OnInit} from '@angular/core';
+import {ConfigurationService} from "./configuration.service";
 import * as moment from 'moment'
-import { ConfigurationSave } from "./configuration-save.model";
-import { Configuration } from "./configuration.model";
+import {Configuration, ConfigurationSave} from "./configuration.model";
 
 @Component({
     selector: 'app-configuration',
@@ -11,84 +10,132 @@ import { Configuration } from "./configuration.model";
 })
 export class ConfigurationComponent implements OnInit {
 
-    config: Configuration = new Configuration();
+    config: Configuration = null;
+    nextUserFrom: Date = null;
+    nextPartnerFrom: Date = null;
+    nextPartnerSendMessagesAt: Date = null;
+    nextPartnerNotEditableAt: Date = null;
+    nextNgoFrom: Date = null;
 
     constructor(private service: ConfigurationService) {
     }
 
     ngOnInit() {
         this.service.getConfig().subscribe(r => {
-            let data = r.data;
-            let c = this.config;
-            if (data) {
-                Object.keys(c).forEach(key => {
-                    c[key] = data[key]
-                });
-            } else {
-                this.onClientDate()
+            if (!r.error) {
+                if (r.data) {
+                    this.config = r.data;
+                    this.populateToDates();
+                } else {
+                    this.config = new Configuration();
+                    this.onClientDate()
+                }
+
             }
-            this.config = c;
         })
     }
 
-    onClientDate(date = new Date()) {
-        this.config.currentClientPaymentDate = moment(date).toDate();
-        this.config.nextClientPaymentDate = moment(this.config.currentClientPaymentDate).add(this.config.clientCycleDays, 'days').toDate();
-        this.onPartnerDate(this.config.nextClientPaymentDate)
+    populateToDates() {
+        if (this.config.userFrom) {
+            this.nextUserFrom = moment(this.config.userFrom).add(this.config.userCloseInterval, 'days').toDate();
+        }
+        if (this.config.partnerFrom) {
+            this.nextPartnerFrom = moment(this.config.partnerFrom).add(this.config.partnerEmailInterval, 'days').toDate();
+        }
+        if (this.config.ngoFrom) {
+            this.nextNgoFrom = moment(this.config.ngoFrom).add(this.config.ngoCloseInterval, 'days').toDate();
+        }
+        if (this.config.partnerSendMessagesAt) {
+            this.nextPartnerSendMessagesAt = moment(this.config.partnerSendMessagesAt).add(this.config.partnerCloseInterval, 'days').toDate()
+        }
+        if (this.config.partnerNotEditableAt) {
+            this.nextPartnerNotEditableAt = moment(this.config.partnerNotEditableAt).add(this.config.ngoGenerateInterval, 'days').toDate()
+        }
+
+        if (!this.config.partnerFrom && !this.config.partnerSendMessagesAt && !this.config.partnerNotEditableAt && !this.config.ngoFrom) {
+            this.onPartnerDate(this.nextUserFrom);
+        } else if (!this.config.partnerSendMessagesAt && !this.config.partnerNotEditableAt && !this.config.ngoFrom) {
+            this.onPartnerSendMessagesAt(this.nextPartnerFrom);
+        } else if (!this.config.partnerNotEditableAt && !this.config.ngoFrom) {
+            this.onPartnerClose(this.nextPartnerSendMessagesAt)
+        } else if (!this.config.ngoFrom) {
+            this.onNgoDate(this.nextPartnerNotEditableAt);
+        }
+
+    }
+
+    onClientDate(date: Date = new Date()) {
+        this.config.userFrom = moment(date).toDate();
+        this.nextUserFrom = moment(this.config.userFrom).add(this.config.userCloseInterval, 'days').toDate();
+        this.onPartnerDate(this.nextUserFrom);
     }
 
     onClientIntervalChange(interval: number) {
         if (interval > 0) {
-            this.config.nextClientPaymentDate = moment(this.config.currentClientPaymentDate).add(interval, 'days').toDate();
-            this.onPartnerDate(this.config.nextClientPaymentDate)
+            this.nextUserFrom = moment(this.config.userFrom).add(interval, 'days').toDate();
+            this.onPartnerDate(this.nextUserFrom);
         }
     }
 
-    onPartnerDate(date) {
-        this.config.currentPartnerPaymentDate = moment(date).add(1, 'days').toDate();
-        this.config.nextPartnerPaymentDate = moment(this.config.currentPartnerPaymentDate).add(this.config.partnerCycleDays, 'days').toDate();
-        this.onNgoDate(this.config.nextPartnerPaymentDate)
+    onPartnerDate(date: Date) {
+        this.config.partnerFrom = date;
+        this.nextPartnerFrom = moment(date).add(this.config.partnerEmailInterval, 'days').toDate();
+        this.onPartnerSendMessagesAt(this.nextPartnerFrom)
     }
 
     onPartnerIntervalChange(interval: number) {
         if (interval > 0) {
-            this.config.nextPartnerPaymentDate = moment(this.config.currentPartnerPaymentDate).add(interval, 'days').toDate();
-            this.onNgoDate(this.config.nextPartnerPaymentDate)
+            this.nextPartnerFrom = moment(this.config.partnerFrom).add(interval, 'days').toDate();
+            this.onPartnerSendMessagesAt(this.nextPartnerFrom);
         }
     }
 
-    onNgoDate(date) {
-        this.config.currentNgoPaymentDate = moment(date).add(1, 'days').toDate();
-        this.config.nextNgoPaymentDate = moment(this.config.currentNgoPaymentDate).add(this.config.ngoCycleDays, 'days').toDate();
+    onPartnerSendMessagesAt(date: Date) {
+        this.config.partnerSendMessagesAt = date;
+        this.nextPartnerSendMessagesAt = moment(date).add(this.config.partnerCloseInterval, 'days').toDate();
+        this.onPartnerClose(this.nextPartnerSendMessagesAt)
+    }
+
+    onPartnerSendMessagesIntervalChange(interval: number) {
+        if (interval > 0) {
+            this.nextPartnerSendMessagesAt = moment(this.config.partnerSendMessagesAt).add(interval, 'days').toDate();
+            this.onPartnerSendMessagesAt(this.nextPartnerSendMessagesAt);
+        }
+    }
+
+    onPartnerClose(date: Date) {
+        this.config.partnerNotEditableAt = date;
+        this.nextPartnerNotEditableAt = moment(date).add(Number(this.config.ngoGenerateInterval), 'days').toDate();
+        this.onNgoDate(this.nextPartnerNotEditableAt);
+    }
+
+    onPartnerCloseIntervalChange(interval: number) {
+        if (interval > 0) {
+            this.nextPartnerNotEditableAt = moment(this.config.partnerNotEditableAt).add(interval, 'days').toDate();
+            this.onNgoDate(this.nextPartnerNotEditableAt);
+        }
+    }
+
+    onNgoDate(date: Date) {
+        this.config.ngoFrom = date;
+        this.nextNgoFrom = moment(date).add(this.config.ngoCloseInterval, 'days').toDate();
     }
 
     onNgoIntervalChange(interval: number) {
-        if (interval > 0) {
-            this.config.nextNgoPaymentDate = moment(this.config.currentNgoPaymentDate).add(interval, 'days').toDate();
+        let newInterval = Number(interval);
+        if (newInterval > 0) {
+            this.nextNgoFrom = moment(this.config.ngoFrom).add(newInterval, 'days').toDate();
         }
     }
 
-    onUpdate() {
-        this.service.update(this.prepareRequestBody(), this.config.id).subscribe(r => {
-            if (r.data) {
-                this.config = r.data
-            }
-        })
-    }
-
     onSave() {
-        this.service.save(this.prepareRequestBody()).subscribe(r => {
-            if (r.data) {
-                this.config = r.data
-            }
-        })
-    }
-
-    private prepareRequestBody() {
-        const body = new ConfigurationSave();
-        Object.keys(body).forEach(key => {
-            body[key] = this.config[key]
+        let save = new ConfigurationSave();
+        Object.keys(save).forEach(key => {
+            save[key] = this.config[key];
         });
-        return body;
+
+        this.service.save(save).subscribe(r => {
+
+        })
     }
 }

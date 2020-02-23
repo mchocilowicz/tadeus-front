@@ -1,10 +1,11 @@
-<h1 mat-dialog-title>{{data.isEdit ? 'Edit:' + value : 'Create'}}</h1>
+<h1 *ngIf="data.isEdit" mat-dialog-title>{{'simple-dialog.edit' | translate}}: {{value}}</h1>
+<h1 *ngIf="!data.isEdit" mat-dialog-title>{{'simple-dialog.create' | translate}}</h1>
 <div mat-dialog-content>
     <mat-form-field>
         <input [(ngModel)]="data.name" matInput>
     </mat-form-field>
 </div>
 <div mat-dialog-actions>
-    <button (click)="onNoClick()" mat-button>Cancel</button>
-    <button (click)="onOkClikc()" mat-button>Ok</button>
+    <button (click)="onNoClick()" mat-button>{{'simple-dialog.cancel' | translate}}</button>
+    <button (click)="onOkClikc()" mat-button>{{'simple-dialog.ok' | translate}}</button>
 </div>

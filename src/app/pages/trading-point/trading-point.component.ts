@@ -47,7 +47,7 @@ export class TradingPointComponent implements OnInit {
     ngOnInit() {
         this.service.getTradingPoints().subscribe(r => {
             if (r.data) {
-                this.dataSource = r.data;
+                this.dataSource.data = r.data;
             }
         });
         this.service.getTypes().subscribe(r => {
@@ -58,7 +58,7 @@ export class TradingPointComponent implements OnInit {
         });
         this.opinionService.getTradingPointsOpinion().subscribe(r => {
             if (r.data) {
-                this.opinionDataSource = r.data;
+                this.opinionDataSource.data = r.data;
             }
         });
         this.excelUrl = environment.url + 'trading-point/excel'
@@ -76,7 +76,7 @@ export class TradingPointComponent implements OnInit {
         };
 
         this.service.getTradingPointsWithQuery(params).subscribe(r => {
-            this.dataSource = r.data;
+            this.dataSource.data = r.data;
         })
     }
 

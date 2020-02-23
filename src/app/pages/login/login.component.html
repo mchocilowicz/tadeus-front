@@ -1,31 +1,31 @@
 <div class="container">
-  <div class="row" id="loginContainer">
-    <div class="col-8">
-      <h1>{{'login.header-title' | translate}}</h1>
-    </div>
-    <div class="col-4">
-      <h2>{{'login.form-title' | translate}}</h2>
-      <form *ngIf="!nextStep" (ngSubmit)="onPhoneFormSubmit()">
-        <div class="form-group" id="phoneForm">
-          <label for="phone">{{'login.form-phone-label' | translate}}</label>
-          +{{phonePrefix}}
-          <input class="form-control" id="phone" type="number"
-                 [(ngModel)]="phone" name="phone"
-                 placeholder="{{'login.form-phone-placeholder' | translate}}">
+    <div class="row" id="loginContainer">
+        <div class="col-8">
+            <h1>{{'login.header-title' | translate}}</h1>
         </div>
-        <button type="submit" class="btn btn-primary">{{'login.form-button' | translate}}</button>
-      </form>
-      <form *ngIf="nextStep" (ngSubmit)="onCodeFormSubmit()">
-        <div class="form-group" id="codeForm">
-          <label for="code">{{'login.form-code-label' | translate}}</label>
-          <input type="number" class="form-control" id="code"
-                 [(ngModel)]="code" name="code"
-                 placeholder="{{'login.form-code-placeholder' | translate}}">
+        <div class="col-4">
+            <h2>{{'login.form-title' | translate}}</h2>
+            <form (ngSubmit)="onPhoneFormSubmit()" *ngIf="!nextStep">
+                <div class="form-group" id="phoneForm">
+                    <label for="phone">{{'login.form-phone-label' | translate}}</label>
+                    +{{phonePrefix}}
+                    <input [(ngModel)]="phone" class="form-control" id="phone"
+                           name="phone" placeholder="{{'login.form-phone-placeholder' | translate}}"
+                           type="number">
+                </div>
+                <button class="btn btn-primary" type="submit">{{'login.form-button' | translate}}</button>
+            </form>
+            <form (ngSubmit)="onCodeFormSubmit()" *ngIf="nextStep">
+                <div class="form-group" id="codeForm">
+                    <label for="code">{{'login.form-code-label' | translate}}</label>
+                    <input [(ngModel)]="code" class="form-control" id="code"
+                           name="code" placeholder="{{'login.form-code-placeholder' | translate}}"
+                           type="number">
+                </div>
+                <button class="btn btn-primary" type="submit">{{'login.form-button' | translate}}</button>
+                <button (click)="onBackButtonClick()" class="btn btn-secondary"
+                        type="button">{{'login.form-back-button' | translate}}</button>
+            </form>
         </div>
-        <button type="submit" class="btn btn-primary">{{'login.form-button' | translate}}</button>
-        <button type="button" (click)="onBackButtonClick()"
-                class="btn btn-secondary">{{'login.form-back-button' | translate}}</button>
-      </form>
     </div>
-  </div>
 </div>

@@ -17,8 +17,8 @@ import {Router} from "@angular/router";
 export class UserComponent implements OnInit {
     userDisplayColumns: string[] = ['id', 'phone', 'email', 'xp', 'status', 'updatedAt'];
     opinionDisplayedColumns: string[] = ['name', 'phone', 'email', 'value', 'createdAt'];
-    opinionDataSource = new MatTableDataSource<Opinion>();
-    userDataSource = new MatTableDataSource<UserListItem>();
+    opinionDataSource: MatTableDataSource<Opinion>;
+    userDataSource: MatTableDataSource<UserListItem>;
     statuses: string[];
     filterForm: FormGroup;
 
@@ -41,12 +41,12 @@ export class UserComponent implements OnInit {
         });
         this.userService.getUsers(this.filterForm.value).subscribe(r => {
             if (r.data) {
-                this.userDataSource = r.data;
+                this.userDataSource = new MatTableDataSource<UserListItem>(r.data);
             }
         });
         this.opinionService.getUsersOpinion().subscribe(r => {
             if (r.data) {
-                this.opinionDataSource = r.data;
+                this.opinionDataSource = new MatTableDataSource<Opinion>(r.data);
             }
         });
         this.statusService.getUserStatuses().subscribe(r => {
@@ -59,7 +59,7 @@ export class UserComponent implements OnInit {
     onFilterFormSubmit() {
         this.userService.getUsers(this.filterForm.value).subscribe(r => {
             if (r.data) {
-                this.userDataSource = r.data;
+                this.userDataSource = new MatTableDataSource<UserListItem>(r.data)
             }
         });
     }

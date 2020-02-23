@@ -1,19 +1,21 @@
 import {Injectable} from "@angular/core";
 import {HttpParams} from "@angular/common/http";
 import {HttpService} from "../../services/http.service";
+import {IType} from "../../models/trading-point.interface";
+import {INgo} from "../../models/ngo.interface";
 
 @Injectable()
 export class NgoService {
 
-    constructor(private service: HttpService<any>) {
+    constructor(private service: HttpService) {
     }
 
     getNgoBy(ID: string) {
-        return this.service.get('ngo/' + ID)
+        return this.service.get<any>('ngo/' + ID)
     }
 
     getNgoList() {
-        return this.service.get('ngo')
+        return this.service.get<INgo[]>('ngo')
     }
 
     getNgoWithQuery(param: { name: string, city: string, type: string }) {
@@ -23,10 +25,10 @@ export class NgoService {
                 params = params.append(k, param[k])
             }
         });
-        return this.service.get('ngo', params)
+        return this.service.get<INgo[]>('ngo', params)
     }
 
     getTypes() {
-        return this.service.get('ngo-type')
+        return this.service.get<IType[]>('ngo-type')
     }
 }

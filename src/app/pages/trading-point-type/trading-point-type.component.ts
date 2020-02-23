@@ -1,10 +1,10 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource } from "@angular/material/table";
-import { MatPaginator } from "@angular/material/paginator";
-import { MatDialog } from "@angular/material/dialog";
-import { SimpleDialogComponent } from "../../components/simple-dialog/simple-dialog.component";
-import { TradingPointService } from "../trading-point/trading-point-service.service";
-import { ICity } from "../../models/city.interface";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
+import {MatDialog} from "@angular/material/dialog";
+import {SimpleDialogComponent} from "../../components/simple-dialog/simple-dialog.component";
+import {TradingPointService} from "../trading-point/trading-point-service.service";
+import {IType} from "../../models/trading-point.interface";
 
 @Component({
     selector: 'app-trading-point-type',
@@ -14,7 +14,7 @@ import { ICity } from "../../models/city.interface";
 export class TradingPointTypeComponent implements OnInit {
 
     displayedColumns: string[] = ['name', 'code'];
-    dataSource = new MatTableDataSource<ICity>([]);
+    dataSource = new MatTableDataSource<IType>([]);
 
     @ViewChild(MatPaginator, {static: true})
     paginator!: MatPaginator;
@@ -24,7 +24,7 @@ export class TradingPointTypeComponent implements OnInit {
 
     ngOnInit() {
         this.dataSource.paginator = this.paginator;
-        this.service.getTypes().subscribe(r => this.dataSource = r.data)
+        this.service.getTypes().subscribe(r => this.dataSource.data = r.data)
     }
 
     onRowClick(row: any) {
@@ -41,7 +41,7 @@ export class TradingPointTypeComponent implements OnInit {
             data: data,
         }).afterClosed().subscribe(r => {
             this.service.getTypes().subscribe(r => {
-                this.dataSource = r.data;
+                this.dataSource.data = r.data;
             });
         });
     }

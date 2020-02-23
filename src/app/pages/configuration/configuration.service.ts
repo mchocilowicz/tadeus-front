@@ -1,25 +1,20 @@
-import { Injectable } from '@angular/core';
-import { HttpService } from "../../services/http.service";
-import { Configuration } from "./configuration.model";
-import { ConfigurationSave } from "./configuration-save.model";
+import {Injectable} from '@angular/core';
+import {HttpService} from "../../services/http.service";
+import {Configuration, ConfigurationSave} from "./configuration.model";
 
 @Injectable({
     providedIn: 'root'
 })
 export class ConfigurationService {
 
-    constructor(private httpService: HttpService<Configuration>) {
+    constructor(private httpService: HttpService) {
     }
 
     getConfig() {
-        return this.httpService.get('configuration')
+        return this.httpService.get<Configuration>('configuration')
     }
 
-    save(dto: ConfigurationSave) {
-        return this.httpService.post('configuration', dto)
-    }
-
-    update(dto: ConfigurationSave, id: string) {
-        return this.httpService.put('configuration/' + id, dto)
+    save(config: ConfigurationSave) {
+        return this.httpService.post('configuration', config)
     }
 }

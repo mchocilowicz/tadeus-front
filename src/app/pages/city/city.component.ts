@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatPaginator, MatTableDataSource } from '@angular/material';
-import { CityService } from "../../services/city.service";
-import { MatDialog } from "@angular/material/dialog";
-import { SimpleDialogComponent } from "../../components/simple-dialog/simple-dialog.component";
-import { ICity } from "../../models/city.interface";
+import {Component, OnInit} from '@angular/core';
+import {MatTableDataSource} from '@angular/material';
+import {CityService} from "../../services/city.service";
+import {MatDialog} from "@angular/material/dialog";
+import {SimpleDialogComponent} from "../../components/simple-dialog/simple-dialog.component";
+import {ICity} from "../../models/city.interface";
 
 
 @Component({
@@ -15,16 +15,12 @@ export class CityComponent implements OnInit {
     displayedColumns: string[] = ['name'];
     dataSource = new MatTableDataSource<ICity>([]);
 
-    @ViewChild(MatPaginator, {static: true})
-    paginator!: MatPaginator;
-
     constructor(private readonly cityService: CityService, public dialog: MatDialog) {
     }
 
     ngOnInit() {
-        this.dataSource.paginator = this.paginator;
         this.cityService.getCities().subscribe(r => {
-            this.dataSource = r.data;
+            this.dataSource.data = r.data;
         });
     }
 
@@ -42,7 +38,7 @@ export class CityComponent implements OnInit {
             data: data,
         }).afterClosed().subscribe(r => {
             this.cityService.getCities().subscribe(r => {
-                this.dataSource = r.data;
+                this.dataSource.data = r.data;
             });
         });
     }

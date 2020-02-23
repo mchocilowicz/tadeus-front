@@ -52,7 +52,7 @@ export class NgoComponent implements OnInit {
     ngOnInit() {
         this.ngoService.getNgoList().subscribe(r => {
             if (r.data) {
-                this.dataSource = r.data;
+                this.dataSource.data = r.data;
             }
         });
         this.ngoService.getTypes().subscribe(r => {
@@ -75,7 +75,7 @@ export class NgoComponent implements OnInit {
             type: this.type
         };
         this.ngoService.getNgoWithQuery(params).subscribe(r => {
-            this.dataSource = r.data;
+            this.dataSource.data = r.data;
         })
     }
 

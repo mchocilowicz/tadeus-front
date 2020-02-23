@@ -1,18 +1,18 @@
 import {Injectable} from '@angular/core';
 import {HttpService} from "../../services/http.service";
 import {HttpParams} from "@angular/common/http";
-import {TradingPointSave} from "../../models/trading-point.interface";
+import {IType, TradingPointListElem, TradingPointSave} from "../../models/trading-point.interface";
 
 @Injectable({
     providedIn: 'root'
 })
 export class TradingPointService {
 
-    constructor(private readonly service: HttpService<any>) {
+    constructor(private readonly service: HttpService) {
     }
 
     getTradingPoints() {
-        return this.service.get('trading-point')
+        return this.service.get<TradingPointListElem[]>('trading-point')
     }
 
     getTradingPointsWithQuery(param: { name: string, city: string, type: string }) {
@@ -22,12 +22,11 @@ export class TradingPointService {
                 params = params.append(k, param[k])
             }
         });
-        console.log(params);
-        return this.service.get('trading-point', params)
+        return this.service.get<TradingPointListElem[]>('trading-point', params)
     }
 
     getTypes() {
-        return this.service.get('trading-point-type')
+        return this.service.get<IType[]>('trading-point-type')
     }
 
     saveTerminal(ID: string, body: any) {
@@ -35,7 +34,7 @@ export class TradingPointService {
     }
 
     getTradingPoint(ID: string) {
-        return this.service.get('trading-point/' + ID)
+        return this.service.get<any>('trading-point/' + ID)
     }
 
     updateTradingPoint(ID: string, body: TradingPointSave) {

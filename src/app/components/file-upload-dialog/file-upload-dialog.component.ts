@@ -15,7 +15,7 @@ export class FileUploadDialogComponent {
     constructor(
         public dialogRef: MatDialogRef<FileUploadDialogComponent>,
         @Inject(MAT_DIALOG_DATA) public data: any,
-        private service: HttpService<any>,
+        private service: HttpService,
         private router: Router) {
     }
 
@@ -28,7 +28,7 @@ export class FileUploadDialogComponent {
     }
 
     onOkClick() {
-        this.service.file(this.data.path + '/' + 'import', this.file).subscribe(r => {
+        this.service.file<any>(this.data.path + '/' + 'import', this.file).subscribe(r => {
             if (!r.error) {
                 this.dialogRef.close();
                 this.router.navigateByUrl(this.data.path);

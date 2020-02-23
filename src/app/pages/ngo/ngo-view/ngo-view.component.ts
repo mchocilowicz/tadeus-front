@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {NgoService} from "../ngo.service";
-import {IType} from "../../../models/type.interface";
+import {IType} from "../../../models/trading-point.interface";
 import {ActivatedRoute, Router} from "@angular/router";
 import {CityService} from "../../../services/city.service";
 import {ICity} from "../../../models/city.interface";

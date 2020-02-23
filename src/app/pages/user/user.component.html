@@ -3,28 +3,33 @@
         <mat-expansion-panel>
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    Filtry
+                    {{'filters.title' | translate}}
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
             <div class="filter-container">
                 <form [formGroup]="filterForm">
                     <mat-form-field>
-                        <input formControlName="phone" matInput placeholder="Telefon" type="number">
+                        <input formControlName="phone" matInput placeholder="{{'filters.phone' | translate}}"
+                               type="number">
                     </mat-form-field>
 
                     <mat-form-field>
-                        <input formControlName="xpMin" matInput placeholder="XP od" type="number">
+                        <input formControlName="xpMin" matInput placeholder="{{'filters.xpMin' | translate}}"
+                               type="number">
                     </mat-form-field>
 
                     <mat-form-field>
-                        <input formControlName="xpMax" matInput placeholder="Xp do" type="number">
+                        <input formControlName="xpMax" matInput placeholder="{{'filters.xpMax' | translate}}"
+                               type="number">
                     </mat-form-field>
                     <mat-form-field>
-                        <input formControlName="updatedFrom" matInput placeholder="Data aktywności od " type="date">
+                        <input formControlName="updatedFrom" matInput
+                               placeholder="{{'filters.updatedFrom' | translate}}" type="date">
                     </mat-form-field>
                     <mat-form-field>
-                        <input formControlName="updatedTo" matInput placeholder="Data aktywności do" type="date">
+                        <input formControlName="updatedTo" matInput placeholder="{{'filters.updatedTo' | translate}}"
+                               type="date">
                     </mat-form-field>
 
                     <mat-form-field>
@@ -37,14 +42,14 @@
                             </div>
                         </mat-select>
                     </mat-form-field>
-                    <button (click)="onFilterFormSubmit()">Szukaj</button>
+                    <button (click)="onFilterFormSubmit()">{{'filters.button' | translate}}</button>
                 </form>
             </div>
         </mat-expansion-panel>
     </mat-accordion>
 
     <div>
-        <p>Użytkownicy</p>
+        <p>{{'user.title' | translate}}</p>
     </div>
 
     <div class="mat-elevation-z8">
@@ -52,37 +57,37 @@
 
             <!-- Position Column -->
             <ng-container matColumnDef="id">
-                <th *matHeaderCellDef mat-header-cell> ID</th>
+                <th *matHeaderCellDef mat-header-cell>{{'user.id' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
             </ng-container>
 
             <!-- Name Column -->
             <ng-container matColumnDef="phone">
-                <th *matHeaderCellDef mat-header-cell> Numer Telefonu</th>
+                <th *matHeaderCellDef mat-header-cell>{{'user.phone' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.prefix + " " + element.phone}} </td>
             </ng-container>
 
             <!-- Weight Column -->
             <ng-container matColumnDef="email">
-                <th *matHeaderCellDef mat-header-cell> Email</th>
+                <th *matHeaderCellDef mat-header-cell>{{'user.email' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.email}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="xp">
-                <th *matHeaderCellDef mat-header-cell> Xp</th>
+                <th *matHeaderCellDef mat-header-cell> {{'user.xp' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="status">
-                <th *matHeaderCellDef mat-header-cell> Status</th>
+                <th *matHeaderCellDef mat-header-cell>{{'user.status' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.status}} </td>
             </ng-container>
 
             <!-- Symbol Column -->
             <ng-container matColumnDef="updatedAt">
-                <th *matHeaderCellDef mat-header-cell> Ostatnia Aktywność</th>
+                <th *matHeaderCellDef mat-header-cell>{{'user.updatedAt' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.updateAt |  date:'MM/dd/yyyy'}} </td>
             </ng-container>
 
@@ -92,7 +97,7 @@
     </div>
 
     <div>
-        <p>Opinie</p>
+        <p>{{'opinion.title' | translate}}</p>
     </div>
 
 
@@ -100,27 +105,27 @@
         <table [dataSource]="opinionDataSource" mat-table>
 
             <ng-container matColumnDef="name">
-                <th *matHeaderCellDef mat-header-cell>Username</th>
+                <th *matHeaderCellDef mat-header-cell>{{'opinion.username' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.name}} </td>
             </ng-container>
 
             <ng-container matColumnDef="phone">
-                <th *matHeaderCellDef mat-header-cell> Numer Telefonu</th>
+                <th *matHeaderCellDef mat-header-cell>{{'opinion.phone' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.prefix + " " + element.phone}} </td>
             </ng-container>
 
             <ng-container matColumnDef="email">
-                <th *matHeaderCellDef mat-header-cell> Email</th>
+                <th *matHeaderCellDef mat-header-cell>{{'opinion.email' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.email}} </td>
             </ng-container>
 
             <ng-container matColumnDef="value">
-                <th *matHeaderCellDef mat-header-cell>Opinia</th>
+                <th *matHeaderCellDef mat-header-cell>{{'opinion.value' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.value}} </td>
             </ng-container>
 
             <ng-container matColumnDef="createdAt">
-                <th *matHeaderCellDef mat-header-cell> Data</th>
+                <th *matHeaderCellDef mat-header-cell> {{'opinion.createdAt' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
             </ng-container>
 

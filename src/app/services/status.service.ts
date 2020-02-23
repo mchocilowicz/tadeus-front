@@ -1,12 +1,12 @@
-import { Injectable } from "@angular/core";
-import { HttpService } from "./http.service";
+import {Injectable} from "@angular/core";
+import {HttpService} from "./http.service";
 
 @Injectable()
 export class StatusService {
-    constructor(private httpServie: HttpService<any>) {
+    constructor(private httpServie: HttpService) {
     }
 
     getUserStatuses() {
-        return this.httpServie.get("user/status")
+        return this.httpServie.get<string[]>("user/status")
     }
 }

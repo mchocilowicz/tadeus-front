@@ -1,33 +1,34 @@
 <app-nav>
     <div *ngIf="userInformation" class="userContainer">
         <div class="userInformation">
-            Dane użytkownika :
+            {{'user-view.title' | translate}}
             <div>
-                Imię: {{userInformation.name}}
+                {{'user-view.name' | translate}}: {{userInformation.name}}
             </div>
             <div>
-                Numer telefonu: +{{userInformation.prefix}}{{userInformation.phone}}
+                {{'user-view.phone' | translate}}: +{{userInformation.prefix}}{{userInformation.phone}}
             </div>
             <div>
-                Pula osobista: {{userInformation.personalPool}}
+                {{'user-view.personalPool' | translate}}: {{userInformation.personalPool}}
             </div>
             <div>
-                Xp: {{userInformation.xp}}
+                {{'user-view.xp' | translate}}: {{userInformation.xp}}
             </div>
             <div>
-                <div>Pula dotacji: {{userInformation.donationPool}}</div>
-                <div>Aktualny cel: {{userInformation.currentNgo}}</div>
-                <div>Ostatni cel: {{userInformation.lastNgo}}</div>
-                <div>Zebrane środki od początku: {{userInformation.collectedMoney}}</div>
-                <div>Ostatnia aktywnośćL {{userInformation.updateAt |  date:'MM/dd/yyyy'}}</div>
+                <div>{{'user-view.donationPool' | translate}}: {{userInformation.donationPool}}</div>
+                <div>{{'user-view.ngo' | translate}}: {{userInformation.currentNgo}}</div>
+                <div>{{'user-view.lastNgo' | translate}}: {{userInformation.lastNgo}}</div>
+                <div>{{'user-view.collectedMoney' | translate}}: {{userInformation.collectedMoney}}</div>
+                <div>{{'user-view.updatedAt' | translate}} {{userInformation.updateAt |  date:'MM/dd/yyyy'}}</div>
             </div>
         </div>
         <div>
-            <p>Edycja</p>
+            <p>{{'user-view.edit.title' | translate}}</p>
             <form [formGroup]="editForm">
                 <div>
                     <mat-form-field>
-                        <input formControlName="phone" matInput placeholder="Nowy numer telefon" type="number">
+                        <input formControlName="phone" matInput placeholder="{{'user-view.edit.phone' | translate}}"
+                               type="number">
                     </mat-form-field>
                     <div>
                         <mat-radio-group
@@ -35,47 +36,51 @@
                                 [value]="userInformation.status"
                                 aria-labelledby="example-radio-group-label"
                                 class="example-radio-group">
-                            <mat-radio-button class="example-radio-button" value="ACTIVE">Aktywny</mat-radio-button>
-                            <mat-radio-button class="example-radio-button" value="BLOCKED">Zablokuj</mat-radio-button>
-                            <mat-radio-button class="example-radio-button" value="SUSPENDED">Zawieś</mat-radio-button>
+                            <mat-radio-button class="example-radio-button"
+                                              value="ACTIVE">{{'user-view.edit.active' | translate}}</mat-radio-button>
+                            <mat-radio-button class="example-radio-button"
+                                              value="BLOCKED">{{'user-view.edit.blocked' | translate}}</mat-radio-button>
+                            <mat-radio-button class="example-radio-button"
+                                              value="SUSPENDED">{{'user-view.edit.suspended' | translate}}</mat-radio-button>
                         </mat-radio-group>
                     </div>
                     <div>
-                        <button (click)="onEditSubmit()">Zapisz zmiany</button>
-                        <button (click)="onDeleteClick()">Usuń użytkownika</button>
+                        <button (click)="onEditSubmit()">{{'user-view.edit.save' | translate}}</button>
+                        <button (click)="onDeleteClick()">{{'user-view.edit.delete' | translate}}</button>
                     </div>
                 </div>
             </form>
             <div>
-                <p>Przesłanie środków pul do innego użytkownika</p>
+                <p>{{'user-view.transfer.title' | translate}}</p>
                 <form [formGroup]="transferForm">
                     <mat-form-field>
-                        <input formControlName="targetID" matInput placeholder="ID użytkownika docelowego" type="text">
+                        <input formControlName="targetID" matInput
+                               placeholder="{{'user-view.transfer.targetID' | translate}}" type="text">
                     </mat-form-field>
-                    <button (click)="onTransferSubmit()">Wyślij</button>
+                    <button (click)="onTransferSubmit()">{{'user-view.transfer.button' | translate}}</button>
                 </form>
             </div>
         </div>
         <div>
-            Transakcje użytkownika
+            {{'user-view.transaction.title' | translate}}
             <table [dataSource]="transactionDataSource" mat-table>
                 <ng-container matColumnDef="type">
-                    <th *matHeaderCellDef mat-header-cell>Typ</th>
+                    <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.type' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.type}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="price">
-                    <th *matHeaderCellDef mat-header-cell> Cena</th>
+                    <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.price' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.price}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="date">
-                    <th *matHeaderCellDef mat-header-cell> Data</th>
+                    <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.createdAt' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="xp">
-                    <th *matHeaderCellDef mat-header-cell>Xp</th>
+                    <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.xp' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
                 </ng-container>
 

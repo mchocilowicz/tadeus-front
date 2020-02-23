@@ -8,5 +8,228 @@
     "form-phone-label": "Numer telefonu",
     "form-code-placeholder": "Podaj kod SMS",
     "form-code-label": "Kod weryfikujacy"
+  },
+  "nav": {
+    "user": "Użytkownicy",
+    "trading-point": "Partnerzy",
+    "ngo": "Beneficjenci",
+    "configuration": "Konfiguracja",
+    "transaction": "Transakcje"
+  },
+  "filters": {
+    "title": "Filtry",
+    "button": "Szukaj",
+    "type": "Typ",
+    "city": "Miasto",
+    "partner": "Nazwa Partnera",
+    "ngo": "Nazwa Beneficjenta",
+    "phone": "Numer telefonu",
+    "status": "Status",
+    "updatedFrom": "Data aktywności od",
+    "updatedTo": "Data aktywności do",
+    "xpMin": "Xp od",
+    "xpMax": "Xp do"
+  },
+  "transaction": {
+    "ngoID": "ID Beneficjenta",
+    "userID": "ID Użytkownika",
+    "transactionID": "ID Transakcji",
+    "terminalID": "ID Terminala",
+    "tradingPointID": "ID Partnera",
+    "createdAt": "Data stworzenia"
+  },
+  "transaction-form": {
+    "ngoID": "ID Beneficjenta",
+    "userID": "ID Użytkownika",
+    "transactionID": "ID Transakcji",
+    "terminalID": "ID Terminala",
+    "tradingPointID": "ID Partnera",
+    "userXp": "Xp użytkownika",
+    "isPaid": "Czy jest opłacona",
+    "ngoDonation": "Wartość dotacji dla Beneficjenta",
+    "price": "Cena",
+    "donationPercentage": "Procent Dotacji",
+    "provisionPercentage": "Procent prowizji",
+    "paymentValue": "Wartość Płatności",
+    "vat": "VAT",
+    "provision": "Prowizja",
+    "donationPool": "Pula dotacji",
+    "personalPool": "Pula osobista",
+    "tradingPointXp": "Xp Partnera",
+    "createdAt": "Data"
+  },
+  "trading-point": {
+    "id": "ID",
+    "name": "Nazwa",
+    "email": "E-mail",
+    "phone": "Numer telefonu",
+    "type": "Typ",
+    "city": "Miasto",
+    "import": "Import pliku Excel",
+    "create": "Stwórz",
+    "excel": "Pobierz plik Excel"
+  },
+  "opinion": {
+    "title": "Opinie",
+    "username": "Nazwa użytkownika",
+    "phone": "Numer telefonu",
+    "email": "E-mail",
+    "value": "Treść",
+    "createdAt": "Data utworzenia"
+  },
+  "trading-point-view": {
+    "form": {
+      "type": "Typ",
+      "phone": "Telefon",
+      "name": "Nazwa",
+      "donationPercentage": "Domyślna wartość dotacji",
+      "email": "E-mail",
+      "active": "Aktywny",
+      "inactive": "Nieaktywny",
+      "vat": "VAT",
+      "fee": "Opłata manipulacyjna",
+      "xp": "Punkty Xp",
+      "street": "Nazwa ulicy",
+      "number": "Numer ulicy",
+      "postCode": "Kod pocztowy",
+      "longitude": "Długość geograficzna",
+      "latitude": "Szerokość geograficzna",
+      "city": "Miasto",
+      "button": "Zapisz"
+    },
+    "terminal": {
+      "title": "Terminale",
+      "name": "Imię",
+      "phone": "Numer telefonu",
+      "button": "Dodaj",
+      "id": "ID",
+      "step": "Status"
+    },
+    "transaction": {
+      "title": "Transakcje",
+      "type": "Typ",
+      "price": "Cena",
+      "date": "Data",
+      "xp": "Xp"
+    },
+    "images": {
+      "title": "Obrazek",
+      "image": "Nowy obrazek",
+      "button": "Zmień"
+    }
+  },
+  "user": {
+    "title": "Użytkownicy",
+    "id": "ID",
+    "phone": "Numer telefonu",
+    "email": "E-mail",
+    "xp": "Xp",
+    "status": "status",
+    "updatedAt": "Ostatnia aktywność"
+  },
+  "user-view": {
+    "title": "Dane użytkownika",
+    "name": "Imię",
+    "phone": "Numer telefonu",
+    "personalPool": "Pula osobista",
+    "xp": "Xp",
+    "donationPool": "Pula dotacji",
+    "ngo": "Aktualny cel",
+    "lastNgo": "Ostatni cel",
+    "collectedMoney": "Zebrane wszystkie środki",
+    "updatedAt": "Ostatnia aktywność",
+    "edit": {
+      "title": "Edycja",
+      "phone": "Nowy numer telefonu",
+      "active": "Aktywny",
+      "blocked": "Zablokowany",
+      "suspended": "Zawieś",
+      "save": "Zapisz zmiany",
+      "delete": "Usuń użytkownika"
+    },
+    "transfer": {
+      "title": "Przelanie środków do innego użytkownika",
+      "targetID": "ID użytkownika",
+      "button": "Wyślij"
+    },
+    "transaction": {
+      "title": "Transakcje",
+      "type": "Typ",
+      "price": "Cena",
+      "createdAt": "Data",
+      "xp": "Xp"
+    }
+  },
+  "ngo": {
+    "id": "ID",
+    "name": "Nazwa",
+    "phone": "Telefon",
+    "email": "E-mail",
+    "verified": "Zweryfikowany",
+    "verifiedAt": "Data weryfikacji",
+    "city": "Miasto",
+    "type": "Typ",
+    "import": "Import pliku Excel",
+    "export": "Export pliku Excel",
+    "button": "Stwórz"
+  },
+  "ngo-view": {
+    "name": "Nazwa",
+    "longName": "Długa nazwa",
+    "phone": "Numer telefonu",
+    "email": "E-mail",
+    "type": "Typ",
+    "createdAt": "Data dodania",
+    "bankNumber": "Numer konta",
+    "description": "Opis",
+    "collectedDonation": "Zebrane dotacje",
+    "active": "Zweryfikowany",
+    "inactive": "Niezweryfikowany",
+    "verifiedAt": "Data weryfikacji",
+    "street": "Ulica",
+    "number": "Numer ulicy",
+    "postCode": "Kod pocztowy",
+    "longitude": "Wysokość geograficzna",
+    "latitude": "Szerokość geograficzna",
+    "city": "Miasto",
+    "button": "Zapisz",
+    "transaction": {
+      "title": "Transakcje",
+      "id": "ID",
+      "price": "Cena",
+      "createdAt": "Data"
+    },
+    "images": {
+      "title": "Obrazki",
+      "image": "Obrazek",
+      "icon": "Ikona",
+      "button": "Zmień"
+    }
+  },
+  "simple-dialog": {
+    "ok": "OK",
+    "cancel": "Anuluj",
+    "edit": "Edytuj",
+    "create": "Stwórz"
+  },
+  "file-upload": {
+    "title": "Podaj plik Excel",
+    "file": "Plik",
+    "ok": "Ok",
+    "cancel": "Anuluj"
+  },
+  "configuration": {
+    "minPersonalPool": "Wartość minimalna Puli osobistej",
+    "minNgoTransfer": "Wartość minimalna transferu środków do beneficjenta",
+    "userExpiration": "Dozwolona ilość dni bez aktywności",
+    "ngo": "Płatność przez TADEUS na rzecz beneficjentów",
+    "ngoGeneration": "Rozliczenia dotacji które zostały opłacone",
+    "partnerPayment": "Płatność Partnerów na rzecz TADEUS",
+    "partnerGeneration": "Rozliczenie Partnerow przez TADEUS",
+    "user": "Uzytkownicy i okres rozliczeniowy",
+    "from": "Od",
+    "to": "Do",
+    "interval": "Czas trwania",
+    "button": "Zapisz"
   }
 }

@@ -1,77 +1,132 @@
 <app-nav>
     <div class="config-form">
         <mat-form-field>
-            <input [(ngModel)]="config.minPersonalPool" matInput placeholder="Min Personal Pool">
+            <input [(ngModel)]="config.minPersonalPool" matInput
+                   placeholder="{{'configuration.minPersonalPool' | translate}}">
         </mat-form-field>
         <mat-form-field>
-            <input [(ngModel)]="config.minNgoTransfer" matInput placeholder="Min Ngo Transfer">
+            <input [(ngModel)]="config.minNgoTransfer" matInput
+                   placeholder="{{'configuration.minNgoTransfer' | translate}}">
         </mat-form-field>
-        <p>Editing Dates for Client will change data for Partners and Ngo</p>
+        <mat-form-field>
+            <input [(ngModel)]="config.userExpiration" matInput
+                   placeholder="{{'configuration.userExpiration' | translate}}">
+        </mat-form-field>
+        {{'configuration.user' | translate}}
         <div class="config-container">
-            Client
             <mat-form-field>
-                <input (dateChange)="onClientDate($event.target.value)" [matDatepicker]="clientCurrent"
-                       [value]="config.currentClientPaymentDate"
-                       matInput placeholder="ngo">
-                <mat-datepicker-toggle [for]="clientCurrent" matSuffix></mat-datepicker-toggle>
-                <mat-datepicker #clientCurrent></mat-datepicker>
+                <input [matDatepicker]="userFrom"
+                       [value]="config.userFrom"
+                       disabled
+                       matInput placeholder="{{'configuration.from' | translate}}">
+                <mat-datepicker-toggle [for]="userFrom" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #userFrom></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-                <input (change)="onClientIntervalChange($event.target.value)" [value]="config.clientCycleDays"
-                       matInput min="1" placeholder="interval" type="number">
+                <input (change)="onClientIntervalChange($event.target.value)" [(ngModel)]="config.userCloseInterval"
+                       matInput min="1" placeholder="{{'configuration.interval' | translate}}" type="number">
             </mat-form-field>
             <mat-form-field>
-                <input [matDatepicker]="clientNext" [value]="config.nextClientPaymentDate" disabled matInput
-                       placeholder="ngo">
-                <mat-datepicker-toggle [for]="clientNext" matSuffix></mat-datepicker-toggle>
-                <mat-datepicker #clientNext></mat-datepicker>
+                <input [matDatepicker]="nextUserFromm"
+                       [value]="nextUserFrom" disabled matInput
+                       placeholder="{{'configuration.to' | translate}}">
+                <mat-datepicker-toggle [for]="nextUserFromm" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #nextUserFromm></mat-datepicker>
             </mat-form-field>
         </div>
-        <p>Editing Dates for Partner will change data for Ngo</p>
+        {{'configuration.partnerGeneration' | translate}}
         <div class="config-container">
-            Partner
             <mat-form-field>
-                <input (dateChange)="onPartnerDate($event.target.value)" [matDatepicker]="partnerCurrent"
-                       [value]="config.currentPartnerPaymentDate"
+                <input [matDatepicker]="partnerCurrent"
+                       [value]="config.partnerFrom"
+                       disabled
                        matInput
-                       placeholder="Value binding">
+                       placeholder="{{'configuration.from' | translate}}">
                 <mat-datepicker-toggle [for]="partnerCurrent" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #partnerCurrent></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-                <input (change)="onPartnerIntervalChange($event.target.value)" [value]="config.partnerCycleDays"
-                       matInput min="1" placeholder="interval" type="number">
+                <input (change)="onPartnerIntervalChange($event.target.value)" [(ngModel)]="config.partnerEmailInterval"
+                       matInput min="1" placeholder="{{'configuration.interval' | translate}}" type="number">
             </mat-form-field>
             <mat-form-field>
-                <input [matDatepicker]="partnerNext" [value]="config.nextPartnerPaymentDate" disabled matInput
-                       placeholder="Value binding">
+                <input [matDatepicker]="partnerNext" [value]="nextPartnerFrom" disabled matInput
+                       placeholder="{{'configuration.to' | translate}}">
                 <mat-datepicker-toggle [for]="partnerNext" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #partnerNext></mat-datepicker>
             </mat-form-field>
         </div>
+        {{'configuration.partnerPayment' | translate}}
         <div class="config-container">
-            Ngo
             <mat-form-field>
-                <input (dateChange)="onNgoDate($event.target.value)" [matDatepicker]="ngoCurrent"
-                       [value]="config.currentNgoPaymentDate"
+                <input [matDatepicker]="partnerSendMessagesAt"
+                       [value]="config.partnerSendMessagesAt"
+                       disabled
                        matInput
-                       placeholder="Value binding">
-                <mat-datepicker-toggle [for]="ngoCurrent" matSuffix></mat-datepicker-toggle>
-                <mat-datepicker #ngoCurrent></mat-datepicker>
+                       placeholder="{{'configuration.from' | translate}}">
+                <mat-datepicker-toggle [for]="partnerSendMessagesAt" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #partnerSendMessagesAt></mat-datepicker>
             </mat-form-field>
             <mat-form-field>
-                <input (change)="onNgoIntervalChange($event.target.value)" [value]="config.ngoCycleDays" matInput
-                       min="1" placeholder="interval" type="number">
+                <input (change)="onPartnerSendMessagesIntervalChange($event.target.value)"
+                       [(ngModel)]="config.partnerCloseInterval"
+                       matInput min="1" placeholder="{{'configuration.interval' | translate}}" type="number">
             </mat-form-field>
             <mat-form-field>
-                <input [matDatepicker]="ngoNext" [value]="config.nextNgoPaymentDate" disabled matInput
-                       placeholder="Value binding">
+                <input [matDatepicker]="nextPartnerSendMessagesAtt" [value]="nextPartnerSendMessagesAt" disabled
+                       matInput
+                       placeholder="{{'configuration.to' | translate}}">
+                <mat-datepicker-toggle [for]="nextPartnerSendMessagesAtt" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #nextPartnerSendMessagesAtt></mat-datepicker>
+            </mat-form-field>
+        </div>
+        {{'configuration.ngoGeneration' | translate}}
+        <div class="config-container">
+            <mat-form-field>
+                <input [matDatepicker]="partnerNotEditableAt"
+                       [value]="config.partnerNotEditableAt"
+                       disabled
+                       matInput
+                       placeholder="{{'configuration.from' | translate}}">
+                <mat-datepicker-toggle [for]="partnerNotEditableAt" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #partnerNotEditableAt></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input (change)="onPartnerCloseIntervalChange($event.target.value)"
+                       [(ngModel)]="config.ngoGenerateInterval"
+                       matInput min="1" placeholder="{{'configuration.interval' | translate}}" type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <input [matDatepicker]="nextPartnerNotEditableAtt" [value]="nextPartnerNotEditableAt" disabled matInput
+                       placeholder="{{'configuration.to' | translate}}">
+                <mat-datepicker-toggle [for]="nextPartnerNotEditableAtt" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #nextPartnerNotEditableAtt></mat-datepicker>
+            </mat-form-field>
+        </div>
+        {{'configuration.ngo' | translate}}
+        <div class="config-container">
+            <mat-form-field>
+                <input [matDatepicker]="ngoFrom"
+                       [value]="config.ngoFrom"
+                       disabled
+                       matInput
+                       placeholder="{{'configuration.from' | translate}}">
+                <mat-datepicker-toggle [for]="ngoFrom" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #ngoFrom></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input (change)="onNgoIntervalChange($event.target.value)" [(ngModel)]="config.ngoCloseInterval"
+                       matInput
+                       min="1" placeholder="{{'configuration.interval' | translate}}" type="number">
+            </mat-form-field>
+            <mat-form-field>
+                <input [matDatepicker]="ngoNext" [value]="nextNgoFrom" disabled matInput
+                       placeholder="{{'configuration.to' | translate}}">
                 <mat-datepicker-toggle [for]="ngoNext" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #ngoNext></mat-datepicker>
             </mat-form-field>
         </div>
 
-        <button (click)="onUpdate()" *ngIf="config.id">Update</button>
-        <button (click)="onSave()" *ngIf="!config.id">Save</button>
+        <button (click)="onSave()">{{'configuration.button' | translate}}</button>
     </div>
 </app-nav>

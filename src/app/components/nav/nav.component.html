@@ -1,12 +1,16 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened>
         <div class="nav-menu">
-            <a *ngFor="let link of links" [routerLink]="'/' +link" routerLinkActive="active">{{ link }}</a>
+            <a routerLink="/user" routerLinkActive="active">{{ 'nav.user' | translate }}</a>
+            <a routerLink="/trading-point" routerLinkActive="active">{{ 'nav.trading-point' | translate }}</a>
+            <a routerLink="/ngo" routerLinkActive="active">{{ 'nav.ngo' | translate }}</a>
+            <a routerLink="/transaction" routerLinkActive="active">{{ 'nav.transaction' | translate }}</a>
+            <a routerLink="/configuration" routerLinkActive="active">{{ 'nav.configuration' | translate }}</a>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>
         <nav class="nav-container">
-            <p>TADEUS</p>
+            <p>{{ 'login.header-title' | translate }}</p>
         </nav>
         <ng-content></ng-content>
     </mat-sidenav-content>
