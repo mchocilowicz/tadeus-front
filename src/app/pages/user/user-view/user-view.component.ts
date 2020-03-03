@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {UserService} from "../../../services/user.service";
-import {ActivatedRoute, Router} from "@angular/router";
-import {FormBuilder, FormGroup} from "@angular/forms";
-import {UserTransaction, UserView} from "../../../models/user-view.interface";
-import {MatTableDataSource} from "@angular/material/table";
+import { Component, OnInit } from '@angular/core';
+import { UserService } from "../../../services/user.service";
+import { ActivatedRoute, Router } from "@angular/router";
+import { FormBuilder, FormGroup } from "@angular/forms";
+import { UserTransaction, UserView } from "../../../models/user-view.interface";
+import { MatTableDataSource } from "@angular/material/table";
 import ApiResponse from "../../../models/api-response.interface";
 
 @Component({

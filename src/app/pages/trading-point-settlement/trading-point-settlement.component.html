@@ -1,1 +1,91 @@
-<p>trading-point-settlement works!</p>
+<app-nav>
+    <div *ngIf="data">
+        <div>
+            <button (click)="onCreateNewPeriod()" [disabled]="canCreateNewPartnerPeriods()">Rozpocznij nowy okres
+            </button>
+            <button (click)="onCreateNewPeriod()" [disabled]="canProcessNewUserPeriods()">Nowe dane do przetworzenia
+            </button>
+            <button [disabled]="!canProcessNewUserPeriods()">Wyslij maile do partnerow
+            </button>
+            <button [disabled]="canClosePeriod()">Zakończ okres</button>
+        </div>
+        <div>okresy sresy</div>
+        <div class="mat-elevation-z8">
+            <table [dataSource]="dataSource" class="mat-elevation-z8 test" mat-table>
+
+                <ng-container matColumnDef="id">
+                    <th *matHeaderCellDef mat-header-cell>ID</th>
+                    <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
+                </ng-container>
+                <ng-container matColumnDef="from">
+                    <th *matHeaderCellDef mat-header-cell>Od</th>
+                    <td *matCellDef="let element" mat-cell> {{element.from}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="to">
+                    <th *matHeaderCellDef mat-header-cell>Do</th>
+                    <td *matCellDef="let element" mat-cell> {{element.to}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="partner">
+                    <th *matHeaderCellDef mat-header-cell>Partner</th>
+                    <td *matCellDef="let element" mat-cell> {{element.tradingPoint}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="count">
+                    <th *matHeaderCellDef mat-header-cell>Transactions</th>
+                    <td *matCellDef="let element" mat-cell> {{element.transactions}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sellPrice">
+                    <th *matHeaderCellDef mat-header-cell>Sell Price</th>
+                    <td *matCellDef="let element" mat-cell> {{element.sellPrice}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="donation">
+                    <th *matHeaderCellDef mat-header-cell>DOnation</th>
+                    <td *matCellDef="let element" mat-cell> {{element.donationPrice | number}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="provision">
+                    <th *matHeaderCellDef mat-header-cell>Prowizja</th>
+                    <td *matCellDef="let element" mat-cell> {{element.provisionPrice}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="price">
+                    <th *matHeaderCellDef mat-header-cell>Cena</th>
+                    <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="paidPrice">
+                    <th *matHeaderCellDef mat-header-cell>Cena</th>
+                    <td *matCellDef="let element" mat-cell><input (change)="updatePaymentPrice($event,element.ID)"
+                                                                  [disabled]="!data.isEditable"
+                                                                  [value]="element.paidPrice"
+                                                                  type="number"></td>
+                </ng-container>
+
+                <ng-container matColumnDef="isPaid">
+                    <th *matHeaderCellDef mat-header-cell>Oplacono</th>
+                    <td *matCellDef="let element" mat-cell> {{element.paidPrice >= element.price}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="details">
+                    <th *matHeaderCellDef mat-header-cell>Detale</th>
+                    <td *matCellDef="let element" mat-cell><input (change)="updatePaymentDetails($event,element.ID)"
+                                                                  [disabled]="!data.isEditable"
+                                                                  [value]="element.details" type="text"></td>
+                </ng-container>
+
+                <ng-container matColumnDef="paymentAt">
+                    <th *matHeaderCellDef mat-header-cell>platnosc dnia</th>
+                    <td *matCellDef="let element" mat-cell> {{element.paymentAt}} </td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+            </table>
+            <button (click)="onSave()">Save</button>
+        </div>
+    </div>
+</app-nav>

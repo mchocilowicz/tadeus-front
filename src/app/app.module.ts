@@ -134,8 +134,13 @@ export const appRoutes: Routes = [
     },
     {
         path: 'settlement',
-        component: TradingPointSettlementComponent,
-        canActivate: [AuthGuard]
+        children: [
+            {
+                path: 'trading-point',
+                component: TradingPointSettlementComponent,
+                canActivate: [AuthGuard]
+            }
+        ]
     },
     {
         path: '',
