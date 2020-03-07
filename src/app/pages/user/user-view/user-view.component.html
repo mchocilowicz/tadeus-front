@@ -61,9 +61,9 @@
                 </form>
             </div>
         </div>
-        <div>
+        <div class="transaction-container">
             {{'user-view.transaction.title' | translate}}
-            <table [dataSource]="transactionDataSource" mat-table>
+            <table [dataSource]="transactionDataSource" class="transaction-container" mat-table>
                 <ng-container matColumnDef="type">
                     <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.type' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.type}} </td>
@@ -71,17 +71,17 @@
 
                 <ng-container matColumnDef="price">
                     <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.price' | translate}}</th>
-                    <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                    <td *matCellDef="let element" mat-cell> {{element.price | number}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="date">
                     <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.createdAt' | translate}}</th>
-                    <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
+                    <td *matCellDef="let element" mat-cell> {{element.createdAt | date}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="xp">
                     <th *matHeaderCellDef mat-header-cell>{{'user-view.transaction.xp' | translate}}</th>
-                    <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
+                    <td *matCellDef="let element" mat-cell> {{element.xp | number}} </td>
                 </ng-container>
 
                 <tr *matHeaderRowDef="transactionDisplayFields" mat-header-row></tr>

@@ -68,7 +68,6 @@ export class NgoViewComponent implements OnInit {
                     this.thumbnail = environment.url + 'img/' + r.data.thumbnail;
 
                     this.transactions = r.data.transactions;
-
                     this.ngoForm = this.fb.group({
                         name: new FormControl(r.data.name, [Validators.required]),
                         longName: new FormControl(r.data.longName, [Validators.required]),

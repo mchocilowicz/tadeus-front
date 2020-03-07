@@ -133,7 +133,7 @@
                 <button (click)="saveTerminal()">{{'trading-point-view.terminal.button'| translate}}</button>
             </form>
 
-            <table [dataSource]="terminals" mat-table matSort>
+            <table [dataSource]="terminals" class="terminal-container" mat-table matSort>
                 <ng-container matColumnDef="ID">
                     <th *matHeaderCellDef mat-header-cell> {{'trading-point-view.terminal.id' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
@@ -163,7 +163,7 @@
                 </mat-panel-title>
             </mat-expansion-panel-header>
 
-            <table [dataSource]="transactions" mat-table>
+            <table [dataSource]="transactions" class="terminal-container" mat-table>
                 <ng-container matColumnDef="type">
                     <th *matHeaderCellDef mat-header-cell>{{'trading-point-view.transaction.type' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.type}} </td>
@@ -171,17 +171,17 @@
 
                 <ng-container matColumnDef="price">
                     <th *matHeaderCellDef mat-header-cell>{{'trading-point-view.transaction.price' | translate}}</th>
-                    <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                    <td *matCellDef="let element" mat-cell> {{element.price | number}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="date">
                     <th *matHeaderCellDef mat-header-cell>{{'trading-point-view.transaction.date' | translate}}</th>
-                    <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
+                    <td *matCellDef="let element" mat-cell> {{element.createdA | date}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="xp">
                     <th *matHeaderCellDef mat-header-cell>{{'trading-point-view.transaction.xp' | translate}}</th>
-                    <td *matCellDef="let element" mat-cell> {{element.xp}} </td>
+                    <td *matCellDef="let element" mat-cell> {{element.xp | number}} </td>
                 </ng-container>
 
                 <tr *matHeaderRowDef="transactionDisplayFields" mat-header-row></tr>

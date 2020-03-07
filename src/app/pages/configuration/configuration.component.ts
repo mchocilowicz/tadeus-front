@@ -38,6 +38,9 @@ export class ConfigurationComponent implements OnInit {
     populateToDates() {
         if (this.config.userFrom) {
             this.nextUserFrom = moment(this.config.userFrom).add(this.config.userCloseInterval, 'days').toDate();
+        } else {
+            this.config.userFrom = moment().toDate();
+            this.nextUserFrom = moment(this.config.userFrom).add(this.config.userCloseInterval, 'days').toDate()
         }
         if (this.config.partnerFrom) {
             this.nextPartnerFrom = moment(this.config.partnerFrom).add(this.config.partnerEmailInterval, 'days').toDate();

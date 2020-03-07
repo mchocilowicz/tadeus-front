@@ -1,91 +1,156 @@
 <app-nav>
     <div *ngIf="data">
-        <div>
-            <button (click)="onCreateNewPeriod()" [disabled]="canCreateNewPartnerPeriods()">Rozpocznij nowy okres
-            </button>
-            <button (click)="onCreateNewPeriod()" [disabled]="canProcessNewUserPeriods()">Nowe dane do przetworzenia
-            </button>
-            <button [disabled]="!canProcessNewUserPeriods()">Wyslij maile do partnerow
-            </button>
-            <button [disabled]="canClosePeriod()">Zakończ okres</button>
+        <div style="display: flex; justify-content: center; align-items: center; align-content: center">
+            <mat-form-field>
+                <mat-select [(ngModel)]="selectedPeriod"
+                            placeholder="{{ 'settlement.trading-point.periods' | translate}}">
+                    <mat-option *ngFor="let period of periods"
+                                [value]="period.id">{{period.from | date: 'longDate'}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div style="display: flex">
+                <p>{{ 'settlement.trading-point.checkbox' | translate}}</p>
+                <input [(ngModel)]="showAll" type="checkbox">
+            </div>
+            <button (click)="onSearchClick()">{{ 'settlement.trading-point.search' | translate}}</button>
         </div>
-        <div>okresy sresy</div>
+        <div style=" display: flex;align-content: center; justify-content: center">
+            <button (click)="onCreateNewPeriod()" [disabled]="canCreateNewPartnerPeriods()">
+                {{ 'settlement.trading-point.partner-button' | translate}}
+            </button>
+            <button (click)="onCreateNewPeriod()" [disabled]="canProcessNewUserPeriods()">
+                {{ 'settlement.trading-point.new-data' | translate}}
+            </button>
+            <button (click)="onSendNotification()" [disabled]="canSendEmails()">
+                {{ 'settlement.trading-point.notify' | translate}}
+            </button>
+            <button (click)="onClosePeriod()" [disabled]="canClosePeriod()">
+                {{ 'settlement.trading-point.end-period' | translate}}
+            </button>
+        </div>
+        <div style="display: flex; justify-content: center; align-items: center">
+            <mat-form-field>
+                <input [matDatepicker]="userPeriodDataPicker"
+                       [value]="userPeriod" disabled
+                       matInput
+                       placeholder="{{ 'settlement.trading-point.user-period' | translate}}">
+                <mat-datepicker-toggle [for]="userPeriodDataPicker" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #userPeriodDataPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input [matDatepicker]="partnerPeriodDataPicker" [value]="partnerPeriod" disabled matInput
+                       placeholder="{{ 'settlement.trading-point.partner-generate' | translate}}">
+                <mat-datepicker-toggle [for]="partnerPeriodDataPicker" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #partnerPeriodDataPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input [matDatepicker]="mailSendAtDataPicker" [value]="mailSendAt" disabled matInput
+                       placeholder="{{ 'settlement.trading-point.notify-send' | translate}}">
+                <mat-datepicker-toggle [for]="mailSendAtDataPicker" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #mailSendAtDataPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input [matDatepicker]="notEditableAtDataPicker" [value]="notEditableAt" disabled matInput
+                       placeholder="{{ 'settlement.trading-point.not-editable' | translate}}">
+                <mat-datepicker-toggle [for]="notEditableAtDataPicker" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #notEditableAtDataPicker></mat-datepicker>
+            </mat-form-field>
+            <mat-form-field>
+                <input [matDatepicker]="closeAtDataPicker" [value]="closeAt" disabled matInput
+                       placeholder="{{ 'settlement.trading-point.close' | translate}}">
+                <mat-datepicker-toggle [for]="closeAtDataPicker" matSuffix></mat-datepicker-toggle>
+                <mat-datepicker #closeAtDataPicker></mat-datepicker>
+            </mat-form-field>
+        </div>
         <div class="mat-elevation-z8">
             <table [dataSource]="dataSource" class="mat-elevation-z8 test" mat-table>
 
                 <ng-container matColumnDef="id">
-                    <th *matHeaderCellDef mat-header-cell>ID</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.id' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
                 </ng-container>
                 <ng-container matColumnDef="from">
-                    <th *matHeaderCellDef mat-header-cell>Od</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.from' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.from}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="to">
-                    <th *matHeaderCellDef mat-header-cell>Do</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.to' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.to}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="partner">
-                    <th *matHeaderCellDef mat-header-cell>Partner</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.partner' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.tradingPoint}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="count">
-                    <th *matHeaderCellDef mat-header-cell>Transactions</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.transactions' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.transactions}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="sellPrice">
-                    <th *matHeaderCellDef mat-header-cell>Sell Price</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.sell-price' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.sellPrice}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="donation">
-                    <th *matHeaderCellDef mat-header-cell>DOnation</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.donation' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.donationPrice | number}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="provision">
-                    <th *matHeaderCellDef mat-header-cell>Prowizja</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.provision' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.provisionPrice}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="price">
-                    <th *matHeaderCellDef mat-header-cell>Cena</th>
-                    <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.price' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.price | number}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="paidPrice">
-                    <th *matHeaderCellDef mat-header-cell>Cena</th>
-                    <td *matCellDef="let element" mat-cell><input (change)="updatePaymentPrice($event,element.ID)"
-                                                                  [disabled]="!data.isEditable"
-                                                                  [value]="element.paidPrice"
-                                                                  type="number"></td>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.paid-price' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <input (change)="updatePaymentPrice($event,element.ID)" *ngIf="data.isEditable"
+                               [value]="element.paidPrice"
+                               class="editable-input"
+                               type="number">
+                        <p *ngIf="!data.isEditable">{{element.paidPrice | number}}</p>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="isPaid">
-                    <th *matHeaderCellDef mat-header-cell>Oplacono</th>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.is-paid' | translate}}</th>
                     <td *matCellDef="let element" mat-cell> {{element.paidPrice >= element.price}} </td>
                 </ng-container>
 
                 <ng-container matColumnDef="details">
-                    <th *matHeaderCellDef mat-header-cell>Detale</th>
-                    <td *matCellDef="let element" mat-cell><input (change)="updatePaymentDetails($event,element.ID)"
-                                                                  [disabled]="!data.isEditable"
-                                                                  [value]="element.details" type="text"></td>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.details' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <input (change)="updatePaymentDetails($event,element.ID)" *ngIf="data.isEditable"
+                               [value]="element.details"
+                               class="editable-input" type="text">
+                        <p *ngIf="!data.isEditable">{{element.details}}</p>
+                    </td>
                 </ng-container>
 
                 <ng-container matColumnDef="paymentAt">
-                    <th *matHeaderCellDef mat-header-cell>platnosc dnia</th>
-                    <td *matCellDef="let element" mat-cell> {{element.paymentAt}} </td>
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.payment-at' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.paymentAt | date: "longDate"}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="sendMessagesAt">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.message-at' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.sendMessagesAt | date: "longDate"}} </td>
                 </ng-container>
 
                 <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
                 <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
             </table>
-            <button (click)="onSave()">Save</button>
+            <button (click)="onSave()" [disabled]="!data.isEditable">
+                {{ 'settlement.trading-point.save' | translate}}
+            </button>
         </div>
     </div>
 </app-nav>

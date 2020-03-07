@@ -4,7 +4,7 @@
     </div>
 
     <div class="mat-elevation-z8">
-        <table [dataSource]="dataSource" mat-table>
+        <table [dataSource]="dataSource" class="mat-elevation-z8 test" mat-table>
             <ng-container matColumnDef="ngoID">
                 <th *matHeaderCellDef mat-header-cell>{{'transaction.ngoID' | translate}}</th>
                 <td *matCellDef="let element" mat-cell> {{element.ngoID}} </td>

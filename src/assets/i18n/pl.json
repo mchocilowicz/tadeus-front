@@ -231,5 +231,36 @@
     "to": "Do",
     "interval": "Czas trwania",
     "button": "Zapisz"
+  },
+  "settlement": {
+    "trading-point": {
+      "periods": "Okresy",
+      "checkbox": "Pokaż wszystkie płatności",
+      "search": "Szukaj",
+      "partner-button": "Stwórz nowy okres dla partnerów",
+      "new-data": "Przetwórz dane okresu użytkowników",
+      "notify": "Wyślij powiadomienia",
+      "end-period": "Zakończ okres",
+      "user-period": "Data użytkowników",
+      "partner-generate": "Data Partnerów",
+      "notify-send": "Data wysłania powiadomień",
+      "not-editable": "Data zablokowania edycji",
+      "close": "Data zakmnięcia okresu",
+      "id": "ID",
+      "from": "Od",
+      "to": "Do",
+      "partner": "Partner",
+      "transactions": "Ilość tranksacji",
+      "sell-price": "Cena sprzedaży",
+      "donation": "Dotacja",
+      "provision": "Prowizja",
+      "price": "Do zapłaty",
+      "paid-price": "Zapłacono",
+      "is-paid": "Oplacono ?",
+      "details": "Uwagi",
+      "payment-at": "Dzień opłacenia",
+      "message-at": "Powiadomienie",
+      "save": "Zapisz"
+    }
   }
 }

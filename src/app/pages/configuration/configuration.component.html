@@ -16,9 +16,9 @@
         <div class="config-container">
             <mat-form-field>
                 <input [matDatepicker]="userFrom"
-                       [value]="config.userFrom"
                        disabled
-                       matInput placeholder="{{'configuration.from' | translate}}">
+                       [value]="config.userFrom" matInput
+                       placeholder="{{'configuration.from' | translate}}">
                 <mat-datepicker-toggle [for]="userFrom" matSuffix></mat-datepicker-toggle>
                 <mat-datepicker #userFrom></mat-datepicker>
             </mat-form-field>
