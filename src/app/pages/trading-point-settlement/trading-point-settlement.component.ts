@@ -1,8 +1,8 @@
-import {Component, Injectable, OnInit} from '@angular/core';
-import {HttpService} from "../../services/http.service";
-import {MatTableDataSource} from "@angular/material/table";
-import {Router} from "@angular/router";
-import {HttpParams} from "@angular/common/http";
+import { Component, Injectable, OnInit } from '@angular/core';
+import { HttpService } from "../../services/http.service";
+import { MatTableDataSource } from "@angular/material/table";
+import { Router } from "@angular/router";
+import { HttpParams } from "@angular/common/http";
 import * as moment from 'moment'
 
 @Component({
@@ -62,8 +62,8 @@ export class TradingPointSettlementComponent implements OnInit {
         return !(!this.data.isEditable && !this.data.isClosed && this.data.notEditableAt && moment().isAfter(this.data.notEditableAt));
     }
 
-    canCreateNewPartnerPeriods(): boolean {
-        return this.data.hasPartnerPeriod;
+    canGeneratePayout(): boolean {
+        return !(this.data.generatePayout && this.data.isClosed && this.data.closedAt && moment().isAfter(this.data.closedAt))
     }
 
     updatePaymentPrice($event, ID: string) {
@@ -108,6 +108,14 @@ export class TradingPointSettlementComponent implements OnInit {
         })
     }
 
+    onGeneratePayout() {
+        this.service.generatePayoutData(this.selectedPeriod).subscribe(r => {
+            if (!r.error) {
+                this.router.navigateByUrl('settlement/trading-point')
+            }
+        })
+    }
+
     private getSettlementsData() {
         this.service.getSettlementData(this.showAll, this.selectedPeriod).subscribe(r => {
             if (r.data) {
@@ -139,11 +147,6 @@ export class TradingPointSettlementComponent implements OnInit {
                 } else {
                     this.closeAt = moment(this.notEditableAt).add(this.data.ngoGenerateInterval, 'days').toDate();
                 }
-                console.log(this.userPeriod);
-                console.log(this.partnerPeriod);
-                console.log(this.mailSendAt);
-                console.log(this.notEditableAt);
-                console.log(this.closeAt);
             }
         });
     }
@@ -161,7 +164,7 @@ export class TradingPointSettlementService {
 
     getSettlementData(showAll: boolean, selectedPeriod: string) {
         let params = new HttpParams()
-            .append('showAll', `${showAll}`)
+            .append('showAll', `${ showAll }`)
             .append('selectedPeriod', selectedPeriod);
         return this.http.get<SettlementPartnerData>("settlement/partner", params);
     }
@@ -181,6 +184,10 @@ export class TradingPointSettlementService {
     closePartnerPeriod() {
         return this.http.put('settlement/partner/close', null)
     }
+
+    generatePayoutData(periodId: string) {
+        return this.http.post(`settlement/partner/${ periodId }/ngoPayout`, null)
+    }
 }
 
 export interface SettlementPartnerData {
@@ -199,4 +206,5 @@ export interface SettlementPartnerData {
     partnerEmailInterval: number;
     partnerCloseInterval: number;
     ngoGenerateInterval: number;
+    generatePayout: boolean;
 }
