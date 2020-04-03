@@ -1,1 +1,69 @@
-<p>ngo-settlement works!</p>
+<app-nav>
+    <div *ngIf="data">
+        <div style="display: flex; justify-content: center; align-items: center; align-content: center">
+            <mat-form-field>
+                <mat-select [(ngModel)]="selectedPeriod"
+                            placeholder="{{ 'settlement.trading-point.periods' | translate}}">
+                    <mat-option *ngFor="let period of periods"
+                                [value]="period.id">{{period.from | date: 'longDate'}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <div style="display: flex">
+                <p>{{ 'settlement.trading-point.checkbox' | translate}}</p>
+                <input [(ngModel)]="showAll" type="checkbox">
+            </div>
+            <button (click)="onSearchClick()">{{ 'settlement.trading-point.search' | translate}}</button>
+        </div>
+        <div style=" display: flex;align-content: center; justify-content: center">
+            <button (click)="onClosePeriod()" [disabled]="canClosePeriod()">
+                {{ 'settlement.trading-point.end-period' | translate}}
+            </button>
+        </div>
+        <div class="mat-elevation-z8">
+            <table [dataSource]="dataSource" class="mat-elevation-z8 test" mat-table>
+                <ng-container matColumnDef="id">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.id' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.ID}} </td>
+                </ng-container>
+                <ng-container matColumnDef="createdAt">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.from' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.createdAt}} </td>
+                </ng-container>
+                <ng-container matColumnDef="ngoId">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.partner' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.ngoId}} </td>
+                </ng-container>
+
+                <ng-container matColumnDef="ngoName">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.transactions' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.ngoName}} </td>
+                </ng-container>
+                <ng-container matColumnDef="price">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.provision' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell> {{element.price | number}} </td>
+                </ng-container>
+                <ng-container matColumnDef="isPaid">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.donation' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <input type="checkbox" [value]="element.isPaid"
+                               (change)="updatePaymentIsPaid($event,element.ID)">
+                    </td>
+                </ng-container>
+                <ng-container matColumnDef="paymentDetails">
+                    <th *matHeaderCellDef mat-header-cell>{{ 'settlement.trading-point.details' | translate}}</th>
+                    <td *matCellDef="let element" mat-cell>
+                        <input (change)="updatePaymentDetails($event,element.ID)"
+                               [value]="element.paymentDetails"
+                               type="text">
+                    </td>
+                </ng-container>
+
+                <tr *matHeaderRowDef="displayedColumns" mat-header-row></tr>
+                <tr *matRowDef="let row; columns: displayedColumns;" mat-row></tr>
+            </table>
+            <button (click)="onSave()">
+                {{ 'settlement.trading-point.save' | translate}}
+            </button>
+        </div>
+    </div>
+</app-nav>

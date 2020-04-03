@@ -85,11 +85,13 @@ export class TradingPointSettlementComponent implements OnInit {
 
     onSave() {
         const changedData = this.dataSource.data.filter(e => e.hasChanges);
-        this.service.onSaveChanges(changedData).subscribe(r => {
-            if (!r.error) {
-                this.router.navigateByUrl('settlement/trading-point')
-            }
-        })
+        if (changedData.length > 0) {
+            this.service.onSaveChanges(changedData).subscribe(r => {
+                if (!r.error) {
+                    this.router.navigateByUrl('settlement/ngo')
+                }
+            })
+        }
     }
 
     onSendNotification() {

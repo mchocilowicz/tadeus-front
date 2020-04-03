@@ -56,7 +56,7 @@ import {
     TradingPointSettlementComponent,
     TradingPointSettlementService
 } from './pages/trading-point-settlement/trading-point-settlement.component';
-import { NgoSettlementComponent } from './pages/ngo-settlement/ngo-settlement.component';
+import { NgoSettlementComponent, NgoSettlementService } from './pages/ngo-settlement/ngo-settlement.component';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http);
@@ -139,6 +139,11 @@ export const appRoutes: Routes = [
                 path: 'trading-point',
                 component: TradingPointSettlementComponent,
                 canActivate: [AuthGuard]
+            },
+            {
+                path: 'ngo',
+                component: NgoSettlementComponent,
+                canActivate: [AuthGuard]
             }
         ]
     },
@@ -220,7 +225,8 @@ export const appRoutes: Routes = [
         OpinionService,
         StatusService,
         TransactionService,
-        TradingPointSettlementService
+        TradingPointSettlementService,
+        NgoSettlementService
     ],
     entryComponents: [
         FileUploadDialogComponent,
