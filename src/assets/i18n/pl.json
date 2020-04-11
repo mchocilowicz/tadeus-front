@@ -14,7 +14,11 @@
     "trading-point": "Partnerzy",
     "ngo": "Beneficjenci",
     "configuration": "Konfiguracja",
-    "transaction": "Transakcje"
+    "transaction": "Transakcje",
+    "stats": "Statystyki",
+    "reports": "Raporty",
+    "ngo-settlements": "Rozliczenia beneficjentów",
+    "partners-settlements": "Rozliczenia partnerów"
   },
   "filters": {
     "title": "Filtry",
@@ -261,6 +265,37 @@
       "payment-at": "Dzień opłacenia",
       "message-at": "Powiadomienie",
       "save": "Zapisz"
+    },
+    "ngo": {
+      "periods": "Okresy",
+      "checkbox": "Pokaż wszystkie płatności",
+      "search": "Szukaj",
+      "end-period": "ZAKOŃCZ REJESTRACJĘ WPŁAT BENEFICJENTÓW",
+      "id": "ID",
+      "name": "Nazwa",
+      "from": "Data utworzenia",
+      "price": "Cena dotacji",
+      "isPaid": "Opłacono ?",
+      "details": "Szczegóły platności",
+      "save": "Zapisz"
+    }
+  },
+  "reports": {
+    "filterDates": "Mesiące",
+    "search": "Szukaj",
+    "id": "ID",
+    "name": "Nazwa",
+    "users": "Ilość użytkowników",
+    "donation": "Wartość dotacji",
+    "ngo": {
+      "title": "Beneficjenci",
+      "partners": "Ilość punktów handlowych",
+      "list": "Zasłużone punkty handlowe"
+    },
+    "partner": {
+      "title": "Punkty Handlowe",
+      "ngo": "Ilość beneficjentów",
+      "list": "Obdarowani beneficjenci"
     }
   }
 }

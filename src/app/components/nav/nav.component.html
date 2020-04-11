@@ -1,13 +1,16 @@
 <mat-sidenav-container class="example-container">
     <mat-sidenav mode="side" opened>
         <div class="nav-menu">
+            <a routerLink="/stats" routerLinkActive="active">{{ 'nav.stats' | translate }}</a>
             <a routerLink="/user" routerLinkActive="active">{{ 'nav.user' | translate }}</a>
             <a routerLink="/trading-point" routerLinkActive="active">{{ 'nav.trading-point' | translate }}</a>
             <a routerLink="/ngo" routerLinkActive="active">{{ 'nav.ngo' | translate }}</a>
             <a routerLink="/transaction" routerLinkActive="active">{{ 'nav.transaction' | translate }}</a>
             <a routerLink="/configuration" routerLinkActive="active">{{ 'nav.configuration' | translate }}</a>
-            <a routerLink="/settlement/trading-point" routerLinkActive="active">Rozliczenia Partnerów</a>
-            <a routerLink="/settlement/ngo" routerLinkActive="active">Rozliczenia Beneficjentów</a>
+            <a routerLink="/reports" routerLinkActive="active">{{ 'nav.reports' | translate }}</a>
+            <a routerLink="/settlement/trading-point"
+               routerLinkActive="active">{{ 'nav.ngo-settlements' | translate }}</a>
+            <a routerLink="/settlement/ngo" routerLinkActive="active">{{ 'nav.partners-settlements' | translate }}</a>
         </div>
     </mat-sidenav>
     <mat-sidenav-content>

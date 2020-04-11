@@ -1,8 +1,8 @@
-import { Component, Injectable, OnInit } from '@angular/core';
-import { MatTableDataSource } from "@angular/material/table";
-import { Router } from "@angular/router";
-import { HttpService } from "../../services/http.service";
-import { HttpParams } from "@angular/common/http";
+import {Component, Injectable, OnInit} from '@angular/core';
+import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
+import {HttpService} from "../../services/http.service";
+import {HttpParams} from "@angular/common/http";
 import * as moment from "moment";
 
 @Component({
@@ -13,7 +13,7 @@ import * as moment from "moment";
 export class NgoSettlementComponent implements OnInit {
 
     data: SettlementNgoData;
-    displayedColumns: string[] = ['id', 'ngoId', 'ngoName', 'createdAt', 'isPaid', 'price', 'paymentDetails'];
+    displayedColumns: string[] = ['ngoId', 'ngoName', 'createdAt', 'isPaid', 'price', 'paymentDetails'];
     dataSource: MatTableDataSource<any>;
     periods: any[] = null;
     selectedPeriod: any = null;
@@ -73,6 +73,10 @@ export class NgoSettlementComponent implements OnInit {
 
     canClosePeriod(): boolean {
         return !(this.data.isClosed && moment().isAfter(moment(this.data.from).add(this.data.closeInterval, 'days')));
+    }
+
+    canEdit(): boolean {
+        return this.data.isClosed;
     }
 
 

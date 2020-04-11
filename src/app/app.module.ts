@@ -54,7 +54,7 @@ import {
     TradingPointSettlementService
 } from './pages/trading-point-settlement/trading-point-settlement.component';
 import {NgoSettlementComponent, NgoSettlementService} from './pages/ngo-settlement/ngo-settlement.component';
-import {ReportsComponent} from './pages/reports/reports.component';
+import {ReportsComponent, ReportsSerivce} from './pages/reports/reports.component';
 import {AuthInterceptor} from "./interceptors/auth.interceptor";
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -114,6 +114,16 @@ export const appRoutes: Routes = [
     {
         path: 'transaction',
         component: TransactionComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'reports',
+        component: ReportsComponent,
+        canActivate: [AuthGuard]
+    },
+    {
+        path: 'stats',
+        component: StatsComponent,
         canActivate: [AuthGuard]
     },
     {
@@ -209,6 +219,7 @@ export const appRoutes: Routes = [
         TransactionService,
         TradingPointSettlementService,
         NgoSettlementService,
+        ReportsSerivce,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     ],
     entryComponents: [
