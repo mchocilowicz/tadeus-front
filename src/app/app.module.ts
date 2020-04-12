@@ -36,7 +36,7 @@ import {TradingPointService} from "./pages/trading-point/trading-point-service.s
 import {TradingPointViewComponent} from './pages/trading-point/trading-point-view/trading-point-view.component';
 import {SimpleDialogComponent} from './components/simple-dialog/simple-dialog.component';
 import {NgoComponent} from "./pages/ngo/ngo.component";
-import {StatsComponent} from "./pages/stats/stats.component";
+import {StatsComponent, StatsService} from "./pages/stats/stats.component";
 import {ConfigurationComponent} from "./pages/configuration/configuration.component";
 import {FileUploadDialogComponent} from './components/file-upload-dialog/file-upload-dialog.component';
 import {NgoViewComponent} from './pages/ngo/ngo-view/ngo-view.component';
@@ -220,6 +220,7 @@ export const appRoutes: Routes = [
         TradingPointSettlementService,
         NgoSettlementService,
         ReportsSerivce,
+        StatsService,
         {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true},
     ],
     entryComponents: [

@@ -32,9 +32,9 @@
                                type="date">
                     </mat-form-field>
 
-                    <mat-form-field>
+                    <mat-form-field *ngIf="statuses">
                         <mat-select formControlName="status" placeholder="Status">
-                            <div *ngIf="statuses && statuses.length > 0">
+                            <div *ngIf="statuses.length > 0">
                                 <mat-option *ngFor="let status of statuses" [value]="status">{{status}}</mat-option>
                             </div>
                             <div *ngIf="statuses.length === 0">

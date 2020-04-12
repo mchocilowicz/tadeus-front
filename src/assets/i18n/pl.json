@@ -297,5 +297,27 @@
       "ngo": "Ilość beneficjentów",
       "list": "Obdarowani beneficjenci"
     }
+  },
+  "stats": {
+    "userTitle": "PODSUMOWANIE – STATYSTYKA UŻYTKOWNIKÓW",
+    "ngoTitle": "PODSUMOWANIE – STATYSTYKA DONACJI",
+    "tradingPointsTitle": "POSUMOWANIE – STATYSTYKA – LICZBA PUNKTÓW HANDLOWYCH",
+    "transactionsTitle": "POSUMOWANIE – STATYSTYKA TRANSAKCJI (dzień/tydzień/miesiąc)",
+    "active": "Liczba zarejestrowanych",
+    "today": "Liczba aktywnych w ostatnich 24 godzinach",
+    "week": "Liczba aktywnych w ostatnim tygodniu",
+    "month": "Liczba aktywnych w ostatnim miesiącu",
+    "overMonth": "Liczba nieaktywnych ponad miesiąc",
+    "months": "Liczba nieaktywnych ponad trzy miesiąc",
+    "overall": "Wartość zebranych donacji od początku (całkowita, obie pule)",
+    "personalPool": "Wartość zebranych donacji od początku (pula osobista)",
+    "donationPool": "Wartość zebranych donacji od początku (pula donacji)",
+    "ngo": "Wartość przekazanych donacji do NGO (pula donacji)",
+    "userPool": "Wartość łączna aktualnej zgromadzonej puli osobistej użytkowników",
+    "transactionsToday": "Wartość transakcji (donacji naliczonych) w ciągu ostatnich 24h",
+    "weeklyTransactions": "Wartość transakcji (donacji naliczonych) w ostatnim tygodniu (i kolejnych tygodniach wstecz)",
+    "monthlyTransactions": "Wartość transakcji (donacji naliczonych) w ostatnim miesiącu (i kolejnych miesiącach wstecz)",
+    "period": "Okres",
+    "price": "Cena"
   }
 }

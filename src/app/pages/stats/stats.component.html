@@ -1,1 +1,74 @@
-<p>stats works!</p>
+<app-nav>
+    <div *ngIf="data">
+        <div *ngIf="data.user">
+            {{'stats.userTitle' | translate}}
+            <div class="data-container">
+                <div>{{'stats.active' | translate}} : {{data.user.activeUsers}}</div>
+                <div>{{'stats.today' | translate}} : {{data.user.today}}</div>
+                <div>{{'stats.week' | translate}} : {{data.user.week}}</div>
+                <div>{{'stats.month' | translate}} : {{data.user.month}}</div>
+                <div>{{'stats.overMonth' | translate}} : {{data.user.overMonth}}</div>
+                <div>{{'stats.months' | translate}} : {{data.user.months}}</div>
+            </div>
+        </div>
+        <div *ngIf="data.ngo">
+            {{'stats.ngoTitle' | translate}}
+            <div class="data-container">
+                <div>{{'stats.overall' | translate}} : {{data.ngo.overall}}</div>
+                <div>{{'stats.personalPool' | translate}} : {{data.ngo.personalPool}}</div>
+                <div>{{'stats.donationPool' | translate}} : {{data.ngo.donationPool}}</div>
+                <div>{{'stats.ngo' | translate}} : {{data.ngo.ngo}}</div>
+                <div>{{'stats.userPool' | translate}} : {{data.ngo.userPool}}</div>
+            </div>
+        </div>
+        <div *ngIf="data.tradingPoint">
+            {{'stats.tradingPointsTitle' | translate}}
+            <div class="data-container">
+                <div>{{'stats.active' | translate}} : {{data.tradingPoint.activePoints}}</div>
+                <div>{{'stats.today' | translate}} : {{data.tradingPoint.today}}</div>
+                <div>{{'stats.week' | translate}} : {{data.tradingPoint.week}}</div>
+                <div>{{'stats.month' | translate}} : {{data.tradingPoint.month}}</div>
+                <div>{{'stats.overMonth' | translate}} : {{data.tradingPoint.overMonth}}</div>
+                <div>{{'stats.months' | translate}} : {{data.tradingPoint.months}}</div>
+            </div>
+        </div>
+        <div *ngIf="data.transactions">
+            {{'stats.transactionsTitle' | translate}}
+            <div class="data-container">
+                <div>
+                    <div>{{'stats.transactionsToday' | translate}} : {{data.transactions.today}}</div>
+                </div>
+                <div class="mat-elevation-z8">
+                    {{'stats.weeklyTransactions' | translate}}
+                    <table [dataSource]="weeksDataSource" mat-table>
+                        <ng-container matColumnDef="period">
+                            <th *matHeaderCellDef mat-header-cell>{{'stats.period' | translate}}</th>
+                            <td *matCellDef="let element" mat-cell> {{element.period}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="price">
+                            <th *matHeaderCellDef mat-header-cell>{{'stats.price' | translate}}</th>
+                            <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                        </ng-container>
+                        <tr *matHeaderRowDef="displayColumns" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: displayColumns;" mat-row></tr>
+                    </table>
+                </div>
+                <div class="mat-elevation-z8">
+                    {{'stats.monthlyTransactions' | translate}}
+                    <table [dataSource]="monthsDataSource" mat-table>
+                        <ng-container matColumnDef="period">
+                            <th *matHeaderCellDef mat-header-cell>{{'stats.period' | translate}}</th>
+                            <td *matCellDef="let element" mat-cell> {{element.period}} </td>
+                        </ng-container>
+                        <ng-container matColumnDef="price">
+                            <th *matHeaderCellDef mat-header-cell>{{'stats.price' | translate}}</th>
+                            <td *matCellDef="let element" mat-cell> {{element.price}} </td>
+                        </ng-container>
+                        <tr *matHeaderRowDef="displayColumns" mat-header-row></tr>
+                        <tr *matRowDef="let row; columns: displayColumns;" mat-row></tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</app-nav>
