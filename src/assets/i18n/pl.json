@@ -71,7 +71,7 @@
     "city": "Miasto",
     "import": "Import pliku Excel",
     "create": "Stwórz",
-    "excel": "Pobierz plik Excel"
+    "export": "Pobierz plik Excel"
   },
   "opinion": {
     "title": "Opinie",
@@ -174,7 +174,7 @@
     "city": "Miasto",
     "type": "Typ",
     "import": "Import pliku Excel",
-    "export": "Export pliku Excel",
+    "export": "Pobierz Excel",
     "button": "Stwórz"
   },
   "ngo-view": {
