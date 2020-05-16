@@ -104,10 +104,13 @@ export class NgoViewComponent implements OnInit {
 
     onEdit() {
         if (this.ngoForm.valid) {
-
+            if (this.ID === 'new') {
+                this.ngoService.createNgo(this.ngoForm.value).subscribe(() => this.router.navigateByUrl('ngo'))
+            } else {
+                this.ngoService.updateNgo(this.ID, this.ngoForm.value).subscribe(() => this.router.navigateByUrl('ngo'))
+            }
         }
     }
-
 
     onImageChange($event) {
         this.newImage = $event.target.files[0]
@@ -126,7 +129,7 @@ export class NgoViewComponent implements OnInit {
             if (this.newThumbnail) {
                 form.append('thumbnail', this.newThumbnail);
             }
-            // this.service.updateImage(this.ID, form).subscribe(r => this.router.navigateByUrl('trading-point'))
+            this.ngoService.updateImage(this.ID, form).subscribe(r => this.router.navigateByUrl('ngo'))
         }
     }
 

@@ -40,6 +40,7 @@ export class TradingPointViewComponent implements OnInit {
                 type: new FormControl(null, Validators.required),
                 phone: new FormControl(null, Validators.required),
                 name: new FormControl(null, Validators.required),
+                description: new FormControl(null, [Validators.required]),
                 address: this.fb.group({
                     street: new FormControl(null, Validators.required),
                     number: new FormControl(null, Validators.required),
@@ -62,6 +63,7 @@ export class TradingPointViewComponent implements OnInit {
                     this.image = environment.url + 'img/' + r.data.image;
                     this.terminals = r.data.terminals;
                     this.transactions = r.data.transactions;
+
                     this.tradingPointForm = this.fb.group({
                         type: new FormControl(r.data.type, Validators.required),
                         phone: new FormControl(r.data.phone, Validators.required),
@@ -73,6 +75,7 @@ export class TradingPointViewComponent implements OnInit {
                         vat: new FormControl(r.data.vat, Validators.required),
                         fee: new FormControl(r.data.fee, Validators.required),
                         xp: new FormControl(r.data.xp, Validators.required),
+                        description: new FormControl(r.data.description, [Validators.required]),
                         address: this.fb.group({
                             street: new FormControl(r.data.address.street, Validators.required),
                             number: new FormControl(r.data.address.number, Validators.required),
