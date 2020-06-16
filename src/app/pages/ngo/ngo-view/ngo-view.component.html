@@ -47,7 +47,8 @@
                     <div>
                         <mat-form-field class="example-full-width">
                             <input formControlName="bankNumber" matInput
-                                   placeholder="{{'ngo-view.bankNumber' | translate}}" type="number">
+                                   maxlength="26" pattern="[0-9]+" placeholder="{{'ngo-view.bankNumber' | translate}}"
+                                   type="text">
                         </mat-form-field>
                     </div>
                     <div>
