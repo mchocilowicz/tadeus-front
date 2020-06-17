@@ -50,30 +50,26 @@ export class TradingPointSettlementComponent implements OnInit {
         this.getSettlementsData();
     }
 
-    canSendEmails(): boolean {
-        return !(this.data.hasPartnerPeriod && this.data.sendMessagesAt === null);
+    canProcessNewUserPeriods(): boolean {
+        return !(this.data.hasDataToProcess && !this.data.isClosed && this.data.isEditable);
     }
 
-    canProcessNewUserPeriods(): boolean {
-        return !(this.data.hasPartnerPeriod && this.data.hasDataToProcess && this.data.sendMessagesAt === null);
+    canSendEmails(): boolean {
+        return !(this.data.isEditable && !this.data.isClosed && this.isDateAfter(this.data.sendMessagesAt));
     }
 
     canClosePeriod(): boolean {
-        return !(!this.data.isEditable && !this.data.isClosed && this.data.notEditableAt && moment().isAfter(this.data.notEditableAt));
+        return !(!this.data.isEditable && !this.data.isClosed && this.isDateAfter(this.data.notEditableAt));
     }
 
     canGeneratePayout(): boolean {
-        return !(this.data.generatePayout && this.data.isClosed && this.data.closedAt && moment().isAfter(this.data.closedAt))
+        return !(this.data.generatePayout && this.data.isClosed && this.isDateAfter(this.data.closedAt))
     }
 
     updatePaymentPrice($event, ID: string) {
         const el = this.dataSource.data.find(e => e.ID === ID);
         el.paidPrice = $event.target.valueAsNumber;
-        if (el.paidPaid >= el.price) {
-            el.isPaid = true;
-        } else {
-            el.isPaid = false;
-        }
+        el.isPaid = el.paidPaid >= el.price;
         el.hasChanges = true;
     }
 
@@ -152,6 +148,20 @@ export class TradingPointSettlementComponent implements OnInit {
             }
         });
     }
+
+    private isDateBefore(date): boolean {
+        if (date) {
+            return moment().isSameOrBefore(date)
+        }
+        return false;
+    }
+
+    private isDateAfter(date): boolean {
+        if (date) {
+            return moment().isSameOrAfter(date)
+        }
+        return false;
+    }
 }
 
 
@@ -194,7 +204,6 @@ export class TradingPointSettlementService {
 
 export interface SettlementPartnerData {
     userPeriodFrom: Date;
-    hasPartnerPeriod: boolean;
     hasDataToProcess: boolean;
     payments: any[];
     partnerPeriodFrom: Date;
