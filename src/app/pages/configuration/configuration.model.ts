@@ -3,6 +3,9 @@ export class Configuration {
     minPersonalPool: number = 0;
     userExpiration: number = 365;
 
+    personalPoolFrequency: number = 30;
+    donationPoolFrequency: number = 30;
+
     userCloseInterval: number = 30;
     partnerEmailInterval: number = 14;
     partnerCloseInterval: number = 21;
@@ -25,4 +28,6 @@ export class ConfigurationSave {
     partnerCloseInterval: number = null;
     ngoGenerateInterval: number = null;
     ngoCloseInterval: number = null;
+    personalPoolFrequency: number = 30;
+    donationPoolFrequency: number = 30;
 }

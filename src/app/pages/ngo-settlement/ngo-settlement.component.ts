@@ -3,7 +3,6 @@ import {MatTableDataSource} from "@angular/material/table";
 import {Router} from "@angular/router";
 import {HttpService} from "../../services/http.service";
 import {HttpParams} from "@angular/common/http";
-import * as moment from "moment";
 
 @Component({
     selector: 'app-ngo-settlement',
@@ -72,7 +71,7 @@ export class NgoSettlementComponent implements OnInit {
     }
 
     canClosePeriod(): boolean {
-        return !(this.data.isClosed && moment().isAfter(moment(this.data.from).add(this.data.closeInterval, 'days')));
+        return !(this.data.isClosed);
     }
 
     canEdit(): boolean {

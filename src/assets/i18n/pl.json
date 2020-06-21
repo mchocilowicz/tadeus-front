@@ -225,6 +225,8 @@
   "configuration": {
     "minPersonalPool": "Wartość minimalna Puli osobistej",
     "minNgoTransfer": "Wartość minimalna transferu środków do beneficjenta",
+    "donationPoolFrequency": "Częstotliwość Daty Pula Dotacji",
+    "personalPoolFrequency": "Częstotliwość Daty Pula Osobista",
     "userExpiration": "Dozwolona ilość dni bez aktywności",
     "ngo": "Płatność przez TADEUS na rzecz beneficjentów",
     "ngoGeneration": "Rozliczenia dotacji które zostały opłacone",
@@ -239,6 +241,7 @@
   "settlement": {
     "trading-point": {
       "periods": "Okresy",
+      "partners": "Partnerzy",
       "checkbox": "Pokaż wszystkie płatności",
       "search": "Szukaj",
       "new-data": "GENERUJ LISTĘ OCZEKIWANYCH WPŁAT PARTNERÓW",

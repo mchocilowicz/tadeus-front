@@ -9,8 +9,18 @@
                    placeholder="{{'configuration.minNgoTransfer' | translate}}">
         </mat-form-field>
         <mat-form-field>
-            <input [(ngModel)]="config.userExpiration" matInput
+            <input [(ngModel)]="config.userExpiration" matInput type="number"
                    placeholder="{{'configuration.userExpiration' | translate}}">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="config.donationPoolFrequency" matInput
+                   placeholder="{{'configuration.donationPoolFrequency' | translate}}"
+                   type="number">
+        </mat-form-field>
+        <mat-form-field>
+            <input [(ngModel)]="config.personalPoolFrequency" matInput
+                   placeholder="{{'configuration.personalPoolFrequency' | translate}}"
+                   type="number">
         </mat-form-field>
         {{'configuration.user' | translate}}
         <div class="config-container">

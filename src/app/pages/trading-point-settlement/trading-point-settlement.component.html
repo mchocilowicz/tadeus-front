@@ -2,6 +2,14 @@
     <div *ngIf="data">
         <div style="display: flex; justify-content: center; align-items: center; align-content: center">
             <mat-form-field>
+                <mat-select [(ngModel)]="selectedPartner"
+                            placeholder="{{ 'settlement.trading-point.partners' | translate}}">
+                    <mat-option value="null"></mat-option>
+                    <mat-option *ngFor="let partner of partners"
+                                [value]="partner.ID">{{partner.ID}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field>
                 <mat-select [(ngModel)]="selectedPeriod"
                             placeholder="{{ 'settlement.trading-point.periods' | translate}}">
                     <mat-option *ngFor="let period of periods"

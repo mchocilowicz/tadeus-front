@@ -1,8 +1,8 @@
-import { Component, Injectable, OnInit } from '@angular/core';
-import { HttpService } from "../../services/http.service";
-import { MatTableDataSource } from "@angular/material/table";
-import { Router } from "@angular/router";
-import { HttpParams } from "@angular/common/http";
+import {Component, Injectable, OnInit} from '@angular/core';
+import {HttpService} from "../../services/http.service";
+import {MatTableDataSource} from "@angular/material/table";
+import {Router} from "@angular/router";
+import {HttpParams} from "@angular/common/http";
 import * as moment from 'moment'
 
 @Component({
@@ -17,6 +17,8 @@ export class TradingPointSettlementComponent implements OnInit {
     dataSource: MatTableDataSource<any>;
     periods: any[] = null;
     selectedPeriod: any = null;
+    selectedPartner: string = null;
+    partners: any[] = null;
     showAll: boolean = false;
 
     userPeriod: Date = null;
@@ -31,6 +33,11 @@ export class TradingPointSettlementComponent implements OnInit {
 
     ngOnInit() {
         this.getSettlementsData();
+        this.service.getPartnersID().subscribe(r => {
+            if (r.data) {
+                this.partners = r.data;
+            }
+        })
         this.service.getPeriodsList().subscribe(r => {
             if (r.data) {
                 this.periods = r.data;
@@ -55,15 +62,15 @@ export class TradingPointSettlementComponent implements OnInit {
     }
 
     canSendEmails(): boolean {
-        return !(this.data.isEditable && !this.data.isClosed && this.isDateAfter(this.data.sendMessagesAt));
+        return !(this.data.isEditable && !this.data.isClosed && !this.data.hasDataToProcess);
     }
 
     canClosePeriod(): boolean {
-        return !(!this.data.isEditable && !this.data.isClosed && this.isDateAfter(this.data.notEditableAt));
+        return !(!this.data.isEditable && !this.data.isClosed);
     }
 
     canGeneratePayout(): boolean {
-        return !(this.data.generatePayout && this.data.isClosed && this.isDateAfter(this.data.closedAt))
+        return !(this.data.generatePayout && this.data.isClosed)
     }
 
     updatePaymentPrice($event, ID: string) {
@@ -115,7 +122,8 @@ export class TradingPointSettlementComponent implements OnInit {
     }
 
     private getSettlementsData() {
-        this.service.getSettlementData(this.showAll, this.selectedPeriod).subscribe(r => {
+
+        this.service.getSettlementData(this.showAll, this.selectedPeriod, this.selectedPartner).subscribe(r => {
             if (r.data) {
                 this.data = r.data;
                 this.selectedPeriod = r.data.partnerPeriodId;
@@ -148,20 +156,6 @@ export class TradingPointSettlementComponent implements OnInit {
             }
         });
     }
-
-    private isDateBefore(date): boolean {
-        if (date) {
-            return moment().isSameOrBefore(date)
-        }
-        return false;
-    }
-
-    private isDateAfter(date): boolean {
-        if (date) {
-            return moment().isSameOrAfter(date)
-        }
-        return false;
-    }
 }
 
 
@@ -174,10 +168,16 @@ export class TradingPointSettlementService {
         return this.http.get<any>("settlement/partner/periods");
     }
 
-    getSettlementData(showAll: boolean, selectedPeriod: string) {
+    getPartnersID() {
+        return this.http.get<string[]>("settlement/partner/points");
+    }
+
+    getSettlementData(showAll: boolean, selectedPeriod: string, partnerID: string) {
         let params = new HttpParams()
-            .append('showAll', `${ showAll }`)
-            .append('selectedPeriod', selectedPeriod);
+            .append('showAll', `${showAll}`)
+            .append('selectedPeriod', selectedPeriod)
+            .append('partnerID', partnerID);
+
         return this.http.get<SettlementPartnerData>("settlement/partner", params);
     }
 
@@ -198,7 +198,7 @@ export class TradingPointSettlementService {
     }
 
     generatePayoutData(periodId: string) {
-        return this.http.post(`settlement/partner/${ periodId }/ngoPayout`, null)
+        return this.http.post(`settlement/partner/${periodId}/ngoPayout`, null)
     }
 }
 
